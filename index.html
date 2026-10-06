@@ -8,7 +8,19 @@
 <meta property="og:title" content="ダジャレ布団飛ばし">
 <meta property="og:description" content="ダジャレを入れると、出来ばえの分だけ布団がふっ飛びます。">
 <meta property="og:type" content="website">
-<meta name="twitter:card" content="summary">
+<meta property="og:url" content="https://sakuichi.github.io/ofuton-flyer/">
+<meta property="og:site_name" content="ダジャレ布団飛ばし">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://sakuichi.github.io/ofuton-flyer/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ダジャレ布団飛ばし。布団が宇宙まで飛び、UFOの宇宙人が驚いている。">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sakuichi.github.io/ofuton-flyer/ogp.png">
+<meta name="theme-color" content="#9fd3f2">
+<link rel="canonical" href="https://sakuichi.github.io/ofuton-flyer/">
+<link rel="icon" href="apple-touch-icon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
@@ -68,7 +80,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 .theme b{font-weight:700}
 .rank{display:inline-block;margin:0 0 .5rem;padding:.12rem .85rem;border:2px solid var(--ink);border-radius:999px;background:var(--surface);font-weight:700;font-size:.95rem}
 .vs{margin:.5rem 0 0;font-weight:700}
-.copylink{width:100%;margin-top:.6rem;min-height:2.8rem;background:transparent;border:1.5px solid var(--line);border-radius:.9rem;font-weight:700}
+.copylink{display:flex;align-items:center;justify-content:center;text-align:center;width:100%;margin-top:.7rem;min-height:3rem;background:var(--mark-a);color:var(--ink);border:2px solid var(--ink);border-radius:.9rem;font-weight:700;text-decoration:none;padding:.3rem .6rem;box-shadow:0 .2rem 0 var(--ink)}
+.copylink:active{transform:translateY(.15rem);box-shadow:0 .05rem 0 var(--ink)}
 .ad{position:relative;margin-top:1.4rem;padding:1.1rem .9rem .9rem;border:1.5px dashed var(--ink-soft);border-radius:.9rem;display:grid;gap:.6rem}
 .adlabel{position:absolute;top:-.7rem;left:.8rem;background:var(--bg);padding:0 .45rem;font-size:.75rem;font-weight:700;color:var(--ink-soft)}
 .adcopy{margin:0;font-weight:700}
@@ -220,7 +233,7 @@ summary{font-weight:700;cursor:pointer}
       <button type="button" id="save">画像を保存</button>
       <a id="post" href="#" target="_blank" rel="noopener">Xでポストする</a>
     </div>
-    <button type="button" class="copylink" id="copylink" hidden>挑戦リンクをコピー</button>
+    <a class="copylink" id="challengepost" href="#" target="_blank" rel="noopener" hidden>挑戦状としてXでポストする</a>
     <p class="sharemsg" id="sharemsg" role="status"></p>
 
     <div id="matchbox">
@@ -1017,12 +1030,13 @@ const DJ = (() => {
     $('fixbox').open = r.unknown.length > 0;
     last = r; $('sharemsg').textContent = '';
     $('post').href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(postText(r));
-    $('copylink').hidden = !shareUrl(r);
+    const cp = $('challengepost'); cp.hidden = !shareUrl(r);
+    cp.href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(challengeText(r));
     renderAd(r);
   }
 
   // 共有
-  const SITE_URL = ''; // 自分のサーバーに置くときは公開URLを入れる（空なら表示中のURL）
+  const SITE_URL = 'https://sakuichi.github.io/ofuton-flyer/'; // 公開URL。挑戦リンクとポスト文面に使う（引っ越したら書き換える）
   const framed = (() => { try { return window.self !== window.top; } catch (e) { return true; } })();
   const hasClaude = !!(window.claude && window.claude.use);
   const dlReady = hasClaude ? window.claude.use('downloads').catch(() => null) : Promise.resolve(null);
@@ -1037,11 +1051,7 @@ const DJ = (() => {
       const el = $('challenge'); el.textContent = `挑戦状が届いています。「${ct}」の ${fmt(DJ.meters(s))} m を超えてください。`; el.hidden = false;
     });
   })();
-  $('copylink').addEventListener('click', () => {
-    const url = last && shareUrl(last), msg = $('sharemsg'); if (!url) return;
-    const ok = () => { msg.textContent = '挑戦リンクをコピーしました。'; }, ng = () => { msg.textContent = 'コピーできませんでした。'; };
-    try { navigator.clipboard.writeText(url).then(ok, ng); } catch (e) { ng(); }
-  });
+
 
   // 広告（Amazonアソシエイト）。結果に合わせて商品を変える
   const AMAZON_TAG = '202610jokesite-22'; // トラッキングID（例：'yourid-22'）。空のあいだは紹介料のつかない通常リンク
@@ -1066,6 +1076,14 @@ const DJ = (() => {
   function shareUrl(r) {
     const base = SITE_URL || (!framed && /^https?:/.test(location.protocol) ? location.origin + location.pathname : '');
     return base ? `${base}?c=${encodeURIComponent(r.text)}&s=${r.score}` : '';
+  }
+  // 挑戦状としてのポスト文面（相手に「超えられる？」と投げかける）
+  function challengeText(r) {
+    const m = DJ.meters(r.score);
+    const head = r.sp && r.sp.ufo ? `「${r.text}」で布団がUFOにさらわれた（${r.score}点）。\nこの記録、超えられる？`
+      : r.score > 0 ? `「${r.text}」で布団が${fmt(m)}mふっ飛んだ（${r.score}点）。\nこの記録、超えられる？`
+      : `「${r.text}」で布団が凍った（0点）。\nこれより寒いダジャレ、ある？`;
+    return head + '\n#ダジャレ布団飛ばし\n' + shareUrl(r);
   }
   function postText(r) {
     const m = DJ.meters(r.score);
