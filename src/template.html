@@ -1,0 +1,1000 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ダジャレ布団飛ばし</title>
+<meta name="description" content="ダジャレを入れると、出来ばえの分だけ布団がふっ飛びます。飛距離を競おう。">
+<meta property="og:title" content="ダジャレ布団飛ばし">
+<meta property="og:description" content="ダジャレを入れると、出来ばえの分だけ布団がふっ飛びます。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sakuichi.github.io/ofuton-flyer/">
+<meta property="og:site_name" content="ダジャレ布団飛ばし">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://sakuichi.github.io/ofuton-flyer/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ダジャレ布団飛ばし。布団が宇宙まで飛び、UFOの宇宙人が驚いている。">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sakuichi.github.io/ofuton-flyer/ogp.png">
+<meta name="theme-color" content="#9fd3f2">
+<link rel="canonical" href="https://sakuichi.github.io/ofuton-flyer/">
+<link rel="icon" href="apple-touch-icon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eaf4fa; --surface:#ffffff; --ink:#1b2444; --ink-soft:#56608a; --line:#c9d6e6;
+  --sky-top:#9fd3f2; --sky-bottom:#d9eefa; --orb:#fff1a8; --orb-ring:#ffe07a;
+  --tatami:#b4b76e; --tatami-weave:#a3a65c; --heri:#3c5a3a;
+  --shiki:#fffdf6; --shiki-line:#d8d2c0; --kake:#2b4a9b; --kake-dot:#f4f7ff;
+  --shu:#d63a2c; --shu-ink:#ffffff;
+  --mark-a:#ffe27a; --mark-b:#ffc4bb; --bar:#2b4a9b; --bar-bg:#dfe8f3;
+  --display:"Dela Gothic One","Hiragino Kaku Gothic StdN","Hiragino Sans","Yu Gothic",sans-serif;
+  --body:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1330; --surface:#1a2148; --ink:#eef1ff; --ink-soft:#a9b2de; --line:#333c72;
+    --sky-top:#0b1034; --sky-bottom:#27307a; --orb:#f6f2d2; --orb-ring:#8f93c9;
+    --tatami:#6d7040; --tatami-weave:#5f6236; --heri:#22331f;
+    --shiki:#ecebe2; --shiki-line:#b9b6a6; --kake:#4d6fd0; --kake-dot:#eaf0ff;
+    --shu:#e2493a; --shu-ink:#ffffff;
+    --mark-a:#7c6500; --mark-b:#8a3327; --bar:#7f9bf0; --bar-bg:#2a3266;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1330; --surface:#1a2148; --ink:#eef1ff; --ink-soft:#a9b2de; --line:#333c72;
+  --sky-top:#0b1034; --sky-bottom:#27307a; --orb:#f6f2d2; --orb-ring:#8f93c9;
+  --tatami:#6d7040; --tatami-weave:#5f6236; --heri:#22331f;
+  --shiki:#ecebe2; --shiki-line:#b9b6a6; --kake:#4d6fd0; --kake-dot:#eaf0ff;
+  --shu:#e2493a; --shu-ink:#ffffff;
+  --mark-a:#7c6500; --mark-b:#8a3327; --bar:#7f9bf0; --bar-bg:#2a3266;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:500;font-size:1rem;line-height:1.7;-webkit-text-size-adjust:100%}
+.wrap{max-width:34rem;margin:0 auto;padding:1.25rem 1rem 3rem}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(1.9rem,9vw,2.6rem);line-height:1.15;margin:.25rem 0 .4rem;letter-spacing:.01em}
+.lead{margin:0 0 1rem;color:var(--ink-soft)}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--shu);outline-offset:2px}
+
+/* 舞台 */
+.scene{position:relative;height:13.5rem;border-radius:1.25rem;overflow:hidden;background:linear-gradient(var(--sky-top),var(--sky-bottom));border:2px solid var(--ink)}
+.orb{position:absolute;top:1.1rem;right:1.4rem;width:2.6rem;height:2.6rem;border-radius:50%;background:var(--orb);box-shadow:0 0 0 .45rem color-mix(in srgb,var(--orb-ring) 35%,transparent)}
+.floor{position:absolute;left:0;right:0;bottom:0;height:3.6rem;background:repeating-linear-gradient(90deg,var(--tatami) 0 3px,var(--tatami-weave) 3px 4px);border-top:.5rem solid var(--heri)}
+.bed{position:absolute;left:1.1rem;bottom:2.5rem;width:11.5rem;height:3.4rem}
+.bed svg{position:absolute;left:0;bottom:0;overflow:visible}
+#kake{position:absolute;left:2.6rem;bottom:.55rem;width:9.2rem;height:2.6rem;transform-origin:50% 60%;will-change:transform}
+#kake svg{width:100%;height:100%;display:block;overflow:visible}
+.room{position:absolute;inset:0}
+#kake .ice{opacity:0;transition:opacity .5s}
+#kake.frozen .ice{opacity:1}
+.challenge{margin:0 0 .8rem;padding:.6rem .85rem;border:2px solid var(--ink);border-radius:.9rem;background:var(--mark-a);font-weight:700;overflow-wrap:anywhere}
+.theme{margin:1rem 0 .5rem;font-size:.92rem}
+.theme b{font-weight:700}
+.rank{display:inline-block;margin:0 0 .5rem;padding:.12rem .85rem;border:2px solid var(--ink);border-radius:999px;background:var(--surface);font-weight:700;font-size:.95rem}
+.vs{margin:.5rem 0 0;font-weight:700}
+.copylink{display:flex;align-items:center;justify-content:center;text-align:center;width:100%;margin-top:.7rem;min-height:3rem;background:var(--mark-a);color:var(--ink);border:2px solid var(--ink);border-radius:.9rem;font-weight:700;text-decoration:none;padding:.3rem .6rem;box-shadow:0 .2rem 0 var(--ink)}
+.copylink:active{transform:translateY(.15rem);box-shadow:0 .05rem 0 var(--ink)}
+.ad{position:relative;margin-top:1.4rem;padding:1.1rem .9rem .9rem;border:1.5px dashed var(--ink-soft);border-radius:.9rem;display:grid;gap:.6rem}
+.adlabel{position:absolute;top:-.7rem;left:.8rem;background:var(--bg);padding:0 .45rem;font-size:.75rem;font-weight:700;color:var(--ink-soft)}
+.adcopy{margin:0;font-weight:700}
+.adlink{display:flex;align-items:center;justify-content:center;min-height:2.8rem;border:2px solid var(--ink);border-radius:.8rem;background:var(--mark-a);color:var(--ink);font-weight:700;text-decoration:none;padding:.3rem .7rem;text-align:center}
+.found{margin:2rem 0 0;font-size:.9rem;font-weight:700}
+.found:empty{display:none}
+#fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:10;display:none}
+.distance{transform-origin:0 60%}
+
+/* 入力 */
+.entry{margin-top:0;display:grid;grid-template-columns:1fr auto;gap:.6rem;align-items:stretch}
+textarea{font:inherit;font-size:1.0625rem;color:var(--ink);background:var(--surface);border:2px solid var(--ink);border-radius:.9rem;padding:.7rem .85rem;resize:none;width:100%;min-height:4.4rem;line-height:1.5}
+textarea::placeholder{color:var(--ink-soft);opacity:.8}
+.go{font-family:var(--display);font-size:1.25rem;background:var(--shu);color:var(--shu-ink);border:2px solid var(--ink);border-radius:.9rem;padding:0 1.15rem;min-width:5.5rem;box-shadow:0 .25rem 0 var(--ink);transition:transform .08s,box-shadow .08s}
+.go:active{transform:translateY(.2rem);box-shadow:0 .05rem 0 var(--ink)}
+.tries{margin:.8rem 0 0;display:flex;flex-wrap:wrap;gap:.4rem .5rem;align-items:center;font-size:.9rem;color:var(--ink-soft)}
+.tries button{background:transparent;border:1.5px solid var(--line);border-radius:999px;padding:.2rem .75rem;color:var(--ink);font-size:.9rem}
+.hint:empty{display:none}
+.hint{margin:.5rem 0 0;font-size:.9rem;color:var(--shu);font-weight:700}
+
+/* 結果 */
+#result{margin-top:1.4rem}
+.verdict{font-weight:700;font-size:1.05rem;margin:0}
+.distance{font-family:var(--display);font-size:clamp(3rem,17vw,4.6rem);line-height:1.05;margin:.1rem 0 0;font-variant-numeric:tabular-nums;word-break:keep-all}
+.distance small{font-size:.4em;margin-left:.15em}
+.points{margin:.1rem 0 0;color:var(--ink-soft)}
+.ruler{position:relative;margin:1.6rem 0 2.6rem;height:.6rem;border-radius:999px;background:var(--bar-bg)}
+.ruler .fill{position:absolute;left:0;top:0;bottom:0;border-radius:999px;background:var(--bar);width:0}
+.ruler .pin{position:absolute;top:-1.15rem;width:1.7rem;height:1.1rem;margin-left:-.85rem;left:0}
+.ruler .pin svg{width:100%;height:100%;display:block}
+.ruler ol{list-style:none;margin:0;padding:0;position:absolute;left:0;right:0;top:.9rem;font-size:.72rem;color:var(--ink-soft);line-height:1.3}
+.ruler li{position:absolute;transform:translateX(-50%);text-align:center;white-space:nowrap}
+.ruler li:first-child{transform:none;text-align:left}
+.ruler li:last-child{transform:translateX(-100%);text-align:right}
+.ruler li::before{content:"";position:absolute;left:50%;top:-.6rem;width:1.5px;height:.4rem;background:var(--ink-soft)}
+.ruler li:first-child::before{left:0}.ruler li:last-child::before{left:auto;right:0}
+.share{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.4rem}
+.share button,.share a{display:flex;align-items:center;justify-content:center;text-align:center;min-height:3rem;border:2px solid var(--ink);border-radius:.9rem;font-weight:700;text-decoration:none;padding:.3rem .6rem;line-height:1.3;box-shadow:0 .2rem 0 var(--ink)}
+.share button{background:var(--surface);color:var(--ink)}
+.share a{background:var(--ink);color:var(--bg)}
+.share button:active,.share a:active{transform:translateY(.15rem);box-shadow:0 .05rem 0 var(--ink)}
+.share button[disabled]{opacity:.55}
+.sharemsg{margin:.6rem 0 0;font-size:.88rem;color:var(--ink-soft)}
+.sharemsg:empty{display:none}
+h2{font-size:1rem;font-weight:700;margin:1.5rem 0 .4rem}
+.yomi{font-size:1.15rem;letter-spacing:.06em;margin:0;overflow-wrap:anywhere;line-height:2}
+.yomi mark{color:var(--ink);padding:.15em .1em;border-radius:.3em}
+.yomi mark.a{background:var(--mark-a)} .yomi mark.b{background:var(--mark-b)}
+.pair{margin:.2rem 0 0;color:var(--ink-soft);font-size:.92rem}
+.parts{margin:0;padding:0;list-style:none;display:grid;gap:.55rem}
+.parts li{display:grid;grid-template-columns:5.2rem 1fr 3.4rem;gap:.6rem;align-items:center}
+.parts .name{font-weight:700}
+.parts .track{height:.55rem;border-radius:999px;background:var(--bar-bg);overflow:hidden}
+.parts .track i{display:block;height:100%;background:var(--bar);border-radius:999px}
+.parts .num{text-align:right;font-variant-numeric:tabular-nums;font-size:.9rem;color:var(--ink-soft)}
+.parts .why{grid-column:1/-1;margin-top:-.45rem;font-size:.8rem;color:var(--ink-soft)}
+.notes{margin:1rem 0 0;padding:0;list-style:none;display:grid;gap:.4rem}
+.notes li{background:var(--surface);border:1.5px solid var(--line);border-radius:.8rem;padding:.55rem .8rem;font-size:.92rem}
+details{margin-top:1rem;border-top:1.5px solid var(--line);padding-top:.8rem}
+summary{font-weight:700;cursor:pointer}
+.fix{display:grid;grid-template-columns:1fr auto;gap:.5rem;margin-top:.6rem}
+.fix input{font:inherit;font-size:1.0625rem;color:var(--ink);background:var(--surface);border:2px solid var(--ink);border-radius:.7rem;padding:.5rem .7rem;min-width:0}
+.fix button{background:var(--surface);border:2px solid var(--ink);border-radius:.7rem;padding:0 .9rem;font-weight:700}
+.fixhelp{font-size:.82rem;color:var(--ink-soft);margin:.4rem 0 0}
+
+/* 記録 */
+.records{margin-top:2.2rem}
+.records .head{display:flex;justify-content:space-between;align-items:baseline}
+.records h2{margin:0}
+.records .clear{background:none;border:none;text-decoration:underline;color:var(--ink-soft);font-size:.85rem;padding:.2rem 0}
+.records ol{margin:.5rem 0 0;padding:0;list-style:none;counter-reset:r}
+.records li{counter-increment:r;display:grid;grid-template-columns:1.6rem 1fr auto;gap:.5rem;padding:.5rem 0;border-bottom:1.5px dashed var(--line);align-items:baseline}
+.records li::before{content:counter(r);font-family:var(--display);color:var(--ink-soft)}
+.records .t{overflow-wrap:anywhere}
+.records .m{font-family:var(--display);font-variant-numeric:tabular-nums;white-space:nowrap}
+.foot{margin-top:.6rem;font-size:.82rem;color:var(--ink-soft)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>ダジャレ布団飛ばし</h1>
+  <p class="lead">ダジャレを入れると、出来ばえの分だけ布団が飛びます。</p>
+
+  <p class="challenge" id="challenge" hidden></p>
+  <div class="scene" id="scene" aria-hidden="true">
+    <div class="orb"></div>
+    <div class="room" id="room">
+    <div class="floor"></div>
+    <div class="bed">
+      <svg width="184" height="34" viewBox="0 0 184 34">
+        <rect x="1" y="16" width="182" height="17" rx="8.5" fill="var(--shiki)" stroke="var(--ink)" stroke-width="2"/>
+        <rect x="6" y="5" width="34" height="14" rx="7" fill="var(--shiki)" stroke="var(--ink)" stroke-width="2"/>
+      </svg>
+      <div id="kake">
+        <svg viewBox="0 0 148 42" preserveAspectRatio="none">
+          <defs><pattern id="kasuri" width="18" height="14" patternUnits="userSpaceOnUse">
+            <path d="M4 4h5M6.5 1.5v5M13 11h5M15.5 8.5v5" stroke="var(--kake-dot)" stroke-width="1.6" stroke-linecap="round"/>
+          </pattern></defs>
+          <path d="M8 40C3 40 1 36 1 30V20C1 9 9 3 22 3c14 0 20 3 34 3s22-4 38-4 20 3 32 3c13 0 20 5 20 15v10c0 6-2 10-7 10z" fill="var(--kake)" stroke="var(--ink)" stroke-width="2" vector-effect="non-scaling-stroke"/>
+          <path d="M8 40C3 40 1 36 1 30V20C1 9 9 3 22 3c14 0 20 3 34 3s22-4 38-4 20 3 32 3c13 0 20 5 20 15v10c0 6-2 10-7 10z" fill="url(#kasuri)"/>
+          <path d="M3 31h142" stroke="var(--shiki)" stroke-width="5"/>
+          <path d="M3 28.5h142M3 33.5h142" stroke="var(--ink)" stroke-width="1" opacity=".5"/>
+          <g class="ice">
+            <path d="M8 40C3 40 1 36 1 30V20C1 9 9 3 22 3c14 0 20 3 34 3s22-4 38-4 20 3 32 3c13 0 20 5 20 15v10c0 6-2 10-7 10z" fill="rgba(205,235,252,.72)"/>
+            <path d="M20 40l4 10 4-10zM52 40l5 14 5-14zM90 40l4 9 4-9zM118 40l5 12 5-12z" fill="#d6eefc" stroke="var(--ink)" stroke-width="1.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    </div>
+    <canvas id="fx"></canvas>
+  </div>
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <p class="theme" id="theme"></p>
+  <div class="entry">
+    <textarea id="text" maxlength="60" placeholder="例：焼肉は焼きにくい" aria-label="ダジャレ" enterkeyhint="go"></textarea>
+    <button class="go" id="go" type="button">飛ばす</button>
+  </div>
+  <p class="hint" id="hint" role="status"></p>
+  <div class="tries">
+    <span>例で試す</span>
+    <button type="button" data-try="レモンの入れもん">レモンの入れもん</button>
+    <button type="button" data-try="草刈ったら臭かった">草刈ったら臭かった</button>
+    <button type="button" data-try="今日はいい天気ですね">今日はいい天気ですね</button>
+  </div>
+
+  <section id="result" hidden aria-live="polite">
+    <p class="rank" id="rank"></p>
+    <p class="verdict" id="verdict"></p>
+    <p class="distance"><span id="dist">0</span><small>m</small></p>
+    <p class="points" id="points"></p>
+    <p class="vs" id="vs" hidden></p>
+    <div class="ruler">
+      <div class="fill" id="rfill"></div>
+      <div class="pin" id="rpin"><svg viewBox="0 0 34 22"><rect x="1" y="3" width="32" height="16" rx="6" fill="var(--kake)" stroke="var(--ink)" stroke-width="2"/></svg></div>
+      <ol>
+        <li style="left:0">枕元</li>
+        <li style="left:25%">部屋の外<br>9 m</li>
+        <li style="left:50%">ご近所<br>99 m</li>
+        <li style="left:75%">隣町<br>999 m</li>
+        <li style="left:100%">成層圏<br>9,999 m</li>
+      </ol>
+    </div>
+
+    <div class="share">
+      <button type="button" id="save">画像を保存</button>
+      <a id="post" href="#" target="_blank" rel="noopener">Xでポストする</a>
+    </div>
+    <a class="copylink" id="challengepost" href="#" target="_blank" rel="noopener" hidden>挑戦状としてXでポストする</a>
+    <p class="sharemsg" id="sharemsg" role="status"></p>
+
+    <div id="matchbox">
+      <h2>掛かっている音</h2>
+      <p class="yomi" id="yomi"></p>
+      <p class="pair" id="pair"></p>
+    </div>
+
+    <div id="partsbox">
+      <h2>点数の内訳</h2>
+      <ul class="parts" id="parts"></ul>
+    </div>
+    <ul class="notes" id="notes"></ul>
+
+    <details id="fixbox">
+      <summary>読みを直す</summary>
+      <div class="fix">
+        <input id="fixyomi" type="text" inputmode="kana" autocomplete="off" aria-label="読み（ひらがな）">
+        <button type="button" id="fixgo">この読みで飛ばす</button>
+      </div>
+      <p class="fixhelp">漢字の読みが違っていたら、ひらがなで全文を書き直してください。</p>
+    </details>
+
+    <aside class="ad" aria-label="広告">
+      <span class="adlabel">広告</span>
+      <p class="adcopy" id="adcopy"></p>
+      <a class="adlink" id="adlink" href="#" target="_blank" rel="noopener sponsored"></a>
+    </aside>
+  </section>
+
+  <section class="records" id="records" hidden>
+    <div class="head"><h2>これまでの記録</h2><button type="button" class="clear" id="clear">記録を消す</button></div>
+    <ol id="reclist"></ol>
+  </section>
+
+  <p class="found" id="found"></p>
+  <p class="foot" id="assoc" hidden>Amazonのアソシエイトとして、当サイトは適格販売により収入を得ています。</p>
+  <p class="foot">判定は音の重なりだけを見ています。意味のおもしろさは測れません。入力した文はこの端末の外に送られず、記録はこのブラウザにだけ残ります。漢字の読みはIPA辞書（mecab-ipadic）をもとにしています。</p>
+</div>
+
+<!-- 読み辞書: mecab-ipadic (Copyright 2000-2007 Nara Institute of Science and Technology) から生成。ライセンスは THIRD_PARTY_NOTICES.md を参照 -->
+<script id="dictdata" type="text/plain">/*DICT*/</script>
+<script>
+/*ENGINE*/
+</script>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const scene = $('scene'), kake = $('kake');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let anim = null, runId = 0, dictNote = false;
+
+  // 読み辞書を展開（外部通信なし）
+  const dictReady = (async () => {
+    try {
+      const b64 = $('dictdata').textContent.trim();
+      const bin = atob(b64); const u8 = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+      const stream = new Blob([u8]).stream().pipeThrough(new DecompressionStream('gzip'));
+      DJ.setDict(await new Response(stream).text());
+    } catch (e) { dictNote = true; }
+  })();
+
+  const fmt = m => m <= 0 ? '0' : m < 10 ? m.toFixed(1) : Math.round(m).toLocaleString('ja-JP');
+  const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  // 今日のお題（日替わり）。お題の言葉で掛けると10点追加
+  const THEMES = [
+    ['魚', ['サケ', 'タイ', 'イカ', 'タコ', 'サバ', 'アジ', 'ブリ', 'カツオ', 'マグロ', 'イクラ', 'エビ', 'カニ', 'サンマ', 'イワシ', 'ウナギ', 'フグ', 'サメ', 'コイ']],
+    ['動物', ['ネコ', 'イヌ', 'サル', 'クマ', 'ウマ', 'ウシ', 'シカ', 'トラ', 'ゾウ', 'カバ', 'サイ', 'ラクダ', 'パンダ', 'イルカ', 'カエル', 'ヘビ', 'トリ', 'ブタ', 'ヒツジ', 'ウサギ', 'キリン', 'コアラ', 'ラッコ']],
+    ['果物', ['ミカン', 'リンゴ', 'ナシ', 'モモ', 'カキ', 'ブドウ', 'バナナ', 'スイカ', 'メロン', 'イチゴ', 'レモン', 'クリ', 'ウメ', 'ユズ', 'キウイ']],
+    ['野菜', ['ナス', 'ネギ', 'ダイコン', 'カブ', 'トマト', 'キュウリ', 'ニンジン', 'レタス', 'キャベツ', 'ゴボウ', 'イモ', 'マメ', 'ピーマン', 'カボチャ', 'ニラ', 'ハクサイ']],
+    ['食べ物', ['パン', 'カレー', 'ラーメン', 'ソバ', 'ウドン', 'スシ', 'ニク', 'ヤキニク', 'タマゴ', 'ノリ', 'モチ', 'アメ', 'チョコ', 'ケーキ', 'プリン', 'ハム', 'チーズ', 'トウフ', 'ナットウ', 'ミソ', 'コメ']],
+    ['飲み物', ['オチャ', 'コーヒー', 'ミズ', 'サケ', 'ビール', 'ワイン', 'コーラ', 'ミルク', 'ココア', 'ジュース', 'ソーダ', 'コウチャ']],
+    ['乗り物', ['クルマ', 'バス', 'デンシャ', 'フネ', 'ヒコウキ', 'タクシー', 'バイク', 'ジテンシャ', 'ヨット', 'ロケット', 'トラック', 'キシャ']],
+    ['家の中', ['フトン', 'マクラ', 'イス', 'ツクエ', 'トイレ', 'フロ', 'ドア', 'マド', 'カギ', 'タンス', 'ユカ', 'カベ', 'カーテン', 'ソファ', 'コタツ', 'タタミ', 'デンワ']],
+    ['体', ['ハナ', 'クチ', 'ミミ', 'アシ', 'カタ', 'コシ', 'カミ', 'ヘソ', 'ヒザ', 'ユビ', 'ムネ', 'セナカ', 'ホネ', 'シタ', 'アタマ', 'ツメ']],
+    ['天気', ['アメ', 'ユキ', 'カゼ', 'クモ', 'ハレ', 'カミナリ', 'タイフウ', 'キリ', 'ニジ', 'アラレ', 'ヒョウ', 'シモ']],
+    ['学校', ['エンピツ', 'ペン', 'ノリ', 'ハサミ', 'ノート', 'ケシゴム', 'カッター', 'ホン', 'コウチョウ', 'センセイ', 'シュクダイ', 'テスト', 'コクバン', 'チョーク']],
+    ['スポーツ', ['サッカー', 'ヤキュウ', 'テニス', 'スキー', 'スモウ', 'ジュウドウ', 'ゴルフ', 'バレー', 'スイエイ', 'マラソン', 'ボール', 'バット']],
+    ['虫', ['アリ', 'ハチ', 'ハエ', 'セミ', 'クモ', 'チョウ', 'トンボ', 'バッタ', 'ホタル', 'カブトムシ', 'ムシ']],
+    ['地名', ['トウキョウ', 'オオサカ', 'キョウト', 'ナラ', 'トットリ', 'チバ', 'サガ', 'ミエ', 'ナゴヤ', 'コウベ', 'ハワイ', 'パリ', 'ロンドン', 'タイ', 'インド', 'カナダ', 'チリ', 'トルコ']]
+  ];
+  const dayIdx = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 86400000);
+  const theme = THEMES[dayIdx % THEMES.length];
+  $('theme').innerHTML = `今日のお題は<b>「${theme[0]}」</b>。${theme[1].slice(0, 3).join('、')}などの名前で掛けると10点追加。`;
+  function applyTheme(r) {
+    if (r.kind !== 'pun' || !r.match || r.ganso) return;
+    const ms = [DJ.looseKana(r.match.k1), DJ.looseKana(r.match.k2)];
+    const hit = theme[1].find(k => { const lk = DJ.looseKana(k); return lk.length >= 2 && ms.some(m => m.includes(lk)); });
+    if (hit) { r.theme = hit; r.score = Math.min(100, r.score + 10); }
+  }
+  // 隠し演出（飛んだときだけ）
+  const HIDDEN = { ufo: 'UFOにさらわれる', cat: '猫が乗ってくる', gold: '金の布団' };
+  function specials(r) {
+    if (r.score < 25) return {};
+    const t = r.text.normalize('NFKC'), y = r.yomi;
+    return {
+      ufo: /UFO|ufo|ユーフォー|ゆーふぉー|宇宙|ウチュウ|うちゅう/.test(t) || y.includes('ウチュウ'),
+      cat: /猫|ネコ|ねこ|ニャ|にゃ/.test(t) || y.includes('ネコ'),
+      gold: /金|ゴールド|おかね|オカネ|こがね/.test(t)
+    };
+  }
+  let found = [];
+  try { found = JSON.parse(localStorage.getItem('dj-found') || '[]') || []; } catch (e) { found = []; }
+  function renderFound() { $('found').textContent = found.length ? `隠し演出を ${found.length} / 3 個見つけました。` : '特定の言葉で起きる隠し演出が3つあります。'; }
+  function titleOf(r) {
+    const s = r.score, sp = r.sp || {};
+    if (sp.ufo) return '宇宙人のお気に入り';
+    if (r.ganso) return '元祖・布団飛ばし';
+    if (r.kind === 'repeat') return '同じことを二度言う人';
+    if (s <= 0) return '氷点下の使い手';
+    if (s < 25) return '布団めくり見習い';
+    if (sp.cat) return '猫に好かれる人';
+    if (sp.gold) return '黄金の布団持ち';
+    if (r.classic) return 'ベタの守り人';
+    if (s < 50) return '廊下の人気者';
+    if (s < 75) return '町内会の盛り上げ役';
+    if (s < 85) return '隣町まで届く声';
+    if (s < 100) return '成層圏ダジャレ師';
+    return '満点の語り部';
+  }
+
+  function verdictOf(r) {
+    const s = r.score;
+    if (r.sp && r.sp.ufo) return '布団がUFOに連れていかれました';
+    if (r.ganso) return '元祖です。布団が成層圏に届きました';
+    if (s <= 0) return '寒すぎて布団が凍りました';
+    if (s < 25) return '布団が少しめくれました';
+    if (s < 50) return '布団が部屋の外まで飛びました';
+    if (s < 75) return '布団がご近所まで飛びました';
+    if (s < 100) return '布団が隣町まで飛びました';
+    return '布団が成層圏に届きました';
+  }
+
+  // ===== 演出 =====
+  const room = $('room'), fx = $('fx');
+  let cancelRun = null;
+  const cssv = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const seg = (t, a, b) => clamp((t - a) / (b - a), 0, 1);
+  const lerp = (a, b, k) => a + (b - a) * k;
+  const eOut = k => 1 - Math.pow(1 - k, 3);
+  const eIO = k => k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+  const stopAnims = (...els) => els.forEach(el => el.getAnimations && el.getAnimations().forEach(a => a.cancel()));
+  const GOLD = { kake: '#e0ac18', dot: '#fff6cf' };
+
+  // 掛け布団。o: {cat: 猫が乗る, frost: 凍り具合0〜1, lw: 線の太さ}
+  function drawKake(c, cx, cy, rot, sc, col, o) {
+    o = o || {}; const lw = (o.lw || 2) / sc;
+    c.save(); c.translate(cx, cy); c.rotate(rot); c.scale(sc, sc); c.translate(-74, -21);
+    const kp = new Path2D(KAKE_PATH); c.fillStyle = col.kake; c.fill(kp);
+    c.save(); c.clip(kp); c.strokeStyle = col.dot; c.lineWidth = 1.6; c.lineCap = 'round';
+    for (let y = 0; y < 42; y += 14) for (let x = 0; x < 150; x += 18) { c.beginPath(); c.moveTo(x + 4, y + 4); c.lineTo(x + 9, y + 4); c.moveTo(x + 6.5, y + 1.5); c.lineTo(x + 6.5, y + 6.5); c.moveTo(x + 13, y + 11); c.lineTo(x + 18, y + 11); c.moveTo(x + 15.5, y + 8.5); c.lineTo(x + 15.5, y + 13.5); c.stroke(); }
+    c.fillStyle = col.shiki; c.fillRect(0, 28.5, 148, 5);
+    if (o.frost) { c.fillStyle = `rgba(205,235,252,${.72 * o.frost})`; c.fillRect(0, 0, 148, 42); }
+    c.restore();
+    c.strokeStyle = col.ink; c.lineWidth = lw; c.lineJoin = 'round'; c.stroke(kp);
+    if (o.frost) { c.save(); c.globalAlpha = o.frost; c.fillStyle = '#d6eefc'; c.lineWidth = lw * .75;
+      [[20, 4, 10], [52, 5, 14], [90, 4, 9], [118, 5, 12]].forEach(([x, w, h]) => { c.beginPath(); c.moveTo(x, 40); c.lineTo(x + w, 40 + h); c.lineTo(x + w * 2, 40); c.closePath(); c.fill(); c.stroke(); }); c.restore(); }
+    if (o.cat) { // しがみつく猫
+      c.save(); c.translate(98, 3); c.lineWidth = lw; c.lineCap = 'round';
+      c.strokeStyle = col.ink; c.lineWidth = lw + 4; c.beginPath(); c.moveTo(14, -2); c.quadraticCurveTo(30, -4, 25, -18); c.stroke();
+      c.strokeStyle = '#f2a65a'; c.lineWidth = 4 - lw * .2; c.beginPath(); c.moveTo(14, -2); c.quadraticCurveTo(30, -4, 25, -18); c.stroke();
+      c.strokeStyle = col.ink; c.lineWidth = lw; c.fillStyle = '#f2a65a';
+      c.beginPath(); c.ellipse(0, -5, 18, 11, 0, 0, 7); c.fill(); c.stroke();
+      c.beginPath(); c.moveTo(-24, -18); c.lineTo(-25, -29); c.lineTo(-16, -22); c.closePath(); c.fill(); c.stroke();
+      c.beginPath(); c.moveTo(-13, -22); c.lineTo(-7, -30); c.lineTo(-6, -18); c.closePath(); c.fill(); c.stroke();
+      c.beginPath(); c.arc(-16, -13, 10.5, 0, 7); c.fill(); c.stroke();
+      c.fillStyle = '#fff'; c.lineWidth = lw * .6; [-20.5, -11.5].forEach(x => { c.beginPath(); c.arc(x, -14, 3.4, 0, 7); c.fill(); c.stroke(); });
+      c.fillStyle = col.ink; [-20.5, -11.5].forEach(x => { c.beginPath(); c.arc(x, -14, 1.3, 0, 7); c.fill(); });
+      c.beginPath(); c.ellipse(-16, -8, 1.6, 2.2, 0, 0, 7); c.fill();
+      c.restore(); }
+    c.restore();
+  }
+  // 擬音などの文字：ぽんと出て、消える（k は 0→1）
+  function popText(c, str, x, y, size, k, fill) {
+    if (k <= 0 || k >= 1) return;
+    const s = k < .18 ? lerp(.4, 1.25, k / .18) : k < .32 ? lerp(1.25, 1, (k - .18) / .14) : 1;
+    c.save(); c.globalAlpha = k > .75 ? 1 - (k - .75) / .25 : 1; c.translate(x, y); c.scale(s, s);
+    c.font = `400 ${size}px ${cssv('--display')}`; c.textAlign = 'center'; c.textBaseline = 'middle';
+    c.lineJoin = 'round'; c.lineWidth = size * .22; c.strokeStyle = '#1b2444'; c.strokeText(str, 0, 0);
+    c.fillStyle = fill || '#fff'; c.fillText(str, 0, 0); c.restore();
+  }
+  function dust(c, x, y, k) {
+    if (k <= 0 || k >= 1) return;
+    c.save(); c.globalAlpha = (1 - k) * .85; c.fillStyle = '#fff';
+    [[-22, 0, 9], [0, -6, 12], [22, 0, 9], [-10, 4, 7], [12, 5, 7]].forEach(([dx, dy, r]) => { c.beginPath(); c.arc(x + dx * (1 + k * 1.3), y + dy - k * 10, r * (.6 + k * .9), 0, 7); c.fill(); });
+    c.restore();
+  }
+  function star4(c, x, y, r, rot) {
+    if (r <= 0) return; c.save(); c.translate(x, y); c.rotate(rot); c.fillStyle = '#fff6c4'; c.beginPath();
+    for (let i = 0; i < 8; i++) { const rr2 = i % 2 ? r * .22 : r, a = i * Math.PI / 4; c.lineTo(Math.cos(a) * rr2, Math.sin(a) * rr2); }
+    c.closePath(); c.fill(); c.restore();
+  }
+  // UFOと宇宙人。sur: 驚き具合(0〜1)、look: 視線の先
+  function drawUfo(c, x, y, rot, t, sur, look, alpha) {
+    if (alpha <= 0) return;
+    c.save(); c.globalAlpha = alpha; c.translate(x, y); c.rotate(rot); c.scale(1.4, 1.4); c.lineJoin = 'round';
+    const INK = '#1b2444';
+    c.fillStyle = '#8fe36b'; c.strokeStyle = INK; c.lineWidth = 2;
+    c.beginPath(); c.moveTo(-4, -22 - sur * 2); c.lineTo(-7, -29 - sur * 3); c.moveTo(4, -22 - sur * 2); c.lineTo(7, -29 - sur * 3); c.stroke();
+    c.beginPath(); c.arc(-7, -30 - sur * 3, 2, 0, 7); c.arc(7, -30 - sur * 3, 2, 0, 7); c.fill();
+    c.beginPath(); c.ellipse(0, -11, 11, 12, 0, 0, 7); c.fill(); c.stroke();
+    const dx = look.x - x, dy = look.y - y, d = Math.hypot(dx, dy) || 1, px = dx / d * 1.8, py = dy / d * 1.8;
+    [-4.6, 4.6].forEach(ex => {
+      const r = 3 + sur * 2.2;
+      c.fillStyle = '#fff'; c.beginPath(); c.ellipse(ex, -13, r, r * (1 + sur * .15), 0, 0, 7); c.fill(); c.lineWidth = 1.2; c.stroke();
+      c.fillStyle = INK; c.beginPath(); c.arc(ex + px, -13 + py, 1.9 - sur * .5, 0, 7); c.fill();
+    });
+    c.fillStyle = INK; c.beginPath(); c.ellipse(0, -5, 1.5 + sur * 1.6, .8 + sur * 2.6, 0, 0, 7); c.fill();
+    c.fillStyle = 'rgba(190,235,255,.32)'; c.lineWidth = 2;
+    c.beginPath(); c.ellipse(0, 1, 19, 27, 0, Math.PI, 0); c.closePath(); c.fill(); c.stroke();
+    c.strokeStyle = 'rgba(255,255,255,.8)'; c.lineWidth = 2; c.lineCap = 'round'; c.beginPath(); c.arc(0, 1, 15, Math.PI * 1.15, Math.PI * 1.35); c.stroke();
+    c.strokeStyle = INK; c.lineWidth = 2;
+    c.fillStyle = '#8f98b8'; c.beginPath(); c.ellipse(0, 9, 22, 7, 0, 0, 7); c.fill(); c.stroke();
+    c.fillStyle = '#d5daea'; c.beginPath(); c.ellipse(0, 4, 38, 9, 0, 0, 7); c.fill(); c.stroke();
+    for (let i = 0; i < 5; i++) { const on = (Math.floor(t / 140) + i) % 2 === 0; c.fillStyle = on ? '#ffe27a' : '#e2493a'; c.beginPath(); c.arc(-26 + i * 13, 5 + Math.abs(i - 2) * -0.8, 2.4, 0, 7); c.fill(); }
+    if (sur > .3) { c.fillStyle = 'rgba(160,220,255,' + sur + ')'; [[-22, -24], [24, -20]].forEach(([sx2, sy2], i) => { const k = (t / 500 + i * .5) % 1; c.beginPath(); c.ellipse(sx2 + (i ? 1 : -1) * k * 6, sy2 + k * 8, 1.8, 3, (i ? -1 : 1) * .5, 0, 7); c.fill(); }); }
+    c.restore();
+  }
+  // 雪（スベったとき）
+  function makeSnow(n, W, H) { return Array.from({ length: n }, () => ({ x: Math.random() * (W + 60), y: Math.random() * H, r: 1.3 + Math.random() * 2, v: .05 + Math.random() * .07, p: Math.random() * 6.28 })); }
+  function drawSnow(c, flakes, W, H, t, dt, a) {
+    if (a <= 0) return; c.save(); c.globalAlpha = a; c.fillStyle = '#fff';
+    flakes.forEach(f => { f.y += f.v * dt; f.x -= (.035 + Math.sin(t / 600 + f.p) * .02) * dt; if (f.y > H + 5) { f.y = -5; f.x = Math.random() * (W + 60); } c.beginPath(); c.arc(f.x, f.y, f.r, 0, 7); c.fill(); });
+    c.restore();
+  }
+  const buzz = p => { try { navigator.vibrate && navigator.vibrate(p); } catch (e) {} };
+
+  function launch(score, sp) {
+    sp = sp || {}; partyId++;
+    if (cancelRun) cancelRun();
+    stopAnims(kake, room, scene);
+    kake.style.transform = ''; kake.style.opacity = ''; kake.classList.remove('frozen');
+    const W = scene.clientWidth, H = scene.clientHeight;
+    room.style.transform = '';
+    const finalState = () => {
+      room.style.transform = ''; kake.style.transform = ''; kake.style.opacity = '';
+      if (score >= 25) kake.style.opacity = '0';
+      else if (score > 0) kake.style.transform = `translateX(${6 + score * 3}px)`;
+      else kake.classList.add('frozen');
+    };
+    if (reduce || !kake.animate || !fx.getContext) { finalState(); return Promise.resolve(); }
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    fx.width = Math.round(W * dpr); fx.height = Math.round(H * dpr);
+    const c = fx.getContext('2d'); c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const col = { kake: cssv('--kake'), dot: cssv('--kake-dot'), ink: cssv('--ink'), shiki: cssv('--shiki') };
+    if (sp.gold) Object.assign(col, GOLD);
+    const kr = kake.getBoundingClientRect(), sr = scene.getBoundingClientRect();
+    const sx = kr.left - sr.left + kr.width / 2, sy = kr.top - sr.top + kr.height / 2;
+
+    return new Promise(resolve => {
+      let raf = 0, done = false, total = 0, frame = () => {};
+      let amp = 0, baseAmp = 0; const kick = a => { amp = Math.max(amp, a); };
+      const finish = () => {
+        if (done) return; done = true; cancelAnimationFrame(raf); scene.style.transform = '';
+        if (performance.now() - t0 < total - 30) buzz(0);
+        c.clearRect(0, 0, W, H); stopAnims(kake, room, scene); finalState();
+        scene.removeEventListener('click', finish); cancelRun = null; resolve();
+      };
+      cancelRun = finish; scene.addEventListener('click', finish);
+      const coldTint = a => { if (a > 0) { c.fillStyle = `rgba(165,195,222,${a})`; c.fillRect(0, 0, W, H); } };
+      const skipHint = () => { c.save(); c.font = `700 11px ${cssv('--body')}`; c.textAlign = 'right'; c.textBaseline = 'top'; c.lineJoin = 'round'; c.lineWidth = 3; c.globalAlpha = .85; c.strokeStyle = '#1b2444'; c.fillStyle = '#fff'; c.strokeText('タップでスキップ', W - 10, H - 22); c.fillText('タップでスキップ', W - 10, H - 22); c.restore(); };
+
+      if (score <= 0) {
+        // 無反応：しーん… → 冷たい風と雪 → 布団が凍る
+        kake.animate([0, -2, 2, -1.2, 1.2, 0].map(r => ({ transform: `rotate(${r}deg)` })), { duration: 480 });
+        total = 3300; const snow = makeSnow(46, W, H); let froze = false;
+        const wind = Array.from({ length: 7 }, (_, i) => ({ y: H * (.12 + i * .11), o: Math.random() * W, l: 50 + Math.random() * 60 }));
+        frame = (t, dt) => {
+          const a = seg(t, 900, 1500) * (1 - seg(t, total - 350, total));
+          coldTint(a * .34);
+          if (a > 0) { c.strokeStyle = `rgba(255,255,255,${.75 * a})`; c.lineWidth = 2; c.lineCap = 'round'; wind.forEach(w => { const x = W + 80 - ((t * .55 + w.o) % (W + 220)); c.beginPath(); c.moveTo(x, w.y); c.quadraticCurveTo(x + w.l * .5, w.y - 7, x + w.l, w.y); c.stroke(); }); }
+          drawSnow(c, snow, W, H, t, dt, a);
+          if (!froze && t >= 1650) { froze = true; kake.classList.add('frozen'); buzz([60, 60, 60]); kick(7); }
+          popText(c, 'しーん…', sx + 70, sy - 62 - seg(t, 300, 1500) * 14, 26, seg(t, 300, 1500));
+          popText(c, 'ひゅ〜', W * .74, H * .5, 26, seg(t, 1000, 2000));
+          popText(c, 'カチーン', sx + 10, sy - 60, 30, seg(t, 1650, total), '#d6eefc');
+          skipHint();
+        };
+      } else if (score < 25) {
+        // めくれる：小さく跳ねて着地、雪がちらつく
+        const dx = 6 + score * 3, h = 14 + score * 3, rot = 4 + score, N = 24, f = [];
+        for (let i = 0; i <= N; i++) { const k = i / N; f.push({ transform: `translate(${dx * k}px,${-4 * h * k * (1 - k)}px) rotate(${Math.sin(k * Math.PI) * -rot}deg)` }); }
+        const dur = 620 + score * 10;
+        kake.style.transform = `translateX(${dx}px)`; kake.animate(f, { duration: dur });
+        total = dur + 1900; let landed = false; const snow = makeSnow(22, W, H);
+        frame = (t, dt) => {
+          const a = seg(t, dur + 200, dur + 700) * (1 - seg(t, total - 350, total));
+          coldTint(a * .2); drawSnow(c, snow, W, H, t, dt, a);
+          if (!landed && t >= dur) { landed = true; buzz(50); kick(4 + score * .25); }
+          dust(c, sx + dx, sy + 22, seg(t, dur, dur + 420));
+          popText(c, score < 12 ? 'ぺろっ' : 'ぽふっ', sx + dx + 30, sy - 58, 26, seg(t, dur - 60, dur + 800));
+          popText(c, 'さむっ', W * .7, H * .32, 26, seg(t, dur + 850, total));
+        };
+      } else {
+        // ふっ飛ぶ：ため → 発射 → 追いかけカメラ → 着地 / 星 / UFOにさらわれる
+        const high = score >= 85, abduct = !!sp.ufo;
+        const L = 500, F0 = 920, D = 1100 + (score - 25) * 18, F1 = F0 + D, E1 = F1 + (abduct ? 1100 : 650); total = E1 + 260;
+        const cx = W * .5, cy = H * .52;
+        kake.animate([{ transform: 'none' }, { transform: 'translateY(4px) scale(1.07,.8)' }, { transform: 'translate(-1.5px,5px) scale(1.1,.72)' }, { transform: 'translate(1.5px,5px) scale(1.1,.72)' }, { transform: 'translate(-1.5px,6px) scale(1.12,.68)' }, { transform: 'translate(1.5px,6px) scale(1.12,.68)' }], { duration: L });
+        kake.style.transform = 'translate(1.5px,6px) scale(1.12,.68)';
+        let launched = false, roomOut = false, roomBack = false, spin = 0, ended = false;
+        buzz([25, 55, 25, 55, 25, 55, 25, 55, 25, 55, 25, 75, score >= 75 ? 450 : 300]); // タメは小刻み、発射で長く
+        let fpos = { x: cx, y: cy }, ufoAt = null; const ux = W * .8, uy = H * .68, ay = H * .22;
+        const lines = Array.from({ length: 18 }, () => ({ x: Math.random() * W * 1.3, y: Math.random() * H * 1.2 - H * .2, l: 30 + Math.random() * 70, v: .6 + Math.random() * .8 }));
+        const clouds = Array.from({ length: 4 }, (_, i) => ({ x: W * (.25 + i * .4), y: H * (-.1 + Math.random() * .8), s: .7 + Math.random() * .7 }));
+        const stars = Array.from({ length: 40 }, () => ({ x: Math.random() * W, y: Math.random() * H, r: .6 + Math.random() * 1.5, p: Math.random() * 6.28 }));
+        const marks = [[25, '部屋の外へ'], [50, 'ご近所を通過'], [75, '隣町を通過'], [100, '成層圏に到達']].filter(m => m[0] <= score).map(m => ({ s: m[0], label: m[1], at: null }));
+        const ex = W * .84, ey = H * .2, lx = cx + 34;
+        frame = (t, dt) => {
+          if (!launched && t >= L) {
+            launched = true; stopAnims(kake); kake.style.opacity = '0'; kake.style.transform = ''; kick(score >= 75 ? 22 : 16);
+          }
+          if (t < L) baseAmp = .8 + 2.6 * seg(t, 0, L); // タメでだんだん強く
+          if (!roomOut && t >= L + 200) { roomOut = true; room.style.transform = 'translate(-40%,140%)'; room.animate([{ transform: 'none' }, { transform: 'translate(-40%,140%)' }], { duration: 420, easing: 'ease-in' }); }
+          if (!roomBack && t >= E1) { roomBack = true; stopAnims(room); room.style.transform = ''; room.animate([{ transform: 'translateY(140%)' }, { transform: 'none' }], { duration: 260, easing: 'ease-out' }); }
+          const spd = t < F0 ? 25 * seg(t, L, F0) : 25 + (score - 25) * eIO(seg(t, F0, F1));
+          const fade = 1 - seg(t, E1, total);
+          const tint = clamp((spd - 45) / 45, 0, .96) * fade;
+          if (tint > 0) { c.fillStyle = `rgba(11,16,52,${tint})`; c.fillRect(0, 0, W, H); }
+          const sa = clamp((spd - 70) / 20, 0, 1) * fade;
+          if (sa > 0) { c.fillStyle = '#fff'; stars.forEach(s => { c.globalAlpha = sa * (.45 + .55 * Math.sin(t / 170 + s.p) ** 2); c.beginPath(); c.arc(s.x, s.y, s.r, 0, 7); c.fill(); }); c.globalAlpha = 1; }
+          // 宇宙に入るとUFOが現れ、布団を見て驚く
+          const uk = abduct ? 0 : seg(spd, 76, 86);
+          if (uk > 0) {
+            if (ufoAt == null && uk >= .75) ufoAt = t;
+            const sur = ufoAt == null ? 0 : eOut(seg(t, ufoAt, ufoAt + 180));
+            const jolt = ufoAt == null ? 0 : (1 - seg(t, ufoAt, ufoAt + 520));
+            const x = lerp(W + 60, ux, eOut(uk)), y = uy + Math.sin(t / 320) * 5 - Math.sin(jolt * Math.PI) * 12;
+            drawUfo(c, x, y, Math.sin(t / 420) * .06 + Math.sin(t / 38) * .16 * jolt, t, sur, fpos, fade);
+            if (ufoAt != null) popText(c, '！？', x + 8, y - 66, 28, seg(t, ufoAt, ufoAt + 1100), '#ffe27a');
+          }
+          const speed = t >= L && t < F1 + 120 ? (.38 + score / 100 * .95) * seg(t, L, F0) * (1 - .55 * seg(t, F1 - 280, F1 + 120)) : 0;
+          baseAmp += speed * 1.7;
+          if (!ended && t >= F1 + (abduct ? 600 : 360)) { ended = true; if (abduct) { kick(9); buzz([40, 40, 120]); } else if (high) { kick(6); buzz([30, 50, 30]); } else { kick(13); buzz(120); } }
+          const ca = clamp(Math.min((spd - 26) / 8, (82 - spd) / 10), 0, 1) * (1 - seg(t, F1, F1 + 300));
+          if (ca > 0) { c.fillStyle = `rgba(255,255,255,${.9 * ca})`; clouds.forEach(cl => {
+            cl.x -= speed * dt * .6; cl.y += speed * dt * .38;
+            if (cl.x < -90 || cl.y > H + 50) { cl.x = W + 50 + Math.random() * 90; cl.y = -50 + Math.random() * H * .7; }
+            [[0, 0, 22], [24, 6, 17], [-24, 7, 16], [8, -12, 16]].forEach(([dx, dy, r]) => { c.beginPath(); c.arc(cl.x + dx * cl.s, cl.y + dy * cl.s, r * cl.s, 0, 7); c.fill(); });
+          }); }
+          if (speed > 0) { c.strokeStyle = 'rgba(255,255,255,.8)'; c.lineWidth = 2; c.lineCap = 'round'; lines.forEach(ln => {
+            ln.x -= speed * dt * 1.7 * ln.v; ln.y += speed * dt * 1.05 * ln.v;
+            if (ln.x < -110 || ln.y > H + 70) { if (Math.random() < .5) { ln.x = W + 30 + Math.random() * 60; ln.y = Math.random() * H * .9 - 50; } else { ln.x = W * (.25 + Math.random() * 1.0); ln.y = -70; } }
+            const l = ln.l * (.4 + speed); c.beginPath(); c.moveTo(ln.x, ln.y); c.lineTo(ln.x + l * .85, ln.y - l * .53); c.stroke();
+          }); }
+          const bk = seg(t, L, L + 320);
+          if (bk > 0 && bk < 1) { c.save(); c.translate(sx, sy + 14); c.strokeStyle = `rgba(255,255,255,${1 - bk})`; c.lineWidth = 4; c.lineCap = 'round';
+            for (let i = 0; i < 14; i++) { const a = -Math.PI * (i + .5) / 14, r0 = 34 + 70 * bk, r1 = r0 + 14 + 44 * (1 - bk) * (i % 2 ? 1 : .6); c.beginPath(); c.moveTo(Math.cos(a) * r0, Math.sin(a) * r0 * .8); c.lineTo(Math.cos(a) * r1, Math.sin(a) * r1 * .8); c.stroke(); }
+            c.restore(); dust(c, sx, sy + 22, bk); }
+          popText(c, 'ドンッ', sx - 24, sy - 84, 34, seg(t, L, L + 560), '#ffe27a');
+          if (sp.cat) popText(c, 'ニャー！？', W * .66, H * .78, 26, seg(t, L + 250, L + 1300), '#ffd2a6');
+          if (sp.gold) popText(c, 'ピカーン', W * .3, H * .5, 26, seg(t, L + 350, L + 1300), '#ffe27a');
+          // さらいに来たUFOの光
+          let ax = cx, ayy = ay;
+          if (abduct) {
+            const k3 = seg(t, F1 + 620, E1); ax = lerp(cx, W + 90, k3 * k3); ayy = lerp(lerp(-60, ay, eOut(seg(t, F1 - 250, F1 + 150))), -50, k3 * k3);
+            const ba = seg(t, F1 + 100, F1 + 240) * (1 - seg(t, F1 + 560, F1 + 640));
+            if (ba > 0) { const g = c.createLinearGradient(0, ayy, 0, H * .86); g.addColorStop(0, `rgba(255,240,150,${.7 * ba})`); g.addColorStop(1, `rgba(255,240,150,${.12 * ba})`); c.fillStyle = g; c.beginPath(); c.moveTo(ax - 16, ayy + 12); c.lineTo(ax + 16, ayy + 12); c.lineTo(ax + 58, H * .86); c.lineTo(ax - 58, H * .86); c.closePath(); c.fill(); }
+          }
+          // 布団
+          if (t >= L) {
+            spin += dt * (.007 + score / 100 * .013) * (abduct ? 1 - .8 * seg(t, F1, F1 + 200) : 1);
+            let x, y, sc = 1, vis = true;
+            if (t < F0) { const k = eOut(seg(t, L, F0)); x = lerp(sx, cx, k); y = lerp(sy, cy, k) - Math.sin(k * Math.PI) * 26; }
+            else if (t < F1) { x = cx + Math.sin(t / 210) * 10; y = cy + Math.cos(t / 170) * 8; }
+            else if (abduct) { const k = seg(t, F1 + 180, F1 + 580); x = cx; y = lerp(cy, ay + 8, k * k); sc = lerp(1, .12, k); vis = k < 1; }
+            else if (high) { const k = seg(t, F1, F1 + 360); x = lerp(cx, ex, k * k); y = lerp(cy, ey, k * k); sc = lerp(1, .06, k); vis = k < 1; }
+            else { const k = seg(t, F1, F1 + 380); x = cx + 34 * k; y = lerp(cy, H + 60, k * k); vis = k < 1; }
+            fpos = { x, y };
+            if (vis) { drawKake(c, x, y, spin, sc, col, { cat: sp.cat });
+              if (sp.gold && t < F1) for (let i = 0; i < 4; i++) { const a = t / 320 + i * 1.57; star4(c, x + Math.cos(a) * 82, y + Math.sin(a) * 40, 5 + 3 * Math.sin(t / 90 + i), t / 200); } }
+          }
+          // 終わり方
+          if (abduct) { if (t >= F1 - 250) drawUfo(c, ax, ayy, Math.sin(t / 300) * .05 + seg(t, F1 + 620, E1) * .35, t, 0, fpos, fade); popText(c, 'さらわれた！', W / 2, H * .66, 30, seg(t, F1 + 600, total), '#ffe27a'); }
+          else if (high) { const k = seg(t, F1 + 340, E1 + 100); star4(c, ex, ey, Math.sin(k * Math.PI) * 30, k * 1.4); popText(c, 'キラーン', W * .56, H * .4, 30, seg(t, F1 + 340, total), '#fff6c4'); }
+          else { dust(c, lx, H - 8, seg(t, F1 + 360, F1 + 800)); popText(c, 'ぽふっ', lx, H - 56, 30, seg(t, F1 + 360, total)); }
+          marks.forEach(m => { if (m.at == null && t >= F0 + 240 && spd >= m.s - .01) { m.at = t; if (m.s > 25) { buzz(60); kick(m.s === 100 ? 12 : 8); } }
+            if (m.at != null) { const fk = seg(t, m.at, m.at + 170); if (fk < 1) { c.fillStyle = `rgba(255,255,255,${.38 * (1 - fk)})`; c.fillRect(0, 0, W, H); }
+              popText(c, m.label, W / 2, H * .2, m.s === 100 ? 30 : 24, seg(t, m.at, m.at + 700), m.s === 100 ? '#ffe27a' : '#fff'); } });
+          if (t < E1) { c.save(); c.globalAlpha = seg(t, L, L + 150); c.font = `400 24px ${cssv('--display')}`; c.textBaseline = 'top'; c.lineJoin = 'round'; c.lineWidth = 5; c.strokeStyle = '#1b2444'; const s = fmt(DJ.meters(spd)) + ' m'; c.strokeText(s, 12, H - 38); c.fillStyle = '#fff'; c.fillText(s, 12, H - 38); c.restore(); skipHint(); }
+        };
+      }
+      const t0 = performance.now(); let prev = t0;
+      const loop = now => {
+        if (done) return; const t = now - t0, dt = Math.min(50, now - prev); prev = now;
+        c.clearRect(0, 0, W, H); baseAmp = 0; frame(t, dt);
+        amp *= Math.exp(-dt / 140); const a = amp + baseAmp;
+        scene.style.transform = a > .3 ? `translate(${((Math.random() * 2 - 1) * a).toFixed(1)}px,${((Math.random() * 2 - 1) * a).toFixed(1)}px)` : '';
+        if (t >= total) finish(); else raf = requestAnimationFrame(loop);
+      };
+      raf = requestAnimationFrame(loop);
+    });
+  }
+
+  // ミラーボール（75点以上）
+  function mirrorBall(c, x, y, R, t) {
+    c.save();
+    c.strokeStyle = '#1b2444'; c.lineWidth = 2; c.beginPath(); c.moveTo(x, y - R - 400); c.lineTo(x, y - R); c.stroke();
+    c.fillStyle = '#8f98b8'; c.fillRect(x - 5, y - R - 5, 10, 7); c.strokeRect(x - 5, y - R - 5, 10, 7);
+    c.beginPath(); c.arc(x, y, R, 0, 7); c.fillStyle = '#5b6488'; c.fill(); c.save(); c.clip();
+    const rows = 8, phi = t / 520, tick = Math.floor(t / 110);
+    for (let j = 0; j < rows; j++) {
+      const lat = ((j + .5) / rows - .5) * Math.PI, cl = Math.cos(lat), n = Math.max(4, Math.round(16 * cl)), h = Math.PI * R / rows * .86;
+      for (let k = 0; k < n; k++) {
+        const lon = phi + k * 2 * Math.PI / n, cz = Math.cos(lon); if (cz <= .05) continue;
+        const px = x + R * cl * Math.sin(lon), py = y + R * Math.sin(lat), w = 2 * Math.PI * R * cl / n * cz * .86;
+        const glint = (k * 7 + j * 13 + tick) % 9 === 0, hue = (k * 47 + j * 83 + tick * 20) % 360;
+        const li = 48 + 34 * cz * (1 - Math.abs(Math.sin(lat)) * .5);
+        c.fillStyle = glint ? '#ffffff' : (k + j) % 5 === 0 ? `hsl(${hue},85%,${li + 8}%)` : `hsl(225,18%,${li}%)`;
+        c.fillRect(px - w / 2, py - h / 2, w, h);
+      }
+    }
+    const g = c.createRadialGradient(x - R * .4, y - R * .45, R * .1, x, y, R); g.addColorStop(0, 'rgba(255,255,255,.55)'); g.addColorStop(.5, 'rgba(255,255,255,0)'); g.addColorStop(1, 'rgba(11,16,52,.35)');
+    c.fillStyle = g; c.fillRect(x - R, y - R, R * 2, R * 2); c.restore();
+    c.beginPath(); c.arc(x, y, R, 0, 7); c.stroke(); c.restore();
+  }
+  let partyId = 0;
+  const PARTY_COLS = ['#ff5fa2', '#4fd8ff', '#ffe27a', '#9dff7a', '#b388ff', '#ff9a4f'];
+  function party() {
+    if (reduce || !fx.getContext) return;
+    const my = ++partyId, W = scene.clientWidth, H = scene.clientHeight, dpr = Math.min(2, window.devicePixelRatio || 1);
+    fx.width = Math.round(W * dpr); fx.height = Math.round(H * dpr);
+    const c = fx.getContext('2d'); c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const t0 = performance.now(), LIFE = 3000, OUT = 1100, R = 27, bx = W / 2, restY = H * .27;
+    const loop = now => {
+      if (my !== partyId) return; const t = now - t0;
+      c.clearRect(0, 0, W, H);
+      const dk = seg(t, 0, 650), back = 1 + 2.2 * Math.pow(dk - 1, 3) + 1.2 * Math.pow(dk - 1, 2); // 少し行きすぎて戻る
+      const by = lerp(lerp(-R - 10, restY, back), -R - 14, eIO(seg(t, LIFE - 150, LIFE + OUT))) + Math.sin(t / 700) * 1.5;
+      const on = seg(t, 350, 800) * (1 - seg(t, LIFE - 700, LIFE));
+      if (on > 0) {
+        c.fillStyle = `rgba(11,16,52,${.58 * on})`; c.fillRect(0, 0, W, H);
+        c.save(); c.globalCompositeOperation = 'lighter';
+        for (let i = 0; i < 10; i++) { // 光の筋
+          const a = t / 1100 + i * Math.PI / 5, wdt = .055 + .02 * Math.sin(t / 300 + i);
+          c.fillStyle = PARTY_COLS[i % 6]; c.globalAlpha = .3 * on;
+          c.beginPath(); c.moveTo(bx, by); c.lineTo(bx + Math.cos(a - wdt) * 600, by + Math.sin(a - wdt) * 600); c.lineTo(bx + Math.cos(a + wdt) * 600, by + Math.sin(a + wdt) * 600); c.closePath(); c.fill();
+        }
+        for (let i = 0; i < 12; i++) { // 床や壁を流れる光の点
+          const u = (((i * .377 + t / 2600 * (i % 2 ? 1 : -1)) % 1) + 1) % 1, v = (i * .618) % 1;
+          c.fillStyle = PARTY_COLS[(i + 2) % 6]; c.globalAlpha = (.42 + .25 * Math.sin(t / 200 + i * 2)) * on;
+          c.beginPath(); c.ellipse(W * u, H * (.12 + .86 * v), 20 + (i % 3) * 7, 9 + (i % 3) * 3, 0, 0, 7); c.fill();
+        }
+        c.restore();
+        for (let i = 0; i < 5; i++) { const k = ((t / 600 + i * .2) % 1); star4(c, bx + Math.cos(i * 2.4 + 1) * (R + 14 + i * 3), by + Math.sin(i * 2.4 + 1) * (R + 10), Math.sin(k * Math.PI) * 9 * on, k * 1.2); }
+        popText(c, 'フィーバー！', W / 2, H * .62, 30, seg(t, 600, 2100), '#ffe27a');
+      }
+      if (t < LIFE + OUT) { mirrorBall(c, bx, by, R, t); requestAnimationFrame(loop); }
+    };
+    requestAnimationFrame(loop);
+  }
+
+  // 紙ふぶき（75点以上）
+  function confetti(n, lights) {
+    if (reduce) return; const cv = $('confetti'), c = cv.getContext('2d');
+    const W = innerWidth, H = innerHeight, dpr = Math.min(2, devicePixelRatio || 1);
+    cv.width = W * dpr; cv.height = H * dpr; cv.style.display = 'block'; c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const cols = ['#2b4a9b', '#d63a2c', '#ffe27a', '#ffffff', '#7f9bf0'];
+    const ps = Array.from({ length: n }, () => ({ x: Math.random() * W, y: -20 - Math.random() * H * .5, vx: (Math.random() - .5) * .25, vy: .18 + Math.random() * .3, w: 6 + Math.random() * 7, h: 9 + Math.random() * 9, r: Math.random() * 6.28, vr: (Math.random() - .5) * .02, c: cols[Math.random() * cols.length | 0], ph: Math.random() * 6.28 }));
+    const t0 = performance.now(), my = ++confetti.id; let prev = t0;
+    const loop = now => {
+      if (my !== confetti.id) return; const t = now - t0, dt = Math.min(50, now - prev); prev = now;
+      c.clearRect(0, 0, W, H); const fade = 1 - seg(t, 1900, 2500);
+      if (lights) for (let i = 0; i < 5; i++) { const x = W * (.5 + .45 * Math.sin(t / 700 + i * 1.3)), y = H * (.25 + .15 * i + .08 * Math.cos(t / 500 + i)), g = c.createRadialGradient(x, y, 0, x, y, 130);
+        g.addColorStop(0, PARTY_COLS[i]); g.addColorStop(1, 'rgba(255,255,255,0)'); c.globalAlpha = .2 * fade * seg(t, 0, 300); c.fillStyle = g; c.fillRect(x - 130, y - 130, 260, 260); }
+      c.globalAlpha = 1;
+      ps.forEach(p => { p.x += (p.vx + Math.sin(t / 300 + p.ph) * .06) * dt; p.y += p.vy * dt; p.r += p.vr * dt;
+        c.save(); c.globalAlpha = fade; c.translate(p.x, p.y); c.rotate(p.r); c.scale(1, Math.cos(t / 160 + p.ph)); c.fillStyle = p.c; c.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); c.restore(); });
+      if (t < 2500) requestAnimationFrame(loop); else { c.clearRect(0, 0, W, H); cv.style.display = 'none'; }
+    };
+    requestAnimationFrame(loop);
+  }
+  confetti.id = 0;
+
+  function countUp(el, to, id) {
+    if (reduce || to === 0) { el.textContent = fmt(to); return; }
+    const t0 = performance.now(), dur = 900;
+    const step = now => {
+      if (id !== runId) return;
+      const t = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - t, 3);
+      el.textContent = fmt(to * e);
+      if (t < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  function renderYomi(r) {
+    const m = r.match; let html = '';
+    r.morae.forEach((k, i) => {
+      if (m && i === m.a1) html += '<mark class="a">';
+      if (m && i === m.a2) html += '<mark class="b">';
+      html += esc(k);
+      if (m && (i === m.b1 || i === m.b2)) html += '</mark>';
+    });
+    return html;
+  }
+
+  const PARTS = [
+    ['len', '音の長さ', 40, '同じ音が何拍つづくか'],
+    ['dens', '密度', 25, '文のうち、掛かっている部分の割合'],
+    ['twist', 'ひねり', 25, '別の言葉、別の区切りで鳴っているか'],
+    ['crisp', 'キレ', 10, '文の短さ']
+  ];
+
+  function show(r, id) {
+    const m = DJ.meters(r.score);
+    $('result').hidden = false;
+    $('rank').textContent = `称号「${titleOf(r)}」`;
+    $('verdict').textContent = verdictOf(r);
+    const vs = $('vs');
+    if (challenge && r.text !== challenge.t) {
+      const cm = fmt(DJ.meters(challenge.s)); vs.hidden = false;
+      vs.textContent = r.score > challenge.s ? `挑戦状の ${cm} m を超えました。` : r.score === challenge.s ? `挑戦状の ${cm} m と引き分けです。` : `挑戦状の ${cm} m に届きませんでした。`;
+    } else vs.hidden = true;
+    $('points').textContent = `${r.score}点（100点満点）`;
+    $('rfill').style.width = r.score + '%'; $('rpin').style.left = r.score + '%';
+    if (r.score >= 25 && !reduce) {
+      $('dist').textContent = fmt(m);
+      const d = $('dist').parentElement;
+      if (d.animate) d.animate([{ transform: 'scale(1.7)', opacity: 0 }, { transform: 'scale(.94)', opacity: 1, offset: .65 }, { transform: 'scale(1)' }], { duration: 360, easing: 'ease-out' });
+      if (r.score >= 75) confetti(r.score >= 100 ? 160 : 90, r.score >= 90);
+      if (r.score >= 90) party();
+    } else countUp($('dist'), m, id);
+
+    const hasMatch = !!r.match;
+    $('matchbox').hidden = !hasMatch && !r.morae.length;
+    $('yomi').innerHTML = renderYomi(r);
+    if (hasMatch) {
+      const mt = r.match;
+      $('pair').textContent = mt.k1 === mt.k2
+        ? `「${mt.s1}」と「${mt.s2}」で「${mt.k1}」が2回鳴っています。`
+        : `「${mt.k1}」と「${mt.k2}」が掛かっています。`;
+    } else $('pair').textContent = '同じ音が2回出てくる場所は見つかりませんでした。';
+
+    $('partsbox').hidden = !hasMatch;
+    $('parts').innerHTML = PARTS.map(([k, name, max, why]) => {
+      const v = Math.round(r.parts[k]);
+      return `<li><span class="name">${name}</span><span class="track"><i style="width:${Math.min(100, v / max * 100)}%"></i></span><span class="num">${v} / ${max}</span><span class="why">${why}</span></li>`;
+    }).join('');
+
+    const notes = [];
+    if (r.ganso) notes.push('このサイトの名前の由来なので、内訳にかかわらず満点です。');
+    if (r.classic) notes.push('定番のダジャレなので12点引きました。');
+    if (r.kind === 'repeat') notes.push('同じ言葉の繰り返しと判定しました。別の言葉で同じ音を鳴らすと飛びます。');
+    if (r.kind === 'maybe') notes.push('同じ言葉の繰り返しかもしれないので控えめの点です。漢字まじりで書くと、別の言葉だと見分けられます。');
+    if (r.kind === 'variant') notes.push('同じ言葉をかなで書いただけかもしれないので控えめの点です。別の言葉なら、漢字で書き分けると見分けられます。');
+    if (r.theme) notes.push(`今日のお題「${theme[0]}」の「${r.theme}」で掛けたので10点足しました。`);
+    Object.keys(HIDDEN).forEach(k => { if (r.sp && r.sp[k]) { const isNew = !found.includes(k); if (isNew) { found.push(k); try { localStorage.setItem('dj-found', JSON.stringify(found)); } catch (e) {} }
+      notes.push(`隠し演出「${HIDDEN[k]}」${isNew ? 'を見つけました。' : 'です。'}`); } });
+    renderFound();
+    if (r.kind === 'none') notes.push('同じ音を、別の言葉でもう一度使うと飛びます。');
+    if (r.unknown.length) notes.push(`「${[...new Set(r.unknown)].join('」「')}」の読みが分かりませんでした。下の「読みを直す」でひらがなを入れてください。`);
+    if (dictNote && /[\u4e00-\u9fff]/.test(r.text)) notes.push('このブラウザでは漢字の読み辞書を開けませんでした。ひらがなで入れると判定できます。');
+    $('notes').innerHTML = notes.map(n => `<li>${esc(n)}</li>`).join('');
+    $('fixbox').open = r.unknown.length > 0;
+    last = r; $('sharemsg').textContent = '';
+    $('post').href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(postText(r));
+    const cp = $('challengepost'); cp.hidden = !shareUrl(r);
+    cp.href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(challengeText(r));
+    renderAd(r);
+  }
+
+  // 共有
+  const SITE_URL = 'https://sakuichi.github.io/ofuton-flyer/'; // 公開URL。挑戦リンクとポスト文面に使う（引っ越したら書き換える）
+  const framed = (() => { try { return window.self !== window.top; } catch (e) { return true; } })();
+  const hasClaude = !!(window.claude && window.claude.use);
+  const dlReady = hasClaude ? window.claude.use('downloads').catch(() => null) : Promise.resolve(null);
+  let last = null, challenge = null;
+  (() => {
+    let q; try { q = new URLSearchParams(location.search); } catch (e) { return; }
+    const ct = (q.get('c') || '').trim().slice(0, 60); if (!ct) return;
+    const cs = parseInt(q.get('s'), 10);
+    dictReady.then(() => {
+      const s = cs >= 0 && cs <= 100 ? cs : DJ.judge(ct).score;
+      challenge = { t: ct, s };
+      const el = $('challenge'); el.textContent = `挑戦状が届いています。「${ct}」の ${fmt(DJ.meters(s))} m を超えてください。`; el.hidden = false;
+    });
+  })();
+
+
+  // 広告（Amazonアソシエイト）。結果に合わせて商品を変える
+  const AMAZON_TAG = '202610jokesite-22'; // トラッキングID（例：'yourid-22'）。空のあいだは紹介料のつかない通常リンク
+  function adFor(r) {
+    const sp = r.sp || {}, s = r.score;
+    if (sp.cat) return ['猫にも、自分の寝床を。', '猫 ベッド', 'Amazonで猫用ベッドを見る'];
+    if (sp.ufo) return ['また連れていかれる前に、予備を一枚。', '掛け布団', 'Amazonで掛け布団を見る'];
+    if (sp.gold) return ['金の布団は、探せば本当にあります。', '布団 ゴールド', 'Amazonで金色の布団を探す'];
+    if (s < 25) return ['寒いギャグで冷えた体に。', '毛布', 'Amazonで毛布を見る'];
+    if (s < 75) return ['ふっ飛んだ布団の代わりに。', '掛け布団', 'Amazonで掛け布団を見る'];
+    if (s < 90) return ['隣町まで取りに行くより早いです。', '掛け布団', 'Amazonで掛け布団を見る'];
+    return ['成層圏まで行った布団は戻りません。', '羽毛布団', 'Amazonで羽毛布団を見る'];
+  }
+  function renderAd(r) {
+    const [copy, q, label] = adFor(r);
+    $('adcopy').textContent = copy; $('adlink').textContent = label;
+    $('adlink').href = 'https://www.amazon.co.jp/s?k=' + encodeURIComponent(q) + (AMAZON_TAG ? '&tag=' + encodeURIComponent(AMAZON_TAG) : '');
+  }
+  if (AMAZON_TAG) $('assoc').hidden = false;
+
+  // 挑戦リンク：開いた人に「この記録を超えろ」と出す
+  function shareUrl(r) {
+    const base = SITE_URL || (!framed && /^https?:/.test(location.protocol) ? location.origin + location.pathname : '');
+    return base ? `${base}?c=${encodeURIComponent(r.text)}&s=${r.score}` : '';
+  }
+  // 挑戦状としてのポスト文面（相手に「超えられる？」と投げかける）
+  function challengeText(r) {
+    const m = DJ.meters(r.score);
+    const head = r.sp && r.sp.ufo ? `「${r.text}」で布団がUFOにさらわれた（${r.score}点）。\nこの記録、超えられる？`
+      : r.score > 0 ? `「${r.text}」で布団が${fmt(m)}mふっ飛んだ（${r.score}点）。\nこの記録、超えられる？`
+      : `「${r.text}」で布団が凍った（0点）。\nこれより寒いダジャレ、ある？`;
+    return head + '\n#ダジャレ布団飛ばし\n' + shareUrl(r);
+  }
+  function postText(r) {
+    const m = DJ.meters(r.score);
+    const head = r.sp && r.sp.ufo ? `「${r.text}」で布団がUFOにさらわれた（${r.score}点）`
+      : r.score > 0 ? `「${r.text}」で布団が${fmt(m)}mふっ飛んだ（${r.score}点）`
+      : `「${r.text}」が寒すぎて布団が凍った（0点）`;
+    const url = shareUrl(r);
+    return head + `\n称号「${titleOf(r)}」\n#ダジャレ布団飛ばし` + (url ? '\n' + url : '');
+  }
+
+  const KAKE_PATH = 'M8 40C3 40 1 36 1 30V20C1 9 9 3 22 3c14 0 20 3 34 3s22-4 38-4 20 3 32 3c13 0 20 5 20 15v10c0 6-2 10-7 10z';
+  function rr(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+  function wrapLines(c, s, maxW) {
+    const lines = ['']; for (const ch of s) { const cur = lines[lines.length - 1]; if (cur && c.measureText(cur + ch).width > maxW) lines.push(ch); else lines[lines.length - 1] = cur + ch; }
+    return lines;
+  }
+
+  // 結果を1枚の画像（1200×675）に描く
+  async function makeImage(r) {
+    const W = 1200, H = 675, INK = '#1b2444';
+    const DISP = '"Dela Gothic One","Hiragino Kaku Gothic StdN","Hiragino Sans","Yu Gothic",sans-serif';
+    const BODY = '"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans","Yu Gothic","Meiryo",sans-serif';
+    const m = DJ.meters(r.score), dist = fmt(m), quote = `「${r.text}」`, verdict = verdictOf(r);
+    try { await Promise.race([Promise.all([
+      document.fonts.load(`400 80px "Dela Gothic One"`, 'ダジャレ布団飛ばし' + dist + 'm'),
+      document.fonts.load(`700 60px "Zen Maru Gothic"`, quote + titleOf(r) + '称号「」点0123456789#')
+    ]), new Promise(res => setTimeout(res, 2500))]); } catch (e) {}
+    const cv = document.createElement('canvas'); cv.width = W; cv.height = H; const c = cv.getContext('2d');
+    const g = c.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#9fd3f2'); g.addColorStop(1, '#dff1fb'); c.fillStyle = g; c.fillRect(0, 0, W, H);
+    // 太陽
+    c.fillStyle = 'rgba(255,224,122,.4)'; c.beginPath(); c.arc(1085, 105, 78, 0, 7); c.fill();
+    c.fillStyle = '#fff1a8'; c.beginPath(); c.arc(1085, 105, 58, 0, 7); c.fill();
+    if (r.score >= 90) { mirrorBall(c, 700, 90, 48, 300); [[640, 50, 14], [765, 70, 11], [742, 140, 16], [650, 128, 9]].forEach(([x, y, s2], i) => star4(c, x, y, s2, i * .5)); }
+    // 畳
+    const FY = 585; c.fillStyle = '#b4b76e'; c.fillRect(0, FY, W, H - FY);
+    c.fillStyle = '#a3a65c'; for (let x = 0; x < W; x += 6) c.fillRect(x, FY, 1.5, H - FY);
+    c.fillStyle = '#3c5a3a'; c.fillRect(0, FY, W, 14);
+    // 敷き布団と枕（右下）
+    c.lineWidth = 4; c.strokeStyle = INK; c.fillStyle = '#fffdf6';
+    rr(c, 800, FY - 22, 350, 34, 17); c.fill(); c.stroke();
+    rr(c, 812, FY - 44, 66, 28, 14); c.fill(); c.stroke();
+    // 掛け布団
+    const s = r.score, p = Math.min(1, s / 100);
+    let kx, ky, rot, sc = 1.9;
+    if (s <= 0) { kx = 870; ky = FY - 86; rot = 0; }
+    else if (s < 25) { kx = 880 + s * 2; ky = FY - 96 - s * 1.5; rot = -(6 + s) * Math.PI / 180; }
+    else { kx = 800 + p * 60; ky = 470 - p * 330; rot = -(12 + p * 28) * Math.PI / 180; sc = 1.9 - p * 0.5; }
+    if (s >= 25 && !(r.sp && r.sp.ufo)) { // 軌跡
+      c.save(); c.setLineDash([4, 18]); c.lineCap = 'round'; c.lineWidth = 6; c.strokeStyle = 'rgba(27,36,68,.35)';
+      c.beginPath(); c.moveTo(1010, FY - 50); c.quadraticCurveTo(1010, ky + 160, kx + 148 * sc / 2, ky + 42 * sc / 2 + 30); c.stroke(); c.restore();
+    }
+    const sp = r.sp || {}, icol = Object.assign({ kake: '#2b4a9b', dot: '#f4f7ff', ink: INK, shiki: '#fffdf6' }, sp.gold ? GOLD : {});
+    if (sp.ufo) { // さらわれ中
+      kx = 800; ky = 290; rot = -.22; sc = 1.35; const ux = kx + 148 * sc / 2, uy = 150;
+      const g = c.createLinearGradient(0, uy, 0, 470); g.addColorStop(0, 'rgba(255,240,150,.85)'); g.addColorStop(1, 'rgba(255,240,150,.15)');
+      c.fillStyle = g; c.beginPath(); c.moveTo(ux - 36, uy + 20); c.lineTo(ux + 36, uy + 20); c.lineTo(ux + 150, 470); c.lineTo(ux - 150, 470); c.closePath(); c.fill();
+      c.save(); c.translate(ux, uy); c.scale(2.2, 2.2); drawUfo(c, 0, 0, -.06, 0, 0, { x: 0, y: 100 }, 1); c.restore();
+    }
+    drawKake(c, kx + 148 * sc / 2, ky + 42 * sc / 2, rot, sc, icol, { cat: sp.cat, frost: s <= 0 ? 1 : 0, lw: 4 });
+    if (s < 25) { // 寒い
+      c.fillStyle = `rgba(165,195,222,${s <= 0 ? .38 : .22})`; c.fillRect(0, 0, W, FY);
+      let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+      c.fillStyle = '#fff'; for (let i = 0; i < (s <= 0 ? 80 : 40); i++) { c.beginPath(); c.arc(rnd() * W, rnd() * FY, 3 + rnd() * 5, 0, 7); c.fill(); }
+    }
+    // 文字
+    c.fillStyle = INK; c.textBaseline = 'alphabetic';
+    c.font = `400 38px ${DISP}`; c.fillText('ダジャレ布団飛ばし', 60, 86);
+    const QW = 720; let fs, lines;
+    for (fs = 66; fs >= 46; fs -= 2) { c.font = `700 ${fs}px ${BODY}`; lines = wrapLines(c, quote, QW); if (lines.length === 1) break; }
+    if (lines.length > 1) for (fs = 56; fs >= 30; fs -= 2) { c.font = `700 ${fs}px ${BODY}`; lines = wrapLines(c, quote, QW); if (lines.length <= 2 && lines[lines.length - 1].length >= 3) break; }
+    lines = lines.slice(0, 2);
+    const qy = lines.length === 1 ? 215 : 190;
+    lines.forEach((ln, i) => c.fillText(ln, 60, qy + i * fs * 1.35));
+    let ds = 190; c.font = `400 ${ds}px ${DISP}`;
+    while (c.measureText(dist).width > 560 && ds > 110) { ds -= 10; c.font = `400 ${ds}px ${DISP}`; }
+    const dy = 480; c.fillText(dist, 54, dy); const dw = c.measureText(dist).width;
+    c.font = `400 ${Math.round(ds * 0.42)}px ${DISP}`; c.fillText('m', 54 + dw + 14, dy);
+    c.font = `700 34px ${BODY}`; c.fillText(`${r.score}点　称号「${titleOf(r)}」`, 60, dy + 62);
+    return new Promise((res, rej) => cv.toBlob(b => b ? res(b) : rej(new Error('toBlob')), 'image/png'));
+  }
+
+  async function saveImage() {
+    if (!last) return;
+    const btn = $('save'), msg = $('sharemsg'); btn.disabled = true; msg.textContent = '';
+    try {
+      const blob = await makeImage(last), name = `dajare-futon-${last.score}.png`;
+      if (hasClaude) {
+        const dl = await dlReady;
+        if (!dl) { msg.textContent = 'この表示では画像を保存できません。'; return; }
+        try { await dl.save({ filename: name, data: blob }); msg.textContent = '画像を保存しました。ポストに添付してください。'; }
+        catch (e) { if (!e || e.code !== 'declined') msg.textContent = e && e.code === 'rate_limited' ? '少し待ってからもう一度押してください。' : '画像を保存できませんでした。'; }
+        return;
+      }
+      const file = typeof File === 'function' ? new File([blob], name, { type: 'image/png' }) : null;
+      if (file && matchMedia('(pointer: coarse)').matches && navigator.canShare && navigator.canShare({ files: [file] })) {
+        try { await navigator.share({ files: [file], text: postText(last) }); return; }
+        catch (e) { if (e && e.name === 'AbortError') return; }
+      }
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+      document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+      msg.textContent = '画像を保存しました。ポストに添付してください。';
+    } catch (e) { msg.textContent = '画像を作れませんでした。'; }
+    finally { btn.disabled = false; }
+  }
+  $('save').addEventListener('click', saveImage);
+
+  // 記録
+  let records = [];
+  try { records = JSON.parse(localStorage.getItem('dj-records') || '[]') || []; } catch (e) { records = []; }
+  function saveRecords() { try { localStorage.setItem('dj-records', JSON.stringify(records)); } catch (e) {} }
+  function renderRecords() {
+    $('records').hidden = records.length === 0;
+    $('reclist').innerHTML = records.map(x => `<li><span class="t">${esc(x.t)}</span><span class="m">${fmt(DJ.meters(x.s))} m</span></li>`).join('');
+  }
+  function addRecord(t, s) {
+    if (s <= 0) return;
+    records = records.filter(x => x.t !== t); records.push({ t, s });
+    records.sort((a, b) => b.s - a.s); records = records.slice(0, 5);
+    saveRecords(); renderRecords();
+  }
+  $('clear').addEventListener('click', () => { records = []; saveRecords(); renderRecords(); });
+  renderRecords(); renderFound();
+
+  async function run(yomi) {
+    const text = $('text').value.trim();
+    if (!text) { $('hint').textContent = 'ダジャレを入れてください。'; $('text').focus(); return; }
+    await dictReady;
+    const r = DJ.judge(text, yomi);
+    if (r.kind === 'short') { $('hint').textContent = '短すぎて判定できません。もう少し長い文を入れてください。'; return; }
+    $('hint').textContent = '';
+    applyTheme(r); r.sp = specials(r);
+    const id = ++runId;
+    $('result').hidden = true;
+    if (yomi == null) $('fixyomi').value = r.yomi.replace(/[\u30a1-\u30f6]/g, c => String.fromCharCode(c.charCodeAt(0) - 0x60));
+    scene.scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' });
+    await launch(r.score, r.sp);
+    if (id !== runId) return;
+    show(r, id);
+    addRecord(text, r.score);
+  }
+
+  $('go').addEventListener('click', () => run());
+  $('text').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); run(); } });
+  $('fixgo').addEventListener('click', () => run($('fixyomi').value));
+  $('fixyomi').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.isComposing) { e.preventDefault(); run($('fixyomi').value); } });
+  document.querySelectorAll('[data-try]').forEach(b => b.addEventListener('click', () => { $('text').value = b.dataset.try; run(); }));
+})();
+</script>
+</body>
+</html>
