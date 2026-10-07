@@ -1,0 +1,14 @@
+{
+  "name": "dajare-futon",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ダジャレ布団飛ばし: ダジャレの出来ばえに応じて布団がふっ飛ぶサイト",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "build:dict": "node tools/build-dict.mjs && node tools/build.mjs",
+    "test": "node test/judge.test.js"
+  },
+  "devDependencies": {
+    "mecab-ipadic-seed": "0.0.2"
+  }
+}
