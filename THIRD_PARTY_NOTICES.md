@@ -75,7 +75,6 @@ grants independently of ICOT any specific warranty to the user in
 writing, such person, organization or entity, will also be exempted
 from and not be held liable to the user for any such damages as noted
 above as far as the program is concerned.
-÷÷
 ```
 
 ## mecab-ipadic-seed
