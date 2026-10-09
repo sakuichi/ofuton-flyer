@@ -1280,7 +1280,7 @@ const MP4FIX = (() => {
         amp *= Math.exp(-dt / 140); const a = amp + baseAmp;
         const shx = a > .3 ? (Math.random() * 2 - 1) * a : 0, shy = a > .3 ? (Math.random() * 2 - 1) * a : 0;
         scene.style.transform = a > .3 ? `translate(${shx.toFixed(1)}px,${shy.toFixed(1)}px)` : '';
-        if (rec) compose(shx, shy);
+        if (rec) { compose(shx, shy); if (rec.onFrame) { const f = rec.onFrame; rec.onFrame = null; f(); } }
         if (t >= total) finish(); else raf = requestAnimationFrame(loop);
       };
       raf = requestAnimationFrame(loop);
@@ -1622,7 +1622,7 @@ const MP4FIX = (() => {
   const VIDEO_MIME = (() => { try { return ['video/mp4;codecs=avc1.42E01E,mp4a.40.2', 'video/mp4;codecs=avc1.42E01E', 'video/webm;codecs=vp9,opus', 'video/webm;codecs=vp8,opus', 'video/webm', 'video/mp4'].find(m => window.MediaRecorder && MediaRecorder.isTypeSupported(m)) || ''; } catch (e) { return ''; } })();
   // 注: 'video/mp4' だけの指定はブラウザによって中身がVP9になり、Xに投稿できない。そのため avc1（H.264）を先に試し、素の video/mp4 は最後にする
   let recording = false;
-  function endCard(rc, RW, RH, top, r) {
+  function endCard(rc, RW, RH, top, r, onFirst) {
     const snap = document.createElement('canvas'); snap.width = RW; snap.height = RH; snap.getContext('2d').drawImage(rc.canvas, 0, 0);
     const [dn, du] = distParts(meters(r.score)), DISP = cssv('--display'), BODY = cssv('--body'), cy = top + (RH - top) / 2;
     return new Promise(res => { const t0 = performance.now(); const step = now => {
@@ -1639,6 +1639,7 @@ const MP4FIX = (() => {
       rc.fillStyle = '#fff'; rc.font = `700 30px ${BODY}`; rc.fillText(`${r.score}点　称号「${titleOf(r)}」`, RW / 2, cy + 74);
       rc.font = `700 22px ${BODY}`; rc.globalAlpha = a * .85; rc.fillText('#ダジャレ布団飛ばし', RW / 2, RH - 24);
       rc.globalAlpha = 1; rc.textAlign = 'left';
+      if (onFirst && t >= 260) { onFirst(); onFirst = null; } // 暗い背景が出そろってから
       if (t < 2000) requestAnimationFrame(step); else res();
     }; requestAnimationFrame(step); });
   }
@@ -1657,13 +1658,19 @@ const MP4FIX = (() => {
       const caption = c => { c.setTransform(1, 0, 0, 1, 0, 0); c.fillStyle = '#1b2444'; c.fillRect(0, 0, RW, top); c.fillStyle = '#fff'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.font = `700 ${fs}px ${BODY}`;
         lines.forEach((ln, i) => c.fillText(ln, RW / 2, top / 2 + (i - (lines.length - 1) / 2) * fs * 1.25)); c.textAlign = 'left'; c.textBaseline = 'alphabetic'; };
       rc.fillStyle = cssv('--sky-top'); rc.fillRect(0, 0, RW, RH); caption(rc);
-      const stream = cv.captureStream(30), as = sfx.recStream(); if (as) as.getAudioTracks().forEach(tr => stream.addTrack(tr));
-      const chunks = [], mr = new MediaRecorder(stream, { mimeType: VIDEO_MIME, videoBitsPerSecond: 4e6 });
-      mr.ondataavailable = e => { if (e.data && e.data.size) chunks.push(e.data); };
-      const stopped = new Promise(res => { mr.onstop = res; }); mr.start(200);
+      // 録画の入口は、部屋と布団を描いた最初のコマができてから作る。キャンバスを録画につないだ瞬間の絵が動画の1コマ目（＝SNSのサムネ）になるので、
+      // 先につなぐと空だけのコマが入ってしまう
+      const chunks = []; let stream = null, mr = null, stopped = null;
+      const begin = () => {
+        if (mr) return;
+        stream = cv.captureStream(30); const as = sfx.recStream(); if (as) as.getAudioTracks().forEach(tr => stream.addTrack(tr));
+        mr = new MediaRecorder(stream, { mimeType: VIDEO_MIME, videoBitsPerSecond: 4e6 });
+        mr.ondataavailable = e => { if (e.data && e.data.size) chunks.push(e.data); };
+        stopped = new Promise(res => { mr.onstop = res; }); mr.start(200);
+      };
       scene.scrollIntoView({ block: 'nearest', behavior: 'auto' });
-      await launch(r.score, r.sp, { c: rc, k, top, W: RW, H: RH, caption });
-      await endCard(rc, RW, RH, top, r);
+      await launch(r.score, r.sp, { c: rc, k, top, W: RW, H: RH, caption, onFrame: begin });
+      await endCard(rc, RW, RH, top, r, begin); // 演出が省かれたとき（動きを減らす設定など）は、結果カードを描いてから始める
       mr.stop(); await stopped; stream.getVideoTracks().forEach(tr => tr.stop());
       const mp4 = VIDEO_MIME.startsWith('video/mp4'); let blob = new Blob(chunks, { type: mp4 ? 'video/mp4' : 'video/webm' });
       if (!blob.size) throw new Error('empty');
