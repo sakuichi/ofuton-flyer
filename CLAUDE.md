@@ -12,7 +12,7 @@ npm run build:dict   # IPA辞書から dict/ を作り直し、続けて build
 npm test             # 判定エンジンの回帰テスト
 ```
 
-`index.html` は生成物。直接編集せず、`src/` を直して `npm run build` する。
+`index.html` と `c/*.html` は生成物。直接編集せず、`src/` と `tools/build.mjs` を直して `npm run build` する。
 GitHub Pages はリポジトリ直下の `index.html` をそのまま配信する（ブランチ直下を公開元にする設定）。
 
 ## 構成
@@ -21,9 +21,12 @@ GitHub Pages はリポジトリ直下の `index.html` をそのまま配信す�
 |---|---|
 | `src/template.html` | 画面・CSS・演出・共有・広告など、判定以外のすべて。`/*DICT*/` と `/*ENGINE*/` が埋め込み位置 |
 | `src/engine.js` | 判定エンジン `DJ`（ブラウザとNodeの両方で動く） |
+| `src/mp4fix.js` | 録画したMP4の組み直し `MP4FIX.defrag`（ブラウザとNodeの両方で動く）。`/*MP4FIX*/` の位置に埋め込まれる |
 | `dict/dict.txt` | 読み辞書（表層形 TAB 読み。名詞は読みの先頭に `.`、人名は `!`）。約13万語 |
 | `dict/dict.b64` | 上を gzip+base64 にしたもの。ページに埋め込まれ、`DecompressionStream` で展開 |
-| `tools/build.mjs` | index.html の組み立て |
+| `tools/build.mjs` | index.html の組み立てと、カード用の入口ページ `c/0.html`〜`c/6.html` の生成 |
+| `tools/make-cards.py` | 点数帯ごとのカード画像 `c/0.png`〜`c/6.png` を作る（絵柄を変えるときだけ。Playwrightとフォントが必要） |
+| `c/` | 点数帯ごとのSNSカード。`c/N.html` はメタタグだけ持ち、開くと `../?c=…&s=…` へ転送する |
 | `tools/build-dict.mjs` | 辞書の生成 |
 | `test/judge.test.js` | 代表的なダジャレの種類と点数帯を固定するテスト |
 | `ogp.png` / `apple-touch-icon.png` | SNSカード用の画像（1200×630）とアイコン。公開URLはメタタグに絶対URLで書いてある |
@@ -51,22 +54,37 @@ GitHub Pages はリポジトリ直下の `index.html` をそのまま配信す�
 
 ## 画面側（src/template.html）の主な部品
 
-- `launch(score, sp)`: 演出本体。0点=凍る、1〜24点=めくれる＋雪、25点以上=タメ→発射→追いかけカメラ。85点以上は星になる。約80点以上で宇宙にUFOが出る
+- `launch(score, sp, rec)`: 演出本体。0点=凍る、1〜24点=めくれる＋雪、25点以上=タメ→発射→追いかけカメラ。85点以上は星になる。約80点以上で宇宙にUFOが出る。`rec` を渡すと録画用キャンバスにシーン全体を描き写す
+- `meters` / `distParts` / `distText`: 飛距離。100点までは `DJ.meters`、それを超えると `OVER` の表（宇宙ステーション→月→火星→木星→太陽系の外）。単位は m / km / 万km / 億km
 - `party()` / `confetti()`: 90点以上でミラーボール（3秒）、75点以上で紙ふぶき
-- `specials(r)`: 隠し演出の判定（`ufo` さらわれる / `cat` 猫が乗る / `gold` 金の布団）
-- `THEMES` / `applyTheme`: 日替わりのお題。お題の語で掛けると+10点
-- `titleOf` / `verdictOf`: 称号と結果の一言
+- `HIDDEN` / `specials(r)`: 隠し演出10種（ufo, cat, gold, panda, ninja, ghost, rainbow, fish, fire, sleep）。`trailFx` / `frontFx` / `drawKake` のオプションで描く。見つけた分は図鑑（localStorage `dj-found`）に出る
+- `THEMES` / `applyTheme`: 日替わりのお題。お題の語で掛けると+10点（上限なし。100点を超える唯一の道）
+- `titleOf` / `TITLES` / `addTitle`: 称号と称号帳（localStorage `dj-titles`）。`TITLES` に無い称号は帳面に出ないので、称号を足すときは両方に書く
+- `quipOf` / `QUIPS`: 結果に添えるひとこと。褒めるか優しくいじる方向で、けなさない
+- `season` / `makeSeason` / `seasonFx`: 日付で切り替わる季節演出（お正月 1/1〜1/7、桜 3/20〜4/10、夏祭り 7/20〜8/31、ハロウィン 10/1〜10/31、クリスマス 12/15〜12/25）。`?season=sakura` のように付けると期間外でも確認できる
+- `sfx`: 効果音と、飛行中のBGM（`bgm`。発射から着地までの長さぶんの音符を先に並べる）。WebAudioでその場で合成するので音声ファイルは無い。最初はオフで、オンにした人だけ localStorage `dj-mute`=`0` で覚える。動画にはオフでも音が入る
 - `makeImage(r)`: 共有用PNG（1200×675）をcanvasで描く
-- `postText` / `shareUrl`: Xの投稿文と挑戦リンク（`?c=ダジャレ&s=点数`）
+- `saveVideo` / `endCard`: 演出を再生し直しながら MediaRecorder で録画（720px幅、上に帯でダジャレ、最後に結果カード）
+- `postText` / `challengeText` / `shareUrl` / `tierOf`: Xの投稿文と挑戦リンク（`c/N.html?c=ダジャレ&s=点数`）
 - `adFor` / `renderAd`: 結果に合わせたAmazonの広告
+- おまかせ（`OMAKASE`）は、未発見の隠し演出が起きる例を出さない（`hiddenOf` で判定）。発見済みになれば出る
+- 音声入力（Web Speech API。対応ブラウザだけボタンが出る）
 
 設定値:
 - `AMAZON_TAG`: アソシエイトのトラッキングID。空にすると通常リンクになり、開示文も消える
-- `SITE_URL`: 挑戦リンクの基準URL（現在は https://sakuichi.github.io/ofuton-flyer/ ）。リポジトリ名やドメインを変えたら書き換える。空にすると表示中のURLを使う
+- `SITE_URL`: 挑戦リンクとカード画像の基準URL（現在は https://sakuichi.github.io/ofuton-flyer/ ）。リポジトリ名やドメインを変えたら書き換えて `npm run build`（`c/*.html` にも入る）
+
+方針（運営者の決定）:
+- サーバーを使う機能は入れない（ランキング、結果ごとの個別カード画像は見送り）
+- 対立を煽る機能は入れない（勝敗を並べる対戦画像などは不可）。「挑戦状としてXでポストする」は現状のままでよい
 
 ## 守ること・はまりどころ
 
-- 外部への通信はGoogle Fontsだけ。入力文をどこにも送らない（フッターで明言している）
+- 外部への通信はGoogle Fontsだけ。入力文をどこにも送らない（フッターで明言している）。例外は音声入力で、ブラウザの音声認識サービスに音声が送られる（これもフッターに書いてある）
+- 録画（`compose`）では画面の揺れをキャンバスの平行移動で再現している。演出レイヤー `fx` は画面と同じ大きさしかないので、端の1列を外側へ引き伸ばして埋めないと、暗い場面で揺れたときに端から元の空色が見える
+- MediaRecorderのMP4は断片化形式で、先頭の長さ情報が不正確（mvhdが0、トラックは最初の断片ぶんだけ）。そのまま渡すと再生時間がでたらめに表示されるので、`MP4FIX.defrag` で全サンプルの表を持つ通常のMP4に組み直している。失敗したら元のファイルを渡す。WebM（Firefoxなど）は未対応で、長さが表示されないことがある
+- 動画の形式は `VIDEO_MIME` で選ぶ。素の `video/mp4` はブラウザによって中身がVP9になりXに投稿できないので、avc1（H.264）指定を先に試し、素のmp4は最後にしている
+- GitHub Pages は全ファイルをJekyllで処理する。UTF-8として不正なバイトが1つでもあると公開が止まる（Actionsタブで確認できる）
 - 演出に Web Animations API の `fill: 'forwards'` を使わない。終了状態が残って畳と敷き布団が戻らなくなる不具合が出た。最終状態はインラインstyleで持ち、アニメーションは上書き再生だけに使う
 - `prefers-reduced-motion` のときは演出を飛ばして結果だけ出す
 - `window.claude`（downloads）を見ている分岐は、Claudeのアーティファクト上で動かすための互換コード。自前ホスティングでは通らないので消してもよい
@@ -90,6 +108,6 @@ GitHub Pages はリポジトリ直下の `index.html` をそのまま配信す�
 
 ## やりたいこと（未着手）
 
-- OGP画像: 結果ごとのURLでカード画像を返す（Cloudflare Workersの無料枠を想定）。Xで画像つきポストになる
-- 効果音、演出の動画保存
-- 採点にLLMを足すハイブリッド（意外性の評価）。費用とAPIキー保護が必要になる
+- 実ユーザーの反応を見ての配点調整、ひとこと・隠し演出・季節演出の追加
+- 有名人のフルネーム対応（「人名の扱い」参照）
+- 採点にLLMを足すハイブリッド（意外性の評価）。サーバーとAPIキー保護が必要になるので、今の方針では対象外

@@ -76,8 +76,23 @@ button{font:inherit;color:inherit;cursor:pointer}
 #kake .ice{opacity:0;transition:opacity .5s}
 #kake.frozen .ice{opacity:1}
 .challenge{margin:0 0 .8rem;padding:.6rem .85rem;border:2px solid var(--ink);border-radius:.9rem;background:var(--mark-a);font-weight:700;overflow-wrap:anywhere}
-.theme{margin:1rem 0 .5rem;font-size:.92rem}
-.theme b{font-weight:700}
+.theme{margin:1rem 0 .7rem;padding:.7rem .9rem;border:2px solid var(--ink);border-radius:.9rem;background:var(--surface);display:grid;grid-template-columns:auto 1fr;gap:.1rem .8rem;align-items:center}
+.theme .tdate{font-size:.85rem;font-weight:700;color:var(--ink-soft)}
+.theme .tname{grid-row:1 / span 2;grid-column:1;font-family:var(--display);font-weight:400;font-size:2.1rem;line-height:1.1;padding:.1rem .7rem .2rem;border-radius:.6rem;background:var(--mark-a);color:var(--ink)}
+.theme .tdesc{font-size:.85rem;line-height:1.5}
+.season{position:absolute;left:.6rem;top:.6rem;z-index:2;padding:.1rem .6rem;border-radius:999px;background:var(--ink);color:var(--bg);font-size:.72rem;font-weight:700}
+.scene.playing .season{display:none}
+.scene[data-season="halloween"] .orb{background:#ffb347}
+.scene[data-season="newyear"] .orb{background:#ff7a5c}
+.quip{margin:.15rem 0 0;color:var(--ink-soft);font-size:.95rem}
+.book{margin-top:2rem}
+.book h2{margin:0}
+.book h2 span{font-family:var(--display);font-weight:400;margin-left:.4rem;color:var(--ink-soft)}
+.bookhelp{margin:.2rem 0 0;font-size:.85rem;color:var(--ink-soft)}
+.chips{list-style:none;margin:.6rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.4rem}
+.chips li{border:1.5px dashed var(--line);border-radius:.7rem;padding:.3rem .65rem;font-size:.85rem;color:var(--ink-soft);line-height:1.35}
+.chips li small{display:block;font-size:.72rem}
+.chips li.got{border:2px solid var(--ink);background:var(--surface);color:var(--ink);font-weight:700}
 .rank{display:inline-block;margin:0 0 .5rem;padding:.12rem .85rem;border:2px solid var(--ink);border-radius:999px;background:var(--surface);font-weight:700;font-size:.95rem}
 .vs{margin:.5rem 0 0;font-weight:700}
 .copylink{display:flex;align-items:center;justify-content:center;text-align:center;width:100%;margin-top:.7rem;min-height:3rem;background:var(--mark-a);color:var(--ink);border:2px solid var(--ink);border-radius:.9rem;font-weight:700;text-decoration:none;padding:.3rem .6rem;box-shadow:0 .2rem 0 var(--ink)}
@@ -86,8 +101,6 @@ button{font:inherit;color:inherit;cursor:pointer}
 .adlabel{position:absolute;top:-.7rem;left:.8rem;background:var(--bg);padding:0 .45rem;font-size:.75rem;font-weight:700;color:var(--ink-soft)}
 .adcopy{margin:0;font-weight:700}
 .adlink{display:flex;align-items:center;justify-content:center;min-height:2.8rem;border:2px solid var(--ink);border-radius:.8rem;background:var(--mark-a);color:var(--ink);font-weight:700;text-decoration:none;padding:.3rem .7rem;text-align:center}
-.found{margin:2rem 0 0;font-size:.9rem;font-weight:700}
-.found:empty{display:none}
 #fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 #confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:10;display:none}
 .distance{transform-origin:0 60%}
@@ -99,7 +112,8 @@ textarea::placeholder{color:var(--ink-soft);opacity:.8}
 .go{font-family:var(--display);font-size:1.25rem;background:var(--shu);color:var(--shu-ink);border:2px solid var(--ink);border-radius:.9rem;padding:0 1.15rem;min-width:5.5rem;box-shadow:0 .25rem 0 var(--ink);transition:transform .08s,box-shadow .08s}
 .go:active{transform:translateY(.2rem);box-shadow:0 .05rem 0 var(--ink)}
 .tries{margin:.8rem 0 0;display:flex;flex-wrap:wrap;gap:.4rem .5rem;align-items:center;font-size:.9rem;color:var(--ink-soft)}
-.tries button{background:transparent;border:1.5px solid var(--line);border-radius:999px;padding:.2rem .75rem;color:var(--ink);font-size:.9rem}
+.tries button{background:var(--surface);border:1.5px solid var(--ink);border-radius:999px;padding:.3rem .9rem;color:var(--ink);font-size:.9rem;font-weight:700;min-height:2.2rem}
+.tries #sound{margin-left:auto;border-color:var(--line);font-weight:500;background:transparent}
 .hint:empty{display:none}
 .hint{margin:.5rem 0 0;font-size:.9rem;color:var(--shu);font-weight:700}
 
@@ -122,7 +136,7 @@ textarea::placeholder{color:var(--ink-soft);opacity:.8}
 .share{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.4rem}
 .share button,.share a{display:flex;align-items:center;justify-content:center;text-align:center;min-height:3rem;border:2px solid var(--ink);border-radius:.9rem;font-weight:700;text-decoration:none;padding:.3rem .6rem;line-height:1.3;box-shadow:0 .2rem 0 var(--ink)}
 .share button{background:var(--surface);color:var(--ink)}
-.share a{background:var(--ink);color:var(--bg)}
+.share a{background:var(--ink);color:var(--bg);grid-column:1 / -1}
 .share button:active,.share a:active{transform:translateY(.15rem);box-shadow:0 .05rem 0 var(--ink)}
 .share button[disabled]{opacity:.55}
 .sharemsg{margin:.6rem 0 0;font-size:.88rem;color:var(--ink-soft)}
@@ -169,6 +183,7 @@ summary{font-weight:700;cursor:pointer}
 
   <p class="challenge" id="challenge" hidden></p>
   <div class="scene" id="scene" aria-hidden="true">
+    <span class="season" id="season" hidden></span>
     <div class="orb"></div>
     <div class="room" id="room">
     <div class="floor"></div>
@@ -198,23 +213,23 @@ summary{font-weight:700;cursor:pointer}
   </div>
   <canvas id="confetti" aria-hidden="true"></canvas>
 
-  <p class="theme" id="theme"></p>
+  <div class="theme" id="theme"></div>
   <div class="entry">
     <textarea id="text" maxlength="60" placeholder="例：焼肉は焼きにくい" aria-label="ダジャレ" enterkeyhint="go"></textarea>
     <button class="go" id="go" type="button">飛ばす</button>
   </div>
   <p class="hint" id="hint" role="status"></p>
   <div class="tries">
-    <span>例で試す</span>
-    <button type="button" data-try="レモンの入れもん">レモンの入れもん</button>
-    <button type="button" data-try="草刈ったら臭かった">草刈ったら臭かった</button>
-    <button type="button" data-try="今日はいい天気ですね">今日はいい天気ですね</button>
+    <button type="button" id="omakase">おまかせで試す</button>
+    <button type="button" id="mic" hidden>声で入れる</button>
+    <button type="button" id="sound" aria-pressed="false">音：オフ</button>
   </div>
 
   <section id="result" hidden aria-live="polite">
     <p class="rank" id="rank"></p>
     <p class="verdict" id="verdict"></p>
-    <p class="distance"><span id="dist">0</span><small>m</small></p>
+    <p class="quip" id="quip"></p>
+    <p class="distance"><span id="dist">0</span><small id="unit">m</small></p>
     <p class="points" id="points"></p>
     <p class="vs" id="vs" hidden></p>
     <div class="ruler">
@@ -231,6 +246,7 @@ summary{font-weight:700;cursor:pointer}
 
     <div class="share">
       <button type="button" id="save">画像を保存</button>
+      <button type="button" id="savevid">動画を保存</button>
       <a id="post" href="#" target="_blank" rel="noopener">Xでポストする</a>
     </div>
     <a class="copylink" id="challengepost" href="#" target="_blank" rel="noopener" hidden>挑戦状としてXでポストする</a>
@@ -269,9 +285,17 @@ summary{font-weight:700;cursor:pointer}
     <ol id="reclist"></ol>
   </section>
 
-  <p class="found" id="found"></p>
+  <section class="book">
+    <h2>隠し演出の図鑑 <span id="zcount"></span></h2>
+    <p class="bookhelp">特定の言葉を入れて布団を飛ばすと起きます。</p>
+    <ul class="chips" id="zlist"></ul>
+  </section>
+  <section class="book">
+    <h2>称号帳 <span id="tcount"></span></h2>
+    <ul class="chips" id="tlist"></ul>
+  </section>
   <p class="foot" id="assoc" hidden>Amazonのアソシエイトとして、当サイトは適格販売により収入を得ています。</p>
-  <p class="foot">判定は音の重なりだけを見ています。意味のおもしろさは測れません。入力した文はこの端末の外に送られず、記録はこのブラウザにだけ残ります。漢字の読みはIPA辞書（mecab-ipadic）をもとにしています。</p>
+  <p class="foot">判定は音の重なりだけを見ています。意味のおもしろさは測れません。入力した文はこの端末の外に送られず、記録はこのブラウザにだけ残ります。「声で入れる」を使ったときだけ、音声がブラウザの音声認識サービスに送られます。漢字の読みはIPA辞書（mecab-ipadic）をもとにしています。</p>
 </div>
 
 <!-- 読み辞書: mecab-ipadic (Copyright 2000-2007 Nara Institute of Science and Technology) から生成。ライセンスは THIRD_PARTY_NOTICES.md を参照 -->
@@ -531,6 +555,119 @@ const DJ = (() => {
 })();
 
 
+/* 断片化MP4（MediaRecorderの出力）を、ふつうのMP4に組み直す。
+   MediaRecorderは録画しながら書き出すので、長さの情報が先頭に正しく入らず、
+   プレーヤーによっては再生時間がでたらめに表示される。全サンプルの表を先頭に持つ形に作り直すと直る。
+   defrag(Uint8Array) → Uint8Array。断片化されていない・読めない場合は null を返す（呼び出し側は元のファイルを使う）。 */
+const MP4FIX = (() => {
+  const u32 = (b, o) => b[o] * 16777216 + (b[o + 1] << 16 | b[o + 2] << 8 | b[o + 3]);
+  const i32 = (b, o) => u32(b, o) | 0;
+  const u64 = (b, o) => u32(b, o) * 4294967296 + u32(b, o + 4);
+  const name = (b, o) => String.fromCharCode(b[o], b[o + 1], b[o + 2], b[o + 3]);
+  function boxes(b, start, end) {
+    const out = []; let o = start;
+    while (o + 8 <= end) {
+      let size = u32(b, o), head = 8; const type = name(b, o + 4);
+      if (size === 1) { size = u64(b, o + 8); head = 16; } else if (size === 0) size = end - o;
+      if (size < head || o + size > end) throw new Error('bad box');
+      out.push({ type, start: o, head, end: o + size }); o += size;
+    }
+    return out;
+  }
+  const cat = arrs => { let n = 0; arrs.forEach(a => { n += a.length; }); const o = new Uint8Array(n); let p = 0; arrs.forEach(a => { o.set(a, p); p += a.length; }); return o; };
+  const ints = vals => { const o = new Uint8Array(vals.length * 4), dv = new DataView(o.buffer); vals.forEach((v, i) => dv.setUint32(i * 4, v >>> 0)); return o; };
+  const box = (type, ...payload) => { const body = cat(payload); return cat([ints([body.length + 8]), Uint8Array.from(type, ch => ch.charCodeAt(0)), body]); };
+
+  function defrag(src) {
+    const kids = bx => boxes(src, bx.start + bx.head, bx.end), find = (bx, t) => kids(bx).find(k => k.type === t);
+    const top = boxes(src, 0, src.length), moov = top.find(x => x.type === 'moov'), moofs = top.filter(x => x.type === 'moof');
+    if (!moov || !moofs.length) return null;
+    const mvhd = find(moov, 'mvhd'), mvex = find(moov, 'mvex'), mvV = src[mvhd.start + mvhd.head];
+    const movieTs = u32(src, mvhd.start + mvhd.head + 4 + (mvV ? 16 : 8));
+    const tracks = {};
+    kids(moov).filter(x => x.type === 'trak').forEach(trak => {
+      const tkhd = find(trak, 'tkhd'), mdhd = find(find(trak, 'mdia'), 'mdhd');
+      const id = u32(src, tkhd.start + tkhd.head + 4 + (src[tkhd.start + tkhd.head] ? 16 : 8));
+      tracks[id] = { trak, ts: u32(src, mdhd.start + mdhd.head + 4 + (src[mdhd.start + mdhd.head] ? 16 : 8)), samples: [], chunks: [], time: 0, trex: { dur: 0, size: 0, flags: 0 } };
+    });
+    if (mvex) kids(mvex).filter(x => x.type === 'trex').forEach(x => { const p = x.start + x.head + 4, t = tracks[u32(src, p)]; if (t) t.trex = { dur: u32(src, p + 8), size: u32(src, p + 12), flags: u32(src, p + 16) }; });
+
+    // すべての断片を読み、サンプル（長さ・大きさ・位置）を集める
+    const order = [];
+    moofs.forEach(moof => {
+      let prevEnd = null;
+      kids(moof).filter(x => x.type === 'traf').forEach(traf => {
+        const tfhd = find(traf, 'tfhd'); let p = tfhd.start + tfhd.head; const fl = u32(src, p) & 0xffffff, t = tracks[u32(src, p + 4)]; p += 8;
+        if (!t) return;
+        let base = null, dDur = t.trex.dur, dSize = t.trex.size, dFlags = t.trex.flags;
+        if (fl & 1) { base = u64(src, p); p += 8; }
+        if (fl & 2) p += 4;
+        if (fl & 8) { dDur = u32(src, p); p += 4; }
+        if (fl & 0x10) { dSize = u32(src, p); p += 4; }
+        if (fl & 0x20) { dFlags = u32(src, p); p += 4; }
+        if (base == null) base = (fl & 0x20000) || prevEnd == null ? moof.start : prevEnd;
+        const tfdt = find(traf, 'tfdt');
+        if (tfdt) { const q = tfdt.start + tfdt.head, bt = src[q] ? u64(src, q + 4) : u32(src, q + 4); if (t.samples.length && bt > t.time) { t.samples[t.samples.length - 1].dur += bt - t.time; t.time = bt; } } // 断片の間のすき間は直前のサンプルを伸ばして埋める
+        let off = base;
+        kids(traf).filter(x => x.type === 'trun').forEach(trun => {
+          let q = trun.start + trun.head; const ver = src[q], tf = u32(src, q) & 0xffffff, n = u32(src, q + 4); q += 8;
+          if (tf & 1) { off = base + i32(src, q); q += 4; }
+          let first = null; if (tf & 4) { first = u32(src, q); q += 4; }
+          const chunk = { t, off, size: 0, n };
+          for (let i = 0; i < n; i++) {
+            const s = { dur: dDur, size: dSize, flags: i === 0 && first != null ? first : dFlags, cto: 0 };
+            if (tf & 0x100) { s.dur = u32(src, q); q += 4; }
+            if (tf & 0x200) { s.size = u32(src, q); q += 4; }
+            if (tf & 0x400) { s.flags = u32(src, q); q += 4; }
+            if (tf & 0x800) { s.cto = ver ? i32(src, q) : u32(src, q); q += 4; }
+            t.samples.push(s); t.time += s.dur; chunk.size += s.size;
+          }
+          if (off < 0 || off + chunk.size > src.length) throw new Error('bad offset');
+          if (n) { order.push(chunk); t.chunks.push(chunk); }
+          off += chunk.size;
+        });
+        prevEnd = off;
+      });
+    });
+    const live = Object.values(tracks).filter(t => t.samples.length);
+    if (!live.length) return null;
+    const movieDur = t => Math.round(t.time * movieTs / t.ts), total = Math.max(...live.map(movieDur));
+
+    // 長さの欄を書き換えた箱の写しを作る（offV0 / offV1 は版ごとの位置）
+    const patched = (bx, offV0, offV1, value) => { const c = src.slice(bx.start, bx.end), v1 = c[bx.head], dv = new DataView(c.buffer); if (v1) { dv.setUint32(bx.head + offV1, Math.floor(value / 4294967296)); dv.setUint32(bx.head + offV1 + 4, value >>> 0); } else dv.setUint32(bx.head + offV0, value >>> 0); return c; };
+    const copy = bx => src.subarray(bx.start, bx.end), Z = ints([0]);
+    const runs = (list, key) => { const out = []; list.forEach(s => { const v = key(s), last = out[out.length - 1]; if (last && last[1] === v) last[0]++; else out.push([1, v]); }); return out; };
+    function stbl(t) {
+      const old = find(find(find(t.trak, 'mdia'), 'minf'), 'stbl'), S = t.samples, parts = [copy(find(old, 'stsd'))];
+      const tt = runs(S, s => s.dur); parts.push(box('stts', Z, ints([tt.length]), ints(tt.flat())));
+      if (S.some(s => s.cto)) { const ct = runs(S, s => s.cto); parts.push(box('ctts', ints([S.some(s => s.cto < 0) ? 0x01000000 : 0]), ints([ct.length]), ints(ct.flat()))); }
+      const sync = []; S.forEach((s, i) => { if (!(s.flags & 0x10000)) sync.push(i + 1); });
+      if (sync.length < S.length) parts.push(box('stss', Z, ints([sync.length]), ints(sync)));
+      const sc = []; t.chunks.forEach((ch, i) => { if (!sc.length || sc[sc.length - 1][1] !== ch.n) sc.push([i + 1, ch.n, 1]); });
+      parts.push(box('stsc', Z, ints([sc.length]), ints(sc.flat())));
+      parts.push(box('stsz', Z, ints([0, S.length]), ints(S.map(s => s.size))));
+      parts.push(box('stco', Z, ints([t.chunks.length]), ints(t.chunks.map(ch => ch.out || 0))));
+      return box('stbl', ...parts);
+    }
+    function trak(t) {
+      return box('trak', ...kids(t.trak).map(k => {
+        if (k.type === 'tkhd') return patched(k, 20, 28, movieDur(t));
+        if (k.type === 'edts') { const el = find(k, 'elst'); return el && u32(src, el.start + el.head + 4) === 1 ? box('edts', patched(el, 8, 8, movieDur(t))) : copy(k); }
+        if (k.type !== 'mdia') return copy(k);
+        return box('mdia', ...kids(k).map(m => m.type === 'mdhd' ? patched(m, 16, 24, t.time) : m.type !== 'minf' ? copy(m) : box('minf', ...kids(m).map(n => n.type === 'stbl' ? stbl(t) : copy(n)))));
+      }));
+    }
+    const buildMoov = () => box('moov', ...kids(moov).filter(k => k.type !== 'mvex').map(k => k.type === 'mvhd' ? patched(k, 16, 24, total) : k.type !== 'trak' ? copy(k) : (() => { const t = live.find(x => x.trak.start === k.start); return t ? trak(t) : new Uint8Array(0); })()));
+    const ftyp = box('ftyp', Uint8Array.from('isom', ch => ch.charCodeAt(0)), ints([0x200]), Uint8Array.from('isomiso2avc1mp41', ch => ch.charCodeAt(0)));
+    let pos = ftyp.length + buildMoov().length + 8, dataLen = 0; // 表の大きさは位置の値によらないので、一度作って大きさを測る
+    order.forEach(ch => { ch.out = pos; pos += ch.size; dataLen += ch.size; });
+    if (pos > 4294967295) return null;
+    return cat([ftyp, buildMoov(), ints([dataLen + 8]), Uint8Array.from('mdat', ch => ch.charCodeAt(0)), ...order.map(ch => src.subarray(ch.off, ch.off + ch.size))]);
+  }
+  return { defrag };
+})();
+
+
 </script>
 <script>
 (() => {
@@ -550,7 +687,26 @@ const DJ = (() => {
     } catch (e) { dictNote = true; }
   })();
 
-  const fmt = m => m <= 0 ? '0' : m < 10 ? m.toFixed(1) : Math.round(m).toLocaleString('ja-JP');
+  const fmt = m => m <= 0 ? '0' : m < 9.95 ? m.toFixed(1) : Math.round(m).toLocaleString('ja-JP');
+  // 100点を超えた先の飛距離（元祖超え）。お題の加点でだけ届く
+  const OVER = [[100, 9999], [101, 4e5], [102, 3.844e8], [103, 7.8e10], [104, 6.3e11], [105, 5.9e12], [110, 9.46e15]];
+  function meters(s) {
+    if (s <= 100) return DJ.meters(s);
+    for (let i = 1; i < OVER.length; i++) if (s <= OVER[i][0]) { const [a, ma] = OVER[i - 1], [b, mb] = OVER[i]; return ma * Math.pow(mb / ma, (s - a) / (b - a)); }
+    return OVER[OVER.length - 1][1];
+  }
+  const fmtBig = v => v < 10 ? v.toFixed(1).replace(/\.0$/, '') : Math.round(v).toLocaleString('ja-JP');
+  function distParts(m) { // [数字, 単位]
+    if (m < 9999.5) return [fmt(m), 'm'];
+    const km = m / 1000;
+    if (km < 1e4) return [Math.round(km).toLocaleString('ja-JP'), 'km'];
+    if (km < 1e8) return [fmtBig(km / 1e4), '万km'];
+    if (km < 1e12) return [fmtBig(km / 1e8), '億km'];
+    return [fmtBig(km / 1e12), '兆km'];
+  }
+  const distText = s => distParts(meters(s)).join(' ');
+  const distJ = s => distParts(meters(s)).join('');
+  const hash = s => { let h = 0; for (const ch of s) h = (h * 31 + ch.codePointAt(0)) >>> 0; return h; };
   const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
   // 今日のお題（日替わり）。お題の言葉で掛けると10点追加
@@ -572,27 +728,47 @@ const DJ = (() => {
   ];
   const dayIdx = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 86400000);
   const theme = THEMES[dayIdx % THEMES.length];
-  $('theme').innerHTML = `今日のお題は<b>「${theme[0]}」</b>。${theme[1].slice(0, 3).join('、')}などの名前で掛けると10点追加。`;
+  const today = new Date(), dateJ = `${today.getMonth() + 1}月${today.getDate()}日`;
+  $('theme').innerHTML = `<span class="tdate">${dateJ}のお題</span><b class="tname">${theme[0]}</b><span class="tdesc">${theme[1].slice(0, 3).join('、')}などの名前で掛けると10点追加。100点を超えると、元祖の先まで飛びます。</span>`;
   function applyTheme(r) {
     if (r.kind !== 'pun' || !r.match || r.ganso) return;
     const ms = [DJ.looseKana(r.match.k1), DJ.looseKana(r.match.k2)];
     const hit = theme[1].find(k => { const lk = DJ.looseKana(k); return lk.length >= 2 && ms.some(m => m.includes(lk)); });
-    if (hit) { r.theme = hit; r.score = Math.min(100, r.score + 10); }
+    if (hit) { r.theme = hit; r.score += 10; } // 上限なし。100点を超えると月や火星まで飛ぶ
   }
   // 隠し演出（飛んだときだけ）
-  const HIDDEN = { ufo: 'UFOにさらわれる', cat: '猫が乗ってくる', gold: '金の布団' };
+  const HIDDEN = {
+    ufo: { name: 'UFOにさらわれる', hint: '空のずっと上の話をすると…', re: /UFO|ufo|ユーフォー|ゆーふぉー|宇宙|うちゅう/ },
+    cat: { name: '猫が乗ってくる', hint: 'ニャーと鳴く生き物', re: /猫|ネコ|ねこ|ニャ|にゃ/ },
+    gold: { name: '金の布団', hint: 'ぴかぴか光る、高いもの', re: /金|ゴールド|おかね|オカネ|こがね/ },
+    panda: { name: 'パンダが乗ってくる', hint: '白黒の人気者', re: /パンダ|ぱんだ/ },
+    ninja: { name: '分身の術', hint: '手裏剣を投げる人', re: /忍者|にんじゃ|ニンジャ|忍術|分身/ },
+    ghost: { name: 'おばけ布団', hint: '夜に出る、足のないもの', re: /おばけ|オバケ|お化け|幽霊|ゆうれい/ },
+    rainbow: { name: '虹がかかる', hint: '雨上がりの空に出るもの', re: /虹|にじ|レインボー/ },
+    fish: { name: '魚がついてくる', hint: '海を泳ぐもの、にぎるもの', re: /魚|さかな|サカナ|寿司|すし|スシ|鮭|鯛|鮪|マグロ|まぐろ|イクラ|いくら|サーモン/ },
+    fire: { name: '燃える布団', hint: '熱いものの話', re: /火|炎|燃|メラメラ|ファイヤー|ファイア/ },
+    sleep: { name: '飛びながら寝る', hint: 'まぶたが重くなる話', re: /眠|ねむ|おやすみ|すやすや|二度寝|居眠り/ }
+  };
+  const HKEYS = Object.keys(HIDDEN);
   function specials(r) {
     if (r.score < 25) return {};
-    const t = r.text.normalize('NFKC'), y = r.yomi;
-    return {
-      ufo: /UFO|ufo|ユーフォー|ゆーふぉー|宇宙|ウチュウ|うちゅう/.test(t) || y.includes('ウチュウ'),
-      cat: /猫|ネコ|ねこ|ニャ|にゃ/.test(t) || y.includes('ネコ'),
-      gold: /金|ゴールド|おかね|オカネ|こがね/.test(t)
-    };
+    const sp = {}; hiddenOf(r.text, r.yomi).forEach(k => { sp[k] = true; });
+    return sp;
+  }
+  // その文が引き起こす隠し演出の一覧（点数は見ない）
+  function hiddenOf(text, yomi) {
+    const t = text.normalize('NFKC'), ks = HKEYS.filter(k => HIDDEN[k].re.test(t));
+    if (yomi.includes('ウチュウ') && !ks.includes('ufo')) ks.push('ufo');
+    if (yomi.includes('ネコ') && !ks.includes('cat')) ks.push('cat');
+    return ks;
   }
   let found = [];
   try { found = JSON.parse(localStorage.getItem('dj-found') || '[]') || []; } catch (e) { found = []; }
-  function renderFound() { $('found').textContent = found.length ? `隠し演出を ${found.length} / 3 個見つけました。` : '特定の言葉で起きる隠し演出が3つあります。'; }
+  function renderFound() {
+    $('zcount').textContent = `${found.filter(k => HIDDEN[k]).length} / ${HKEYS.length}`;
+    $('zlist').innerHTML = HKEYS.map(k => found.includes(k) ? `<li class="got">${esc(HIDDEN[k].name)}</li>` : `<li>？？？<small>${esc(HIDDEN[k].hint)}</small></li>`).join('');
+  }
+  const TITLES = ['氷点下の使い手', '布団めくり見習い', '同じことを二度言う人', '廊下の人気者', '町内会の盛り上げ役', '隣町まで届く声', '成層圏ダジャレ師', '満点の語り部', '元祖・布団飛ばし', '元祖を超えた者', 'ベタの守り人', '宇宙人のお気に入り', '猫に好かれる人', '黄金の布団持ち', 'パンダの相棒', '布団隠れの術', 'おばけと添い寝', '虹をかける人', '魚群を連れる人', '炎の布団使い', '二度寝の達人'];
   function titleOf(r) {
     const s = r.score, sp = r.sp || {};
     if (sp.ufo) return '宇宙人のお気に入り';
@@ -600,8 +776,16 @@ const DJ = (() => {
     if (r.kind === 'repeat') return '同じことを二度言う人';
     if (s <= 0) return '氷点下の使い手';
     if (s < 25) return '布団めくり見習い';
+    if (s > 100) return '元祖を超えた者';
     if (sp.cat) return '猫に好かれる人';
     if (sp.gold) return '黄金の布団持ち';
+    if (sp.panda) return 'パンダの相棒';
+    if (sp.ninja) return '布団隠れの術';
+    if (sp.ghost) return 'おばけと添い寝';
+    if (sp.rainbow) return '虹をかける人';
+    if (sp.fish) return '魚群を連れる人';
+    if (sp.fire) return '炎の布団使い';
+    if (sp.sleep) return '二度寝の達人';
     if (r.classic) return 'ベタの守り人';
     if (s < 50) return '廊下の人気者';
     if (s < 75) return '町内会の盛り上げ役';
@@ -609,11 +793,22 @@ const DJ = (() => {
     if (s < 100) return '成層圏ダジャレ師';
     return '満点の語り部';
   }
+  // 称号帳
+  let titles = [];
+  try { titles = JSON.parse(localStorage.getItem('dj-titles') || '[]') || []; } catch (e) { titles = []; }
+  function renderTitles() {
+    $('tcount').textContent = `${titles.filter(x => TITLES.includes(x)).length} / ${TITLES.length}`;
+    $('tlist').innerHTML = TITLES.map(x => titles.includes(x) ? `<li class="got">${esc(x)}</li>` : '<li>？？？</li>').join('');
+  }
+  function addTitle(x) { if (titles.includes(x)) return false; titles.push(x); try { localStorage.setItem('dj-titles', JSON.stringify(titles)); } catch (e) {} renderTitles(); return true; }
 
+  const PLACES = [[101, '宇宙ステーション'], [102, '月'], [103, '火星'], [104, '木星'], [105, '太陽系の外']];
+  const placeOf = s => { let p = null; PLACES.forEach(x => { if (s >= x[0]) p = x[1]; }); return p; };
   function verdictOf(r) {
     const s = r.score;
     if (r.sp && r.sp.ufo) return '布団がUFOに連れていかれました';
     if (r.ganso) return '元祖です。布団が成層圏に届きました';
+    if (s > 100) return `元祖を超えました。布団が${placeOf(s)}まで飛びました`;
     if (s <= 0) return '寒すぎて布団が凍りました';
     if (s < 25) return '布団が少しめくれました';
     if (s < 50) return '布団が部屋の外まで飛びました';
@@ -621,6 +816,98 @@ const DJ = (() => {
     if (s < 100) return '布団が隣町まで飛びました';
     return '布団が成層圏に届きました';
   }
+  // ひとこと（結果に添える一文）。同じダジャレには同じ文が出る
+  const QUIPS = {
+    over: ['元祖が布団の中で震えています。', '宇宙のほうが先に笑いました。', 'もはや布団というより探査機です。'],
+    ganso: ['すべてはここから始まりました。', '元祖には誰も頭が上がりません。'],
+    ufo: ['宇宙人にも伝わったようです。', '地球のダジャレ、輸出されました。'],
+    cat: ['猫はまだ降りる気がないようです。', '猫も一緒に笑っています。たぶん。'],
+    gold: ['まぶしくて直視できません。', '寝るにはもったいない輝きです。'],
+    panda: ['笹のにおいがします。', 'パンダは重さを感じさせませんでした。'],
+    ninja: ['どれが本物かは布団にも分かりません。', '音もなく飛びました。'],
+    ghost: ['足はありませんが、飛距離はあります。', 'ひんやりした風が通りました。'],
+    rainbow: ['雨上がりでもないのに。', '空に橋がかかりました。'],
+    fish: ['活きのいい布団です。', '魚たちも乗り気です。'],
+    fire: ['よく燃えていますが、羽毛は無事です。', '熱い一本でした。'],
+    sleep: ['飛びながら寝ています。器用です。', '夢の中でもう一回言っているはずです。'],
+    repeat: ['大事なことなので二回言ったのですね。', '同じ言葉が仲良く並んでいます。'],
+    zero: ['布団は聞かなかったことにしました。', '今のは、ふつうの文として受け取りました。', '静かな夜です。'],
+    low: ['惜しい。布団はやる気を見せました。', '風は起きました。そよ風ですが。', '布団がこちらをちらっと見ました。'],
+    classic: ['安心と信頼の定番です。', '何度聞いても落ち着きます。', '教科書に載せたい一本です。'],
+    s25: ['廊下の空気が少しだけ和みました。', '布団は飛びました。あとは距離だけです。', 'もうひと押しで玄関を出ます。'],
+    s50: ['ご近所で小さな拍手が起きました。', 'じわじわ来ます。', '回覧板に載せたい出来です。'],
+    s75: ['隣町の人がざわついています。', 'うまい。布団一枚、持っていってください。', '声に出して言いたくなる響きです。'],
+    s90: ['近所の犬まで振り向く出来です。', '布団も本望だと思います。', '寝る前に思い出して笑うやつです。']
+  };
+  function quipOf(r) {
+    const s = r.score, sp = r.sp || {};
+    const key = s > 100 ? 'over' : r.ganso ? 'ganso' : HKEYS.find(k => sp[k]) || (r.kind === 'repeat' ? 'repeat' : s <= 0 ? 'zero' : s < 25 ? 'low' : r.classic ? 'classic' : s < 50 ? 's25' : s < 75 ? 's50' : s < 90 ? 's75' : 's90');
+    const list = QUIPS[key]; return list[hash(r.text) % list.length];
+  }
+
+  // 季節の限定演出（日付で切り替え。?season=sakura のように指定すると確認できる）
+  const season = (() => {
+    let q = ''; try { q = new URLSearchParams(location.search).get('season') || ''; } catch (e) {}
+    const md = (today.getMonth() + 1) * 100 + today.getDate();
+    const list = [['newyear', 101, 107, 'お正月'], ['sakura', 320, 410, '桜の季節'], ['summer', 720, 831, '夏祭り'], ['halloween', 1001, 1031, 'ハロウィン'], ['xmas', 1215, 1225, 'クリスマス']];
+    const hit = list.find(x => q ? x[0] === q : md >= x[1] && md <= x[2]);
+    return hit ? { key: hit[0], label: hit[3] } : null;
+  })();
+  if (season) { scene.dataset.season = season.key; const el = $('season'); el.textContent = `${season.label}の限定演出中`; el.hidden = false; }
+
+  // 効果音（ファイルを使わず、その場で音を合成する）
+  const sfx = (() => {
+    let ctx = null, master = null, out = null, recDest = null, muted = true, live = [], nbuf = null; // 音は最初オフ
+    try { muted = localStorage.getItem('dj-mute') !== '0'; } catch (e) {}
+    const AC = window.AudioContext || window.webkitAudioContext;
+    function init() {
+      if (ctx || !AC) return !!ctx;
+      try { ctx = new AC(); master = ctx.createGain(); master.gain.value = .5; out = ctx.createGain(); out.gain.value = muted ? 0 : 1; master.connect(out); out.connect(ctx.destination); } catch (e) { ctx = null; }
+      return !!ctx;
+    }
+    function wake() { if (init() && ctx.state === 'suspended') ctx.resume().catch(() => {}); }
+    const keep = n => { live.push(n); n.onended = () => { live = live.filter(x => x !== n); }; };
+    function tone(type, f0, f1, dur, vol, at) {
+      const t = ctx.currentTime + (at || 0), o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = type; o.frequency.setValueAtTime(f0, t); if (f1 !== f0) o.frequency.exponentialRampToValueAtTime(Math.max(1, f1), t + dur);
+      g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + .012); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+      o.connect(g); g.connect(master); o.start(t); o.stop(t + dur + .05); keep(o);
+    }
+    function noise(dur, vol, f0, f1, at, q) {
+      if (!nbuf) { nbuf = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate); const d = nbuf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; }
+      const t = ctx.currentTime + (at || 0), s = ctx.createBufferSource(), f = ctx.createBiquadFilter(), g = ctx.createGain();
+      s.buffer = nbuf; s.loop = true; f.type = 'bandpass'; f.Q.value = q || 1; f.frequency.setValueAtTime(f0, t); f.frequency.exponentialRampToValueAtTime(f1, t + dur);
+      g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + Math.min(.08, dur * .3)); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+      s.connect(f); f.connect(g); g.connect(master); s.start(t); s.stop(t + dur + .05); keep(s);
+    }
+    const S = {
+      charge: () => { tone('sawtooth', 70, 190, .5, .12); tone('square', 35, 95, .5, .07); },
+      don: () => { tone('sine', 160, 38, .4, .9); noise(.3, .5, 900, 120); },
+      whoosh: d => noise(d, .13, 500, 2600, 0, .7),
+      ping: i => { const f = 660 * Math.pow(1.189, i || 0); tone('triangle', f, f, .22, .25); },
+      kira: () => { tone('sine', 1760, 1760, .5, .2); tone('sine', 2637, 2637, .6, .16, .09); tone('sine', 3520, 3520, .7, .1, .18); },
+      pofu: () => { noise(.22, .5, 300, 90, 0, .6); tone('sine', 110, 60, .18, .4); },
+      hop: () => tone('triangle', 300, 520, .16, .22),
+      brr: () => noise(1.1, .14, 1800, 900, 0, 2),
+      freeze: () => { tone('triangle', 2200, 1400, .35, .2); tone('sine', 3300, 3300, .5, .1, .05); noise(.2, .18, 5000, 3000); },
+      beam: () => { tone('sine', 400, 1200, .7, .18); tone('sine', 406, 1215, .7, .13); },
+      fever: () => [523, 659, 784, 1047, 1319].forEach((f, i) => tone('square', f, f, .14, .1, i * .08)),
+      // 飛行中のBGM：d秒ぶんの音符を先に並べておく（C→G→Am→F の繰り返し、テンポ172）
+      bgm: d => { const e = 60 / 172 / 2, CH = [[261.63, 329.63, 392, 523.25], [196, 246.94, 293.66, 392], [220, 261.63, 329.63, 440], [174.61, 220, 261.63, 349.23]], PAT = [0, 1, 2, 1, 3, 2, 1, 2];
+        for (let i = 0; i * e < d - .08; i++) { const ch = CH[(i >> 3) % 4], at = i * e, f = ch[PAT[i % 8]] * 2;
+          tone('square', f, f, e * 1.6, .055, at); // メロディ
+          if (i % 2 === 0) { const bf = ch[0] / (i % 4 ? 1 : 2); tone('triangle', bf, bf, e * 1.9, .2, at); } // ベース
+          else noise(.04, .07, 7000, 6000, at, 1.5); } } // 裏拍のきざみ
+    };
+    return {
+      wake,
+      play(n, a) { if (!ctx || !S[n]) return; try { S[n](a); } catch (e) {} },
+      stop() { live.forEach(n => { try { n.stop(); } catch (e) {} }); live = []; },
+      isMuted: () => muted,
+      setMuted(m) { muted = m; try { localStorage.setItem('dj-mute', m ? '1' : '0'); } catch (e) {} if (out) out.gain.value = m ? 0 : 1; },
+      recStream() { if (!init()) return null; wake(); try { if (!recDest) { recDest = ctx.createMediaStreamDestination(); master.connect(recDest); } return recDest.stream; } catch (e) { return null; } }
+    };
+  })();
 
   // ===== 演出 =====
   const room = $('room'), fx = $('fx');
@@ -632,9 +919,9 @@ const DJ = (() => {
   const eOut = k => 1 - Math.pow(1 - k, 3);
   const eIO = k => k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
   const stopAnims = (...els) => els.forEach(el => el.getAnimations && el.getAnimations().forEach(a => a.cancel()));
-  const GOLD = { kake: '#e0ac18', dot: '#fff6cf' };
+  const GOLD = { kake: '#e0ac18', dot: '#fff6cf' }, GHOST = { kake: '#f4f6ff', dot: '#cfd6f5' };
 
-  // 掛け布団。o: {cat: 猫が乗る, frost: 凍り具合0〜1, lw: 線の太さ}
+  // 掛け布団。o: {cat: 猫が乗る, panda: パンダが乗る, ghost: 顔がつく, hat: サンタ帽, frost: 凍り具合0〜1, lw: 線の太さ}
   function drawKake(c, cx, cy, rot, sc, col, o) {
     o = o || {}; const lw = (o.lw || 2) / sc;
     c.save(); c.translate(cx, cy); c.rotate(rot); c.scale(sc, sc); c.translate(-74, -21);
@@ -660,6 +947,81 @@ const DJ = (() => {
       c.fillStyle = col.ink; [-20.5, -11.5].forEach(x => { c.beginPath(); c.arc(x, -14, 1.3, 0, 7); c.fill(); });
       c.beginPath(); c.ellipse(-16, -8, 1.6, 2.2, 0, 0, 7); c.fill();
       c.restore(); }
+    if (o.ghost) { c.fillStyle = col.ink; [[40, 13], [58, 13]].forEach(([x, y]) => { c.beginPath(); c.ellipse(x, y, 3.2, 4.6, 0, 0, 7); c.fill(); }); c.beginPath(); c.ellipse(49, 23, 3.6, 4.6, 0, 0, 7); c.fill(); }
+    if (o.panda) { // 乗っかるパンダ
+      c.save(); c.translate(o.cat ? 42 : 96, 0); c.lineWidth = lw; c.strokeStyle = col.ink;
+      c.fillStyle = '#1b2444'; [[-11, -24], [11, -24]].forEach(([x, y]) => { c.beginPath(); c.arc(x, y, 6, 0, 7); c.fill(); });
+      c.fillStyle = '#fff'; c.beginPath(); c.arc(0, -12, 14, 0, 7); c.fill(); c.stroke();
+      c.fillStyle = '#1b2444'; [[-6, -14], [6, -14]].forEach(([x, y]) => { c.beginPath(); c.ellipse(x, y, 4, 5, x < 0 ? .4 : -.4, 0, 7); c.fill(); });
+      c.fillStyle = '#fff'; [[-6, -14.5], [6, -14.5]].forEach(([x, y]) => { c.beginPath(); c.arc(x, y, 1.4, 0, 7); c.fill(); });
+      c.fillStyle = '#1b2444'; c.beginPath(); c.ellipse(0, -7, 2.2, 1.6, 0, 0, 7); c.fill();
+      [[-12, 2], [12, 2]].forEach(([x, y]) => { c.beginPath(); c.ellipse(x, y, 5, 4, 0, 0, 7); c.fill(); });
+      c.restore(); }
+    if (o.hat) { // サンタ帽
+      c.save(); c.translate(20, 3); c.lineWidth = lw; c.strokeStyle = col.ink; c.fillStyle = '#d63a2c';
+      c.beginPath(); c.moveTo(-12, 0); c.lineTo(3, -25); c.lineTo(14, 0); c.closePath(); c.fill(); c.stroke();
+      c.fillStyle = '#fff'; c.beginPath(); c.arc(3, -26, 4.5, 0, 7); c.fill(); c.stroke(); rr(c, -15, -3, 32, 7, 3.5); c.fill(); c.stroke();
+      c.restore(); }
+    c.restore();
+  }
+  // 布団のうしろに出る演出（虹・炎）
+  function trailFx(c, x, y, t, sp) {
+    if (sp.rainbow) { c.save(); c.lineCap = 'round'; c.lineWidth = 7; c.globalAlpha = .85;
+      ['#ff5f5f', '#ffa94f', '#ffe27a', '#7ddc7a', '#4fb8ff', '#a488ff'].forEach((col, i) => { const o = (i - 2.5) * 7, ox = o * .53, oy = o * .85; c.strokeStyle = col; c.beginPath(); c.moveTo(x + ox, y + oy); c.quadraticCurveTo(x - 110 + ox, y + 40 + oy + Math.sin(t / 200) * 6, x - 300 + ox, y + 190 + oy); c.stroke(); });
+      c.restore(); }
+    if (sp.fire) { c.save(); for (let i = 0; i < 16; i++) { const k = (t / 420 + i / 16) % 1, px = x - 20 - k * 150 + Math.sin(t / 60 + i * 2) * 8, py = y + 12 + k * 92 + Math.cos(t / 70 + i) * 8;
+      c.globalAlpha = Math.min(1, 1.5 * (1 - k)); c.fillStyle = k < .25 ? '#ffe36b' : k < .55 ? '#ff9a2e' : '#f0492c'; c.beginPath(); c.arc(px, py, 17 * (1 - k) + 4, 0, 7); c.fill(); } c.restore(); }
+  }
+  // 布団の手前に出る演出（魚・Zzz）
+  function frontFx(c, x, y, t, sp) {
+    if (sp.fish) for (let i = 0; i < 3; i++) { const a = t / 380 + i * 2.1; c.save(); c.translate(x + Math.cos(a) * (96 + i * 8), y + Math.sin(a * 1.3) * 46 - 6); c.rotate(Math.sin(a * 2) * .3 - .5);
+      c.strokeStyle = '#1b2444'; c.lineWidth = 1.6; c.fillStyle = ['#ff9c8a', '#8fc7ff', '#ffd27a'][i];
+      c.beginPath(); c.moveTo(-12, 0); c.lineTo(-22, -7); c.lineTo(-22, 7); c.closePath(); c.fill(); c.stroke(); c.beginPath(); c.ellipse(0, 0, 14, 7.5, 0, 0, 7); c.fill(); c.stroke();
+      c.fillStyle = '#1b2444'; c.beginPath(); c.arc(7, -2, 1.6, 0, 7); c.fill(); c.restore(); }
+    if (sp.sleep) for (let i = 0; i < 3; i++) { const k = (t / 1400 + i / 3) % 1, zx = x + 50 + k * 60, zy = y - 30 - k * 60; c.save(); c.globalAlpha = Math.sin(k * Math.PI);
+      c.font = `400 ${14 + k * 16}px ${cssv('--display')}`; c.lineJoin = 'round'; c.lineWidth = 4; c.strokeStyle = '#1b2444'; c.fillStyle = '#fff'; c.strokeText('Z', zx, zy); c.fillText('Z', zx, zy); c.restore(); }
+  }
+  const SPTEXT = { cat: ['ニャー！？', '#ffd2a6'], gold: ['ピカーン', '#ffe27a'], panda: ['もぐもぐ', '#fff'], ninja: ['ドロン', '#d6d9ff'], ghost: ['ひゅ〜どろどろ', '#e8ebff'], rainbow: ['にじ〜', '#fff'], fish: ['ピチピチ', '#8fd0ff'], fire: ['メラメラ', '#ffb347'], sleep: ['すやぁ', '#fff'] };
+  const SPSLOT = [[.66, .78], [.3, .5], [.74, .36], [.28, .82]];
+  // 季節の演出
+  function makeSeason(W, H) {
+    if (!season) return null; const R = Math.random, n = { sakura: 26, halloween: 7, xmas: 34 }[season.key] || 0;
+    return { k: season.key, ps: Array.from({ length: n }, () => ({ x: R() * (W + 80), y: R() * H, r: R(), p: R() * 6.28, v: .5 + R() })), bursts: [], next: 0 };
+  }
+  function seasonFx(c, st, t, dt, W, H, spd, speed, fade) {
+    const a = fade * seg(spd, 22, 30); if (!st || a <= 0) return; c.save(); c.globalAlpha = a;
+    const drift = p => { p.x -= (speed * .9 + .03) * p.v * dt; p.y += (speed * .55 + .04) * p.v * dt; if (p.x < -30 || p.y > H + 30) { if (Math.random() < .5) { p.x = W + 20; p.y = Math.random() * H; } else { p.x = Math.random() * (W + 80); p.y = -20; } } };
+    if (st.k === 'sakura') st.ps.forEach(p => { drift(p); c.save(); c.translate(p.x, p.y); c.rotate(t / 300 * p.v + p.p); c.fillStyle = p.r < .5 ? '#ffc4d6' : '#ffe1ea'; c.beginPath(); c.ellipse(0, 0, 5 + p.r * 3, 2.6 + p.r, 0, 0, 7); c.fill(); c.restore(); });
+    if (st.k === 'xmas') { c.fillStyle = '#fff'; st.ps.forEach(p => { drift(p); c.beginPath(); c.arc(p.x, p.y, 1.4 + p.r * 2.2, 0, 7); c.fill(); }); }
+    if (st.k === 'halloween') st.ps.forEach((p, i) => { drift(p); c.save(); c.translate(p.x, p.y);
+      if (i < 2) { // かぼちゃ
+        c.rotate(Math.sin(t / 400 + p.p) * .2); c.fillStyle = '#ff9a2e'; c.strokeStyle = '#1b2444'; c.lineWidth = 1.6; c.beginPath(); c.ellipse(0, 0, 15, 12, 0, 0, 7); c.fill(); c.stroke(); c.fillStyle = '#3c5a3a'; c.fillRect(-2, -17, 4, 6);
+        c.fillStyle = '#1b2444'; c.beginPath(); c.moveTo(-8, -3); c.lineTo(-4.5, -8); c.lineTo(-1, -3); c.closePath(); c.moveTo(8, -3); c.lineTo(4.5, -8); c.lineTo(1, -3); c.closePath(); c.moveTo(-8, 3); c.lineTo(-4, 7); c.lineTo(0, 4); c.lineTo(4, 7); c.lineTo(8, 3); c.closePath(); c.fill();
+      } else { // こうもり
+        const f = Math.sin(t / 70 + p.p) * 5; c.fillStyle = '#2a1f4a'; c.beginPath(); c.moveTo(0, 0); c.quadraticCurveTo(-7, -9 + f, -16, -3 + f); c.quadraticCurveTo(-11, -1, -8, 4); c.quadraticCurveTo(-4, 0, 0, 4); c.quadraticCurveTo(4, 0, 8, 4); c.quadraticCurveTo(11, -1, 16, -3 + f); c.quadraticCurveTo(7, -9 + f, 0, 0); c.fill(); }
+      c.restore(); });
+    if (st.k === 'summer' && spd > 50) { // 花火
+      if (t > st.next) { st.next = t + 380; st.bursts.push({ x: W * (.12 + Math.random() * .76), y: H * (.12 + Math.random() * .6), t0: t, hue: Math.random() * 360 | 0 }); }
+      st.bursts = st.bursts.filter(b => t - b.t0 < 900);
+      st.bursts.forEach(b => { const k2 = (t - b.t0) / 900, r = 46 * eOut(k2); c.fillStyle = `hsla(${b.hue},95%,70%,${1 - k2})`;
+        for (let i = 0; i < 16; i++) { const an = i * Math.PI / 8; c.beginPath(); c.arc(b.x + Math.cos(an) * r, b.y + Math.sin(an) * r + k2 * k2 * 14, 2.4, 0, 7); c.fill(); c.beginPath(); c.arc(b.x + Math.cos(an + .2) * r * .55, b.y + Math.sin(an + .2) * r * .55 + k2 * k2 * 14, 1.6, 0, 7); c.fill(); } }); }
+    if (st.k === 'newyear') { const k2 = seg(spd, 25, 38) * (1 - seg(spd, 60, 72)); if (k2 > 0) { c.globalAlpha = a * k2; const by = H + 24 - k2 * 14; // 初日の出と富士山
+      c.fillStyle = '#ff5a3c'; c.beginPath(); c.arc(W * .36, by - 92, 30, 0, 7); c.fill();
+      c.fillStyle = '#4a69b5'; c.beginPath(); c.moveTo(W * .02, by); c.lineTo(W * .2, by - 86); c.lineTo(W * .29, by - 86); c.lineTo(W * .5, by); c.closePath(); c.fill();
+      c.fillStyle = '#fff'; c.beginPath(); c.moveTo(W * .2, by - 86); c.lineTo(W * .29, by - 86); c.lineTo(W * .335, by - 64); c.lineTo(W * .3, by - 70); c.lineTo(W * .265, by - 62); c.lineTo(W * .225, by - 70); c.lineTo(W * .165, by - 62); c.closePath(); c.fill(); } }
+    c.restore();
+  }
+  // 惑星（100点を超えたとき）
+  function planet(c, kind, x, y) {
+    c.save(); c.strokeStyle = '#1b2444'; c.lineWidth = 2;
+    if (kind === 101) { c.translate(x, y); c.rotate(-.3); c.fillStyle = '#d5daea'; c.fillRect(-9, -6, 18, 12); c.strokeRect(-9, -6, 18, 12); c.fillStyle = '#4f7fd8'; [[-34, -8], [12, -8]].forEach(([px, py]) => { c.fillRect(px, py, 22, 16); c.strokeRect(px, py, 22, 16); }); }
+    else { const R = kind === 104 ? 46 : 32, base = kind === 102 ? '#d9dce6' : kind === 103 ? '#d8623c' : kind === 104 ? '#e3b27a' : '#8fa3d8';
+      c.beginPath(); c.arc(x, y, R, 0, 7); c.fillStyle = base; c.fill(); c.save(); c.clip();
+      if (kind === 102) { c.fillStyle = '#b9bdcc'; [[-10, -8, 8], [12, 6, 6], [-4, 14, 5], [14, -14, 4]].forEach(([dx, dy, r]) => { c.beginPath(); c.arc(x + dx, y + dy, r, 0, 7); c.fill(); }); }
+      if (kind === 103) { c.fillStyle = '#b84a2a'; [[-12, -6, 9], [10, 10, 7]].forEach(([dx, dy, r]) => { c.beginPath(); c.arc(x + dx, y + dy, r, 0, 7); c.fill(); }); c.fillStyle = '#fff'; c.beginPath(); c.ellipse(x, y - R + 3, 12, 5, 0, 0, 7); c.fill(); }
+      if (kind === 104) { c.fillStyle = '#c98b52'; [-26, -8, 12, 28].forEach(dy => c.fillRect(x - R, y + dy, R * 2, 8)); c.fillStyle = '#d8623c'; c.beginPath(); c.ellipse(x + 14, y + 16, 9, 5, 0, 0, 7); c.fill(); }
+      c.fillStyle = 'rgba(11,16,52,.28)'; c.beginPath(); c.arc(x + R * .5, y + R * .3, R * 1.05, 0, 7); c.fill(); c.restore();
+      c.beginPath(); c.arc(x, y, R, 0, 7); c.stroke(); }
     c.restore();
   }
   // 擬音などの文字：ぽんと出て、消える（k は 0→1）
@@ -717,8 +1079,8 @@ const DJ = (() => {
   }
   const buzz = p => { try { navigator.vibrate && navigator.vibrate(p); } catch (e) {} };
 
-  function launch(score, sp) {
-    sp = sp || {}; partyId++;
+  function launch(score, sp, rec) {
+    sp = sp || {}; partyId++; sfx.stop();
     if (cancelRun) cancelRun();
     stopAnims(kake, room, scene);
     kake.style.transform = ''; kake.style.opacity = ''; kake.classList.remove('frozen');
@@ -735,34 +1097,59 @@ const DJ = (() => {
     fx.width = Math.round(W * dpr); fx.height = Math.round(H * dpr);
     const c = fx.getContext('2d'); c.setTransform(dpr, 0, 0, dpr, 0, 0);
     const col = { kake: cssv('--kake'), dot: cssv('--kake-dot'), ink: cssv('--ink'), shiki: cssv('--shiki') };
-    if (sp.gold) Object.assign(col, GOLD);
+    if (sp.gold) Object.assign(col, GOLD); else if (sp.ghost) Object.assign(col, GHOST);
     const kr = kake.getBoundingClientRect(), sr = scene.getBoundingClientRect();
     const sx = kr.left - sr.left + kr.width / 2, sy = kr.top - sr.top + kr.height / 2;
+    const kopt = { cat: sp.cat, panda: sp.panda, ghost: sp.ghost, hat: !!season && season.key === 'xmas' };
+    // 録画用：シーン全体を1枚のキャンバスに描き写すための位置と色
+    const rel = el => { const b = el.getBoundingClientRect(); return { x: b.left - sr.left - scene.clientLeft, y: b.top - sr.top - scene.clientTop, w: b.width, h: b.height }; };
+    const geo = rec ? { orb: rel(scene.querySelector('.orb')), floor: rel(scene.querySelector('.floor')), bed: rel(scene.querySelector('.bed svg')), kake: rel(kake) } : null;
+    const pal = rec ? { top: cssv('--sky-top'), bottom: cssv('--sky-bottom'), orb: getComputedStyle(scene.querySelector('.orb')).backgroundColor, ring: cssv('--orb-ring'), tatami: cssv('--tatami'), weave: cssv('--tatami-weave'), heri: cssv('--heri'), shiki: cssv('--shiki'), ink: cssv('--ink') } : null;
+    const compose = (shx, shy) => {
+      const r = rec.c, k = rec.k;
+      r.setTransform(1, 0, 0, 1, 0, 0); r.save(); r.beginPath(); r.rect(0, rec.top, rec.W, rec.H - rec.top); r.clip();
+      r.setTransform(k, 0, 0, k, shx * k, rec.top + shy * k);
+      const g = r.createLinearGradient(0, 0, 0, H); g.addColorStop(0, pal.top); g.addColorStop(1, pal.bottom); r.fillStyle = g; r.fillRect(-40, -40, W + 80, H + 80);
+      const o = geo.orb; r.globalAlpha = .35; r.fillStyle = pal.ring; r.beginPath(); r.arc(o.x + o.w / 2, o.y + o.h / 2, o.w / 2 + 7, 0, 7); r.fill(); r.globalAlpha = 1; r.fillStyle = pal.orb; r.beginPath(); r.arc(o.x + o.w / 2, o.y + o.h / 2, o.w / 2, 0, 7); r.fill();
+      const rm = new DOMMatrix(getComputedStyle(room).transform); r.save(); r.translate(rm.e, rm.f);
+      const f = geo.floor, M = 48; r.fillStyle = pal.tatami; r.fillRect(f.x - M, f.y, f.w + M * 2, f.h + M); r.fillStyle = pal.weave; for (let x = f.x - M + 3; x < f.x + f.w + M; x += 4) r.fillRect(x, f.y, 1, f.h + M); r.fillStyle = pal.heri; r.fillRect(f.x - M, f.y, f.w + M * 2, 8);
+      const b = geo.bed; r.save(); r.translate(b.x, b.y); r.scale(b.w / 184, b.h / 34); r.lineWidth = 2; r.strokeStyle = pal.ink; r.fillStyle = pal.shiki; rr(r, 1, 16, 182, 17, 8.5); r.fill(); r.stroke(); rr(r, 6, 5, 34, 14, 7); r.fill(); r.stroke(); r.restore();
+      const ks = getComputedStyle(kake);
+      if (ks.opacity !== '0') { const m = new DOMMatrix(ks.transform), q = geo.kake; r.save(); r.translate(q.x + q.w * .5, q.y + q.h * .6); r.transform(m.a, m.b, m.c, m.d, m.e, m.f); r.translate(-q.w * .5, -q.h * .6); drawKake(r, q.w / 2, q.h / 2, 0, q.w / 148, col, { frost: kake.classList.contains('frozen') ? 1 : 0 }); r.restore(); }
+      r.restore();
+      r.drawImage(fx, 0, 0, W, H);
+      { const M = 48, fw = fx.width, fh = fx.height; // 揺れで見える外側を、端の1列を引き伸ばして埋める（暗い空が画面の外まで続くように）
+        r.drawImage(fx, 0, 0, 1, fh, -M, 0, M + .5, H); r.drawImage(fx, fw - 1, 0, 1, fh, W - .5, 0, M + .5, H);
+        r.drawImage(fx, 0, 0, fw, 1, -M, -M, W + M * 2, M + .5); r.drawImage(fx, 0, fh - 1, fw, 1, -M, H - .5, W + M * 2, M + .5); }
+      r.restore(); rec.caption(r);
+    };
 
+    scene.classList.add('playing');
     return new Promise(resolve => {
       let raf = 0, done = false, total = 0, frame = () => {};
       let amp = 0, baseAmp = 0; const kick = a => { amp = Math.max(amp, a); };
       const finish = () => {
-        if (done) return; done = true; cancelAnimationFrame(raf); scene.style.transform = '';
-        if (performance.now() - t0 < total - 30) buzz(0);
+        if (done) return; done = true; cancelAnimationFrame(raf); scene.style.transform = ''; scene.classList.remove('playing');
+        if (performance.now() - t0 < total - 30) { buzz(0); sfx.stop(); }
         c.clearRect(0, 0, W, H); stopAnims(kake, room, scene); finalState();
         scene.removeEventListener('click', finish); cancelRun = null; resolve();
       };
       cancelRun = finish; scene.addEventListener('click', finish);
       const coldTint = a => { if (a > 0) { c.fillStyle = `rgba(165,195,222,${a})`; c.fillRect(0, 0, W, H); } };
-      const skipHint = () => { c.save(); c.font = `700 11px ${cssv('--body')}`; c.textAlign = 'right'; c.textBaseline = 'top'; c.lineJoin = 'round'; c.lineWidth = 3; c.globalAlpha = .85; c.strokeStyle = '#1b2444'; c.fillStyle = '#fff'; c.strokeText('タップでスキップ', W - 10, H - 22); c.fillText('タップでスキップ', W - 10, H - 22); c.restore(); };
+      const skipHint = () => { if (rec) return; c.save(); c.font = `700 11px ${cssv('--body')}`; c.textAlign = 'right'; c.textBaseline = 'top'; c.lineJoin = 'round'; c.lineWidth = 3; c.globalAlpha = .85; c.strokeStyle = '#1b2444'; c.fillStyle = '#fff'; c.strokeText('タップでスキップ', W - 10, H - 22); c.fillText('タップでスキップ', W - 10, H - 22); c.restore(); };
 
       if (score <= 0) {
         // 無反応：しーん… → 冷たい風と雪 → 布団が凍る
         kake.animate([0, -2, 2, -1.2, 1.2, 0].map(r => ({ transform: `rotate(${r}deg)` })), { duration: 480 });
-        total = 3300; const snow = makeSnow(46, W, H); let froze = false;
+        total = 3300; const snow = makeSnow(46, W, H); let froze = false, blew = false;
         const wind = Array.from({ length: 7 }, (_, i) => ({ y: H * (.12 + i * .11), o: Math.random() * W, l: 50 + Math.random() * 60 }));
         frame = (t, dt) => {
           const a = seg(t, 900, 1500) * (1 - seg(t, total - 350, total));
           coldTint(a * .34);
           if (a > 0) { c.strokeStyle = `rgba(255,255,255,${.75 * a})`; c.lineWidth = 2; c.lineCap = 'round'; wind.forEach(w => { const x = W + 80 - ((t * .55 + w.o) % (W + 220)); c.beginPath(); c.moveTo(x, w.y); c.quadraticCurveTo(x + w.l * .5, w.y - 7, x + w.l, w.y); c.stroke(); }); }
           drawSnow(c, snow, W, H, t, dt, a);
-          if (!froze && t >= 1650) { froze = true; kake.classList.add('frozen'); buzz([60, 60, 60]); kick(7); }
+          if (!blew && t >= 950) { blew = true; sfx.play('brr'); }
+          if (!froze && t >= 1650) { froze = true; kake.classList.add('frozen'); buzz([60, 60, 60]); kick(7); sfx.play('freeze'); }
           popText(c, 'しーん…', sx + 70, sy - 62 - seg(t, 300, 1500) * 14, 26, seg(t, 300, 1500));
           popText(c, 'ひゅ〜', W * .74, H * .5, 26, seg(t, 1000, 2000));
           popText(c, 'カチーン', sx + 10, sy - 60, 30, seg(t, 1650, total), '#d6eefc');
@@ -774,38 +1161,39 @@ const DJ = (() => {
         for (let i = 0; i <= N; i++) { const k = i / N; f.push({ transform: `translate(${dx * k}px,${-4 * h * k * (1 - k)}px) rotate(${Math.sin(k * Math.PI) * -rot}deg)` }); }
         const dur = 620 + score * 10;
         kake.style.transform = `translateX(${dx}px)`; kake.animate(f, { duration: dur });
-        total = dur + 1900; let landed = false; const snow = makeSnow(22, W, H);
+        total = dur + 1900; let landed = false; const snow = makeSnow(22, W, H); sfx.play('hop');
         frame = (t, dt) => {
           const a = seg(t, dur + 200, dur + 700) * (1 - seg(t, total - 350, total));
           coldTint(a * .2); drawSnow(c, snow, W, H, t, dt, a);
-          if (!landed && t >= dur) { landed = true; buzz(50); kick(4 + score * .25); }
+          if (!landed && t >= dur) { landed = true; buzz(50); kick(4 + score * .25); sfx.play('pofu'); }
           dust(c, sx + dx, sy + 22, seg(t, dur, dur + 420));
           popText(c, score < 12 ? 'ぺろっ' : 'ぽふっ', sx + dx + 30, sy - 58, 26, seg(t, dur - 60, dur + 800));
           popText(c, 'さむっ', W * .7, H * .32, 26, seg(t, dur + 850, total));
         };
       } else {
         // ふっ飛ぶ：ため → 発射 → 追いかけカメラ → 着地 / 星 / UFOにさらわれる
-        const high = score >= 85, abduct = !!sp.ufo;
-        const L = 500, F0 = 920, D = 1100 + (score - 25) * 18, F1 = F0 + D, E1 = F1 + (abduct ? 1100 : 650); total = E1 + 260;
+        const high = score >= 85, abduct = !!sp.ufo, base = Math.min(score, 100), over = Math.max(0, score - 100);
+        const L = 500, F0 = 920, D1 = 1100 + (base - 25) * 18, D = D1 + over * 700, F1 = F0 + D, E1 = F1 + (abduct ? 1100 : 650); total = E1 + 260;
         const cx = W * .5, cy = H * .52;
         kake.animate([{ transform: 'none' }, { transform: 'translateY(4px) scale(1.07,.8)' }, { transform: 'translate(-1.5px,5px) scale(1.1,.72)' }, { transform: 'translate(1.5px,5px) scale(1.1,.72)' }, { transform: 'translate(-1.5px,6px) scale(1.12,.68)' }, { transform: 'translate(1.5px,6px) scale(1.12,.68)' }], { duration: L });
         kake.style.transform = 'translate(1.5px,6px) scale(1.12,.68)';
-        let launched = false, roomOut = false, roomBack = false, spin = 0, ended = false;
+        let launched = false, roomOut = false, roomBack = false, spin = 0, ended = false, beamed = false;
+        const sst = makeSeason(W, H), spk = HKEYS.filter(k => sp[k] && SPTEXT[k]); sfx.play('charge');
         buzz([25, 55, 25, 55, 25, 55, 25, 55, 25, 55, 25, 75, score >= 75 ? 450 : 300]); // タメは小刻み、発射で長く
         let fpos = { x: cx, y: cy }, ufoAt = null; const ux = W * .8, uy = H * .68, ay = H * .22;
         const lines = Array.from({ length: 18 }, () => ({ x: Math.random() * W * 1.3, y: Math.random() * H * 1.2 - H * .2, l: 30 + Math.random() * 70, v: .6 + Math.random() * .8 }));
         const clouds = Array.from({ length: 4 }, (_, i) => ({ x: W * (.25 + i * .4), y: H * (-.1 + Math.random() * .8), s: .7 + Math.random() * .7 }));
         const stars = Array.from({ length: 40 }, () => ({ x: Math.random() * W, y: Math.random() * H, r: .6 + Math.random() * 1.5, p: Math.random() * 6.28 }));
-        const marks = [[25, '部屋の外へ'], [50, 'ご近所を通過'], [75, '隣町を通過'], [100, '成層圏に到達']].filter(m => m[0] <= score).map(m => ({ s: m[0], label: m[1], at: null }));
+        const marks = [[25, '部屋の外へ'], [50, 'ご近所を通過'], [75, '隣町を通過'], [100, '成層圏に到達'], [101, '宇宙ステーションを通過'], [102, '月に到達'], [103, '火星に到達'], [104, '木星に到達'], [105, '太陽系の外へ']].filter(m => m[0] <= score).map((m, i) => ({ s: m[0], label: m[1], at: null, i }));
         const ex = W * .84, ey = H * .2, lx = cx + 34;
         frame = (t, dt) => {
           if (!launched && t >= L) {
-            launched = true; stopAnims(kake); kake.style.opacity = '0'; kake.style.transform = ''; kick(score >= 75 ? 22 : 16);
+            launched = true; stopAnims(kake); kake.style.opacity = '0'; kake.style.transform = ''; kick(score >= 75 ? 22 : 16); sfx.play('don'); sfx.play('whoosh', (F1 - L) / 1000); sfx.play('bgm', (F1 - L) / 1000);
           }
           if (t < L) baseAmp = .8 + 2.6 * seg(t, 0, L); // タメでだんだん強く
           if (!roomOut && t >= L + 200) { roomOut = true; room.style.transform = 'translate(-40%,140%)'; room.animate([{ transform: 'none' }, { transform: 'translate(-40%,140%)' }], { duration: 420, easing: 'ease-in' }); }
           if (!roomBack && t >= E1) { roomBack = true; stopAnims(room); room.style.transform = ''; room.animate([{ transform: 'translateY(140%)' }, { transform: 'none' }], { duration: 260, easing: 'ease-out' }); }
-          const spd = t < F0 ? 25 * seg(t, L, F0) : 25 + (score - 25) * eIO(seg(t, F0, F1));
+          const spd = t < F0 ? 25 * seg(t, L, F0) : t < F0 + D1 || !over ? 25 + (base - 25) * eIO(seg(t, F0, F0 + D1)) : 100 + over * seg(t, F0 + D1, F1);
           const fade = 1 - seg(t, E1, total);
           const tint = clamp((spd - 45) / 45, 0, .96) * fade;
           if (tint > 0) { c.fillStyle = `rgba(11,16,52,${tint})`; c.fillRect(0, 0, W, H); }
@@ -821,9 +1209,12 @@ const DJ = (() => {
             drawUfo(c, x, y, Math.sin(t / 420) * .06 + Math.sin(t / 38) * .16 * jolt, t, sur, fpos, fade);
             if (ufoAt != null) popText(c, '！？', x + 8, y - 66, 28, seg(t, ufoAt, ufoAt + 1100), '#ffe27a');
           }
-          const speed = t >= L && t < F1 + 120 ? (.38 + score / 100 * .95) * seg(t, L, F0) * (1 - .55 * seg(t, F1 - 280, F1 + 120)) : 0;
+          const speed = t >= L && t < F1 + 120 ? (.38 + base / 100 * .95) * seg(t, L, F0) * (1 - .55 * seg(t, F1 - 280, F1 + 120)) : 0;
           baseAmp += speed * 1.7;
-          if (!ended && t >= F1 + (abduct ? 600 : 360)) { ended = true; if (abduct) { kick(9); buzz([40, 40, 120]); } else if (high) { kick(6); buzz([30, 50, 30]); } else { kick(13); buzz(120); } }
+          seasonFx(c, sst, t, dt, W, H, spd, speed, fade);
+          if (over) [101, 102, 103, 104].forEach(pk => { const k = seg(spd, pk - .75, pk + .75); if (k > 0 && k < 1 && fade > 0) { c.save(); c.globalAlpha = fade; planet(c, pk, lerp(W + 70, -70, k), lerp(H * .12, H * .88, k)); c.restore(); } });
+          if (!ended && t >= F1 + (abduct ? 600 : 360)) { ended = true; if (abduct) { kick(9); buzz([40, 40, 120]); } else if (high) { kick(6); buzz([30, 50, 30]); sfx.play('kira'); } else { kick(13); buzz(120); sfx.play('pofu'); } }
+          if (abduct && !beamed && t >= F1 + 100) { beamed = true; sfx.play('beam'); }
           const ca = clamp(Math.min((spd - 26) / 8, (82 - spd) / 10), 0, 1) * (1 - seg(t, F1, F1 + 300));
           if (ca > 0) { c.fillStyle = `rgba(255,255,255,${.9 * ca})`; clouds.forEach(cl => {
             cl.x -= speed * dt * .6; cl.y += speed * dt * .38;
@@ -840,8 +1231,7 @@ const DJ = (() => {
             for (let i = 0; i < 14; i++) { const a = -Math.PI * (i + .5) / 14, r0 = 34 + 70 * bk, r1 = r0 + 14 + 44 * (1 - bk) * (i % 2 ? 1 : .6); c.beginPath(); c.moveTo(Math.cos(a) * r0, Math.sin(a) * r0 * .8); c.lineTo(Math.cos(a) * r1, Math.sin(a) * r1 * .8); c.stroke(); }
             c.restore(); dust(c, sx, sy + 22, bk); }
           popText(c, 'ドンッ', sx - 24, sy - 84, 34, seg(t, L, L + 560), '#ffe27a');
-          if (sp.cat) popText(c, 'ニャー！？', W * .66, H * .78, 26, seg(t, L + 250, L + 1300), '#ffd2a6');
-          if (sp.gold) popText(c, 'ピカーン', W * .3, H * .5, 26, seg(t, L + 350, L + 1300), '#ffe27a');
+          spk.slice(0, 4).forEach((k, i) => popText(c, SPTEXT[k][0], W * SPSLOT[i][0], H * SPSLOT[i][1], 24, seg(t, L + 250 + i * 160, L + 1350 + i * 160), SPTEXT[k][1]));
           // さらいに来たUFOの光
           let ax = cx, ayy = ay;
           if (abduct) {
@@ -851,7 +1241,7 @@ const DJ = (() => {
           }
           // 布団
           if (t >= L) {
-            spin += dt * (.007 + score / 100 * .013) * (abduct ? 1 - .8 * seg(t, F1, F1 + 200) : 1);
+            spin += dt * (.007 + base / 100 * .013) * (abduct ? 1 - .8 * seg(t, F1, F1 + 200) : 1);
             let x, y, sc = 1, vis = true;
             if (t < F0) { const k = eOut(seg(t, L, F0)); x = lerp(sx, cx, k); y = lerp(sy, cy, k) - Math.sin(k * Math.PI) * 26; }
             else if (t < F1) { x = cx + Math.sin(t / 210) * 10; y = cy + Math.cos(t / 170) * 8; }
@@ -859,17 +1249,19 @@ const DJ = (() => {
             else if (high) { const k = seg(t, F1, F1 + 360); x = lerp(cx, ex, k * k); y = lerp(cy, ey, k * k); sc = lerp(1, .06, k); vis = k < 1; }
             else { const k = seg(t, F1, F1 + 380); x = cx + 34 * k; y = lerp(cy, H + 60, k * k); vis = k < 1; }
             fpos = { x, y };
-            if (vis) { drawKake(c, x, y, spin, sc, col, { cat: sp.cat });
+            if (vis) { if (t < F1) trailFx(c, x, y, t, sp);
+              if (sp.ninja && t < F1) { c.save(); c.globalAlpha = .42; drawKake(c, x - 72 + Math.sin(t / 130) * 8, y + 36, spin + .5, sc * .9, col, kopt); drawKake(c, x + 74 + Math.cos(t / 150) * 8, y - 34, spin - .6, sc * .9, col, kopt); c.restore(); }
+              drawKake(c, x, y, spin, sc, col, kopt); if (t < F1) frontFx(c, x, y, t, sp);
               if (sp.gold && t < F1) for (let i = 0; i < 4; i++) { const a = t / 320 + i * 1.57; star4(c, x + Math.cos(a) * 82, y + Math.sin(a) * 40, 5 + 3 * Math.sin(t / 90 + i), t / 200); } }
           }
           // 終わり方
           if (abduct) { if (t >= F1 - 250) drawUfo(c, ax, ayy, Math.sin(t / 300) * .05 + seg(t, F1 + 620, E1) * .35, t, 0, fpos, fade); popText(c, 'さらわれた！', W / 2, H * .66, 30, seg(t, F1 + 600, total), '#ffe27a'); }
           else if (high) { const k = seg(t, F1 + 340, E1 + 100); star4(c, ex, ey, Math.sin(k * Math.PI) * 30, k * 1.4); popText(c, 'キラーン', W * .56, H * .4, 30, seg(t, F1 + 340, total), '#fff6c4'); }
           else { dust(c, lx, H - 8, seg(t, F1 + 360, F1 + 800)); popText(c, 'ぽふっ', lx, H - 56, 30, seg(t, F1 + 360, total)); }
-          marks.forEach(m => { if (m.at == null && t >= F0 + 240 && spd >= m.s - .01) { m.at = t; if (m.s > 25) { buzz(60); kick(m.s === 100 ? 12 : 8); } }
+          marks.forEach(m => { if (m.at == null && t >= F0 + 240 && spd >= m.s - .01) { m.at = t; if (m.s > 25) { buzz(60); kick(m.s >= 100 ? 12 : 8); sfx.play('ping', m.i); } }
             if (m.at != null) { const fk = seg(t, m.at, m.at + 170); if (fk < 1) { c.fillStyle = `rgba(255,255,255,${.38 * (1 - fk)})`; c.fillRect(0, 0, W, H); }
-              popText(c, m.label, W / 2, H * .2, m.s === 100 ? 30 : 24, seg(t, m.at, m.at + 700), m.s === 100 ? '#ffe27a' : '#fff'); } });
-          if (t < E1) { c.save(); c.globalAlpha = seg(t, L, L + 150); c.font = `400 24px ${cssv('--display')}`; c.textBaseline = 'top'; c.lineJoin = 'round'; c.lineWidth = 5; c.strokeStyle = '#1b2444'; const s = fmt(DJ.meters(spd)) + ' m'; c.strokeText(s, 12, H - 38); c.fillStyle = '#fff'; c.fillText(s, 12, H - 38); c.restore(); skipHint(); }
+              popText(c, m.label, W / 2, H * .2, m.s >= 100 ? (m.label.length > 8 ? 24 : 30) : 24, seg(t, m.at, m.at + (over ? 620 : 700)), m.s >= 100 ? '#ffe27a' : '#fff'); } });
+          if (t < E1) { c.save(); c.globalAlpha = seg(t, L, L + 150); c.font = `400 24px ${cssv('--display')}`; c.textBaseline = 'top'; c.lineJoin = 'round'; c.lineWidth = 5; c.strokeStyle = '#1b2444'; const s = distText(spd); c.strokeText(s, 12, H - 38); c.fillStyle = '#fff'; c.fillText(s, 12, H - 38); c.restore(); skipHint(); }
         };
       }
       const t0 = performance.now(); let prev = t0;
@@ -877,7 +1269,9 @@ const DJ = (() => {
         if (done) return; const t = now - t0, dt = Math.min(50, now - prev); prev = now;
         c.clearRect(0, 0, W, H); baseAmp = 0; frame(t, dt);
         amp *= Math.exp(-dt / 140); const a = amp + baseAmp;
-        scene.style.transform = a > .3 ? `translate(${((Math.random() * 2 - 1) * a).toFixed(1)}px,${((Math.random() * 2 - 1) * a).toFixed(1)}px)` : '';
+        const shx = a > .3 ? (Math.random() * 2 - 1) * a : 0, shy = a > .3 ? (Math.random() * 2 - 1) * a : 0;
+        scene.style.transform = a > .3 ? `translate(${shx.toFixed(1)}px,${shy.toFixed(1)}px)` : '';
+        if (rec) compose(shx, shy);
         if (t >= total) finish(); else raf = requestAnimationFrame(loop);
       };
       raf = requestAnimationFrame(loop);
@@ -909,7 +1303,7 @@ const DJ = (() => {
   let partyId = 0;
   const PARTY_COLS = ['#ff5fa2', '#4fd8ff', '#ffe27a', '#9dff7a', '#b388ff', '#ff9a4f'];
   function party() {
-    if (reduce || !fx.getContext) return;
+    if (reduce || !fx.getContext) return; sfx.play('fever');
     const my = ++partyId, W = scene.clientWidth, H = scene.clientHeight, dpr = Math.min(2, window.devicePixelRatio || 1);
     fx.width = Math.round(W * dpr); fx.height = Math.round(H * dpr);
     const c = fx.getContext('2d'); c.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -995,19 +1389,21 @@ const DJ = (() => {
   ];
 
   function show(r, id) {
-    const m = DJ.meters(r.score);
+    const m = meters(r.score), [dn, du] = distParts(m), title = titleOf(r);
     $('result').hidden = false;
-    $('rank').textContent = `称号「${titleOf(r)}」`;
+    $('rank').textContent = `称号「${title}」` + (addTitle(title) ? '　はじめて獲得' : '');
     $('verdict').textContent = verdictOf(r);
+    $('quip').textContent = quipOf(r);
+    $('unit').textContent = du;
     const vs = $('vs');
     if (challenge && r.text !== challenge.t) {
-      const cm = fmt(DJ.meters(challenge.s)); vs.hidden = false;
-      vs.textContent = r.score > challenge.s ? `挑戦状の ${cm} m を超えました。` : r.score === challenge.s ? `挑戦状の ${cm} m と引き分けです。` : `挑戦状の ${cm} m に届きませんでした。`;
+      const cm = distText(challenge.s); vs.hidden = false;
+      vs.textContent = r.score > challenge.s ? `挑戦状の ${cm} を超えました。` : r.score === challenge.s ? `挑戦状の ${cm} と引き分けです。` : `挑戦状の ${cm} に届きませんでした。`;
     } else vs.hidden = true;
-    $('points').textContent = `${r.score}点（100点満点）`;
-    $('rfill').style.width = r.score + '%'; $('rpin').style.left = r.score + '%';
+    $('points').textContent = r.score > 100 ? `${r.score}点（100点満点を突破）` : `${r.score}点（100点満点）`;
+    const pct = Math.min(100, r.score); $('rfill').style.width = pct + '%'; $('rpin').style.left = pct + '%';
     if (r.score >= 25 && !reduce) {
-      $('dist').textContent = fmt(m);
+      $('dist').textContent = dn;
       const d = $('dist').parentElement;
       if (d.animate) d.animate([{ transform: 'scale(1.7)', opacity: 0 }, { transform: 'scale(.94)', opacity: 1, offset: .65 }, { transform: 'scale(1)' }], { duration: 360, easing: 'ease-out' });
       if (r.score >= 75) confetti(r.score >= 100 ? 160 : 90, r.score >= 90);
@@ -1036,9 +1432,10 @@ const DJ = (() => {
     if (r.kind === 'repeat') notes.push('同じ言葉の繰り返しと判定しました。別の言葉で同じ音を鳴らすと飛びます。');
     if (r.kind === 'maybe') notes.push('同じ言葉の繰り返しかもしれないので控えめの点です。漢字まじりで書くと、別の言葉だと見分けられます。');
     if (r.kind === 'variant') notes.push('同じ言葉をかなで書いただけかもしれないので控えめの点です。別の言葉なら、漢字で書き分けると見分けられます。');
-    if (r.theme) notes.push(`今日のお題「${theme[0]}」の「${r.theme}」で掛けたので10点足しました。`);
-    Object.keys(HIDDEN).forEach(k => { if (r.sp && r.sp[k]) { const isNew = !found.includes(k); if (isNew) { found.push(k); try { localStorage.setItem('dj-found', JSON.stringify(found)); } catch (e) {} }
-      notes.push(`隠し演出「${HIDDEN[k]}」${isNew ? 'を見つけました。' : 'です。'}`); } });
+    if (r.theme) notes.push(`${dateJ}のお題「${theme[0]}」の「${r.theme}」で掛けたので10点足しました。`);
+    if (r.score > 100) notes.push('お題の加点で100点を超えたので、元祖「布団が吹っ飛んだ」より遠くまで飛びました。');
+    HKEYS.forEach(k => { if (r.sp && r.sp[k]) { const isNew = !found.includes(k); if (isNew) { found.push(k); try { localStorage.setItem('dj-found', JSON.stringify(found)); } catch (e) {} }
+      notes.push(`隠し演出「${HIDDEN[k].name}」${isNew ? 'を見つけました。図鑑に登録しました。' : 'です。'}`); } });
     renderFound();
     if (r.kind === 'none') notes.push('同じ音を、別の言葉でもう一度使うと飛びます。');
     if (r.unknown.length) notes.push(`「${[...new Set(r.unknown)].join('」「')}」の読みが分かりませんでした。下の「読みを直す」でひらがなを入れてください。`);
@@ -1063,9 +1460,9 @@ const DJ = (() => {
     const ct = (q.get('c') || '').trim().slice(0, 60); if (!ct) return;
     const cs = parseInt(q.get('s'), 10);
     dictReady.then(() => {
-      const s = cs >= 0 && cs <= 100 ? cs : DJ.judge(ct).score;
+      const s = cs >= 0 && cs <= 110 ? cs : DJ.judge(ct).score;
       challenge = { t: ct, s };
-      const el = $('challenge'); el.textContent = `挑戦状が届いています。「${ct}」の ${fmt(DJ.meters(s))} m を超えてください。`; el.hidden = false;
+      const el = $('challenge'); el.textContent = `挑戦状が届いています。「${ct}」の ${distText(s)} を超えてください。`; el.hidden = false;
     });
   })();
 
@@ -1089,26 +1486,27 @@ const DJ = (() => {
   }
   if (AMAZON_TAG) $('assoc').hidden = false;
 
+  const tierOf = s => s <= 0 ? 0 : s < 25 ? 1 : s < 50 ? 2 : s < 75 ? 3 : s < 100 ? 4 : s === 100 ? 5 : 6;
   // 挑戦リンク：開いた人に「この記録を超えろ」と出す
   function shareUrl(r) {
     const base = SITE_URL || (!framed && /^https?:/.test(location.protocol) ? location.origin + location.pathname : '');
-    return base ? `${base}?c=${encodeURIComponent(r.text)}&s=${r.score}` : '';
+    // c/N.html は点数帯ごとのカード画像を持つ入口ページ（開くとこのページへ転送される）
+    return base ? `${base}c/${tierOf(r.score)}.html?c=${encodeURIComponent(r.text)}&s=${r.score}` : '';
   }
+  const flew = r => r.score > 100 ? `${placeOf(r.score)}（${distJ(r.score)}）までふっ飛んだ` : `${distJ(r.score)}ふっ飛んだ`;
   // 挑戦状としてのポスト文面（相手に「超えられる？」と投げかける）
   function challengeText(r) {
-    const m = DJ.meters(r.score);
     const head = r.sp && r.sp.ufo ? `「${r.text}」で布団がUFOにさらわれた（${r.score}点）。\nこの記録、超えられる？`
-      : r.score > 0 ? `「${r.text}」で布団が${fmt(m)}mふっ飛んだ（${r.score}点）。\nこの記録、超えられる？`
+      : r.score > 0 ? `「${r.text}」で布団が${flew(r)}（${r.score}点）。\nこの記録、超えられる？`
       : `「${r.text}」で布団が凍った（0点）。\nこれより寒いダジャレ、ある？`;
     return head + '\n#ダジャレ布団飛ばし\n' + shareUrl(r);
   }
   function postText(r) {
-    const m = DJ.meters(r.score);
     const head = r.sp && r.sp.ufo ? `「${r.text}」で布団がUFOにさらわれた（${r.score}点）`
-      : r.score > 0 ? `「${r.text}」で布団が${fmt(m)}mふっ飛んだ（${r.score}点）`
+      : r.score > 0 ? `「${r.text}」で布団が${flew(r)}（${r.score}点）`
       : `「${r.text}」が寒すぎて布団が凍った（0点）`;
     const url = shareUrl(r);
-    return head + `\n称号「${titleOf(r)}」\n#ダジャレ布団飛ばし` + (url ? '\n' + url : '');
+    return head + (r.theme ? `\n${dateJ}のお題「${theme[0]}」` : '') + `\n称号「${titleOf(r)}」\n#ダジャレ布団飛ばし` + (r.theme ? ' #今日のお題' : '') + (url ? '\n' + url : '');
   }
 
   const KAKE_PATH = 'M8 40C3 40 1 36 1 30V20C1 9 9 3 22 3c14 0 20 3 34 3s22-4 38-4 20 3 32 3c13 0 20 5 20 15v10c0 6-2 10-7 10z';
@@ -1123,9 +1521,9 @@ const DJ = (() => {
     const W = 1200, H = 675, INK = '#1b2444';
     const DISP = '"Dela Gothic One","Hiragino Kaku Gothic StdN","Hiragino Sans","Yu Gothic",sans-serif';
     const BODY = '"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans","Yu Gothic","Meiryo",sans-serif';
-    const m = DJ.meters(r.score), dist = fmt(m), quote = `「${r.text}」`, verdict = verdictOf(r);
+    const [dist, unit] = distParts(meters(r.score)), quote = `「${r.text}」`;
     try { await Promise.race([Promise.all([
-      document.fonts.load(`400 80px "Dela Gothic One"`, 'ダジャレ布団飛ばし' + dist + 'm'),
+      document.fonts.load(`400 80px "Dela Gothic One"`, 'ダジャレ布団飛ばし' + dist + unit),
       document.fonts.load(`700 60px "Zen Maru Gothic"`, quote + titleOf(r) + '称号「」点0123456789#')
     ]), new Promise(res => setTimeout(res, 2500))]); } catch (e) {}
     const cv = document.createElement('canvas'); cv.width = W; cv.height = H; const c = cv.getContext('2d');
@@ -1133,6 +1531,7 @@ const DJ = (() => {
     // 太陽
     c.fillStyle = 'rgba(255,224,122,.4)'; c.beginPath(); c.arc(1085, 105, 78, 0, 7); c.fill();
     c.fillStyle = '#fff1a8'; c.beginPath(); c.arc(1085, 105, 58, 0, 7); c.fill();
+    if (r.score > 100) { c.fillStyle = 'rgba(11,16,52,.82)'; c.fillRect(0, 0, W, 585); c.save(); c.translate(1085, 330); c.scale(1.6, 1.6); planet(c, Math.min(104, Math.max(102, r.score)), 0, 0); c.restore(); }
     if (r.score >= 90) { mirrorBall(c, 700, 90, 48, 300); [[640, 50, 14], [765, 70, 11], [742, 140, 16], [650, 128, 9]].forEach(([x, y, s2], i) => star4(c, x, y, s2, i * .5)); }
     // 畳
     const FY = 585; c.fillStyle = '#b4b76e'; c.fillRect(0, FY, W, H - FY);
@@ -1152,21 +1551,21 @@ const DJ = (() => {
       c.save(); c.setLineDash([4, 18]); c.lineCap = 'round'; c.lineWidth = 6; c.strokeStyle = 'rgba(27,36,68,.35)';
       c.beginPath(); c.moveTo(1010, FY - 50); c.quadraticCurveTo(1010, ky + 160, kx + 148 * sc / 2, ky + 42 * sc / 2 + 30); c.stroke(); c.restore();
     }
-    const sp = r.sp || {}, icol = Object.assign({ kake: '#2b4a9b', dot: '#f4f7ff', ink: INK, shiki: '#fffdf6' }, sp.gold ? GOLD : {});
+    const sp = r.sp || {}, icol = Object.assign({ kake: '#2b4a9b', dot: '#f4f7ff', ink: INK, shiki: '#fffdf6' }, sp.gold ? GOLD : sp.ghost ? GHOST : {});
     if (sp.ufo) { // さらわれ中
       kx = 800; ky = 290; rot = -.22; sc = 1.35; const ux = kx + 148 * sc / 2, uy = 150;
       const g = c.createLinearGradient(0, uy, 0, 470); g.addColorStop(0, 'rgba(255,240,150,.85)'); g.addColorStop(1, 'rgba(255,240,150,.15)');
       c.fillStyle = g; c.beginPath(); c.moveTo(ux - 36, uy + 20); c.lineTo(ux + 36, uy + 20); c.lineTo(ux + 150, 470); c.lineTo(ux - 150, 470); c.closePath(); c.fill();
       c.save(); c.translate(ux, uy); c.scale(2.2, 2.2); drawUfo(c, 0, 0, -.06, 0, 0, { x: 0, y: 100 }, 1); c.restore();
     }
-    drawKake(c, kx + 148 * sc / 2, ky + 42 * sc / 2, rot, sc, icol, { cat: sp.cat, frost: s <= 0 ? 1 : 0, lw: 4 });
+    drawKake(c, kx + 148 * sc / 2, ky + 42 * sc / 2, rot, sc, icol, { cat: sp.cat, panda: sp.panda, ghost: sp.ghost, frost: s <= 0 ? 1 : 0, lw: 4 });
     if (s < 25) { // 寒い
       c.fillStyle = `rgba(165,195,222,${s <= 0 ? .38 : .22})`; c.fillRect(0, 0, W, FY);
       let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
       c.fillStyle = '#fff'; for (let i = 0; i < (s <= 0 ? 80 : 40); i++) { c.beginPath(); c.arc(rnd() * W, rnd() * FY, 3 + rnd() * 5, 0, 7); c.fill(); }
     }
     // 文字
-    c.fillStyle = INK; c.textBaseline = 'alphabetic';
+    c.fillStyle = r.score > 100 ? '#fff' : INK; c.textBaseline = 'alphabetic';
     c.font = `400 38px ${DISP}`; c.fillText('ダジャレ布団飛ばし', 60, 86);
     const QW = 720; let fs, lines;
     for (fs = 66; fs >= 46; fs -= 2) { c.font = `700 ${fs}px ${BODY}`; lines = wrapLines(c, quote, QW); if (lines.length === 1) break; }
@@ -1175,37 +1574,97 @@ const DJ = (() => {
     const qy = lines.length === 1 ? 215 : 190;
     lines.forEach((ln, i) => c.fillText(ln, 60, qy + i * fs * 1.35));
     let ds = 190; c.font = `400 ${ds}px ${DISP}`;
-    while (c.measureText(dist).width > 560 && ds > 110) { ds -= 10; c.font = `400 ${ds}px ${DISP}`; }
+    while (c.measureText(dist).width > (unit.length > 2 ? 420 : 560) && ds > 100) { ds -= 10; c.font = `400 ${ds}px ${DISP}`; }
     const dy = 480; c.fillText(dist, 54, dy); const dw = c.measureText(dist).width;
-    c.font = `400 ${Math.round(ds * 0.42)}px ${DISP}`; c.fillText('m', 54 + dw + 14, dy);
+    c.font = `400 ${Math.round(ds * 0.42)}px ${DISP}`; c.fillText(unit, 54 + dw + 14, dy);
     c.font = `700 34px ${BODY}`; c.fillText(`${r.score}点　称号「${titleOf(r)}」`, 60, dy + 62);
     return new Promise((res, rej) => cv.toBlob(b => b ? res(b) : rej(new Error('toBlob')), 'image/png'));
   }
 
+  // 作ったファイルを保存する（スマホは共有シート、パソコンはダウンロード）
+  async function deliver(blob, name, okMsg) {
+    const msg = $('sharemsg');
+    if (hasClaude) {
+      const dl = await dlReady;
+      if (!dl) { msg.textContent = 'この表示では保存できません。'; return; }
+      try { await dl.save({ filename: name, data: blob }); msg.textContent = okMsg; }
+      catch (e) { if (!e || e.code !== 'declined') msg.textContent = e && e.code === 'rate_limited' ? '少し待ってからもう一度押してください。' : '保存できませんでした。'; }
+      return;
+    }
+    const file = typeof File === 'function' ? new File([blob], name, { type: blob.type }) : null;
+    if (file && matchMedia('(pointer: coarse)').matches && navigator.canShare && navigator.canShare({ files: [file] })) {
+      try { await navigator.share({ files: [file], text: postText(last) }); return; }
+      catch (e) { if (e && e.name === 'AbortError') return; }
+    }
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+    msg.textContent = okMsg;
+  }
   async function saveImage() {
     if (!last) return;
-    const btn = $('save'), msg = $('sharemsg'); btn.disabled = true; msg.textContent = '';
-    try {
-      const blob = await makeImage(last), name = `dajare-futon-${last.score}.png`;
-      if (hasClaude) {
-        const dl = await dlReady;
-        if (!dl) { msg.textContent = 'この表示では画像を保存できません。'; return; }
-        try { await dl.save({ filename: name, data: blob }); msg.textContent = '画像を保存しました。ポストに添付してください。'; }
-        catch (e) { if (!e || e.code !== 'declined') msg.textContent = e && e.code === 'rate_limited' ? '少し待ってからもう一度押してください。' : '画像を保存できませんでした。'; }
-        return;
-      }
-      const file = typeof File === 'function' ? new File([blob], name, { type: 'image/png' }) : null;
-      if (file && matchMedia('(pointer: coarse)').matches && navigator.canShare && navigator.canShare({ files: [file] })) {
-        try { await navigator.share({ files: [file], text: postText(last) }); return; }
-        catch (e) { if (e && e.name === 'AbortError') return; }
-      }
-      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
-      document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 5000);
-      msg.textContent = '画像を保存しました。ポストに添付してください。';
-    } catch (e) { msg.textContent = '画像を作れませんでした。'; }
+    const btn = $('save'); btn.disabled = true; $('sharemsg').textContent = '';
+    try { await deliver(await makeImage(last), `dajare-futon-${last.score}.png`, '画像を保存しました。ポストに添付してください。'); }
+    catch (e) { $('sharemsg').textContent = '画像を作れませんでした。'; }
     finally { btn.disabled = false; }
   }
   $('save').addEventListener('click', saveImage);
+
+  // 動画：演出をもう一度再生しながら、ブラウザの中で録画する（サーバー不要）
+  const VIDEO_MIME = (() => { try { return ['video/mp4;codecs=avc1.42E01E,mp4a.40.2', 'video/mp4;codecs=avc1.42E01E', 'video/webm;codecs=vp9,opus', 'video/webm;codecs=vp8,opus', 'video/webm', 'video/mp4'].find(m => window.MediaRecorder && MediaRecorder.isTypeSupported(m)) || ''; } catch (e) { return ''; } })();
+  // 注: 'video/mp4' だけの指定はブラウザによって中身がVP9になり、Xに投稿できない。そのため avc1（H.264）を先に試し、素の video/mp4 は最後にする
+  let recording = false;
+  function endCard(rc, RW, RH, top, r) {
+    const snap = document.createElement('canvas'); snap.width = RW; snap.height = RH; snap.getContext('2d').drawImage(rc.canvas, 0, 0);
+    const [dn, du] = distParts(meters(r.score)), DISP = cssv('--display'), BODY = cssv('--body'), cy = top + (RH - top) / 2;
+    return new Promise(res => { const t0 = performance.now(); const step = now => {
+      const t = now - t0, a = Math.min(1, t / 220), pop = t < 260 ? lerp(1.5, 1, eOut(t / 260)) : 1;
+      rc.setTransform(1, 0, 0, 1, 0, 0); rc.globalAlpha = 1; rc.drawImage(snap, 0, 0);
+      rc.fillStyle = `rgba(11,16,52,${.8 * a})`; rc.fillRect(0, top, RW, RH - top);
+      if (r.score >= 90) mirrorBall(rc, RW - 86, top + 74, 38, t);
+      rc.globalAlpha = a; rc.fillStyle = '#fff'; rc.textAlign = 'center'; rc.textBaseline = 'alphabetic';
+      let fs = 132; rc.font = `400 ${fs}px ${DISP}`; const us = () => rc.measureText(dn).width + fs * .42 * du.length * 1.05;
+      while (us() > RW - 80 && fs > 60) { fs -= 8; rc.font = `400 ${fs}px ${DISP}`; }
+      const nw = rc.measureText(dn).width; rc.save(); rc.translate(RW / 2, cy + 10); rc.scale(pop, pop); rc.textAlign = 'left';
+      rc.font = `400 ${fs * .42}px ${DISP}`; const uw = rc.measureText(du).width, x0 = -(nw + 12 + uw) / 2;
+      rc.font = `400 ${fs}px ${DISP}`; rc.fillStyle = '#ffe27a'; rc.fillText(dn, x0, 0); rc.font = `400 ${fs * .42}px ${DISP}`; rc.fillText(du, x0 + nw + 12, 0); rc.restore();
+      rc.fillStyle = '#fff'; rc.font = `700 30px ${BODY}`; rc.fillText(`${r.score}点　称号「${titleOf(r)}」`, RW / 2, cy + 74);
+      rc.font = `700 22px ${BODY}`; rc.globalAlpha = a * .85; rc.fillText('#ダジャレ布団飛ばし', RW / 2, RH - 24);
+      rc.globalAlpha = 1; rc.textAlign = 'left';
+      if (t < 2000) requestAnimationFrame(step); else res();
+    }; requestAnimationFrame(step); });
+  }
+  async function saveVideo() {
+    if (!last || recording) return;
+    const r = last, btn = $('savevid'), msg = $('sharemsg');
+    if (!VIDEO_MIME || !fx.captureStream) { msg.textContent = 'このブラウザでは動画を保存できません。'; return; }
+    recording = true; btn.disabled = true; $('go').disabled = true; btn.textContent = '録画中…'; msg.textContent = '';
+    try {
+      try { await Promise.race([Promise.all([document.fonts.load('400 80px "Dela Gothic One"', 'ダジャレ布団飛ばし0123456789万億km'), document.fonts.load('700 30px "Zen Maru Gothic"', `「${r.text}」${titleOf(r)}称号点#`)]), new Promise(res => setTimeout(res, 2500))]); } catch (e) {}
+      const W = scene.clientWidth, H = scene.clientHeight, RW = 720, k = RW / W, top = 104, RH = (Math.round(H * k) + top + 1) & ~1;
+      const cv = document.createElement('canvas'); cv.width = RW; cv.height = RH; const rc = cv.getContext('2d');
+      const BODY = cssv('--body'), quote = `「${r.text}」`; let fs = 40, lines;
+      for (; fs >= 22; fs -= 2) { rc.font = `700 ${fs}px ${BODY}`; lines = wrapLines(rc, quote, RW - 48); if (lines.length <= (fs > 30 ? 1 : 2)) break; }
+      lines = lines.slice(0, 2);
+      const caption = c => { c.setTransform(1, 0, 0, 1, 0, 0); c.fillStyle = '#1b2444'; c.fillRect(0, 0, RW, top); c.fillStyle = '#fff'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.font = `700 ${fs}px ${BODY}`;
+        lines.forEach((ln, i) => c.fillText(ln, RW / 2, top / 2 + (i - (lines.length - 1) / 2) * fs * 1.25)); c.textAlign = 'left'; c.textBaseline = 'alphabetic'; };
+      rc.fillStyle = cssv('--sky-top'); rc.fillRect(0, 0, RW, RH); caption(rc);
+      const stream = cv.captureStream(30), as = sfx.recStream(); if (as) as.getAudioTracks().forEach(tr => stream.addTrack(tr));
+      const chunks = [], mr = new MediaRecorder(stream, { mimeType: VIDEO_MIME, videoBitsPerSecond: 4e6 });
+      mr.ondataavailable = e => { if (e.data && e.data.size) chunks.push(e.data); };
+      const stopped = new Promise(res => { mr.onstop = res; }); mr.start(200);
+      scene.scrollIntoView({ block: 'nearest', behavior: 'auto' });
+      await launch(r.score, r.sp, { c: rc, k, top, W: RW, H: RH, caption });
+      await endCard(rc, RW, RH, top, r);
+      mr.stop(); await stopped; stream.getVideoTracks().forEach(tr => tr.stop());
+      const mp4 = VIDEO_MIME.startsWith('video/mp4'); let blob = new Blob(chunks, { type: mp4 ? 'video/mp4' : 'video/webm' });
+      if (!blob.size) throw new Error('empty');
+      // 録画直後のMP4は長さの情報が正しく入っておらず、再生時間がでたらめに表示される。ふつうのMP4に組み直してから渡す
+      if (mp4) { try { const fixed = MP4FIX.defrag(new Uint8Array(await blob.arrayBuffer())); if (fixed) blob = new Blob([fixed], { type: 'video/mp4' }); } catch (e) {} }
+      await deliver(blob, `dajare-futon-${r.score}.${mp4 ? 'mp4' : 'webm'}`, mp4 ? '動画を保存しました。ポストに添付してください。' : '動画を保存しました（WebM形式）。Xに添付できないときは、ChromeかSafariで保存し直してください。');
+    } catch (e) { msg.textContent = '動画を作れませんでした。'; }
+    finally { recording = false; btn.disabled = false; $('go').disabled = false; btn.textContent = '動画を保存'; }
+  }
+  $('savevid').addEventListener('click', saveVideo);
 
   // 記録
   let records = [];
@@ -1213,7 +1672,7 @@ const DJ = (() => {
   function saveRecords() { try { localStorage.setItem('dj-records', JSON.stringify(records)); } catch (e) {} }
   function renderRecords() {
     $('records').hidden = records.length === 0;
-    $('reclist').innerHTML = records.map(x => `<li><span class="t">${esc(x.t)}</span><span class="m">${fmt(DJ.meters(x.s))} m</span></li>`).join('');
+    $('reclist').innerHTML = records.map(x => `<li><span class="t">${esc(x.t)}</span><span class="m">${distText(x.s)}</span></li>`).join('');
   }
   function addRecord(t, s) {
     if (s <= 0) return;
@@ -1222,11 +1681,13 @@ const DJ = (() => {
     saveRecords(); renderRecords();
   }
   $('clear').addEventListener('click', () => { records = []; saveRecords(); renderRecords(); });
-  renderRecords(); renderFound();
+  renderRecords(); renderFound(); renderTitles();
 
   async function run(yomi) {
     const text = $('text').value.trim();
+    if (recording) return;
     if (!text) { $('hint').textContent = 'ダジャレを入れてください。'; $('text').focus(); return; }
+    sfx.wake();
     await dictReady;
     const r = DJ.judge(text, yomi);
     if (r.kind === 'short') { $('hint').textContent = '短すぎて判定できません。もう少し長い文を入れてください。'; return; }
@@ -1246,7 +1707,32 @@ const DJ = (() => {
   $('text').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); run(); } });
   $('fixgo').addEventListener('click', () => run($('fixyomi').value));
   $('fixyomi').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.isComposing) { e.preventDefault(); run($('fixyomi').value); } });
-  document.querySelectorAll('[data-try]').forEach(b => b.addEventListener('click', () => { $('text').value = b.dataset.try; run(); }));
+  // おまかせ：例を1つ入れて飛ばす。まだ見つけていない隠し演出が起きる例は出さない（自分で見つける楽しみを残す）
+  const OMAKASE = ['レモンの入れもん', '草刈ったら臭かった', '焼肉は焼きにくい', 'そのスイカ、安いか？', 'パンダのパンだ', 'カッターを買ったー', 'この鮭、叫んだ', 'ニューヨークで入浴', '加藤が勝とう', '電話に出んわ', '猫が寝込んだ', 'お金はおっかねー', '傷んだ廊下にいたんだろうか', 'マスカットを食べますかっと', 'チーターが落っこちーたー', '今日はいい天気ですね'];
+  let lastPick = '';
+  $('omakase').addEventListener('click', async () => {
+    await dictReady;
+    const pool = OMAKASE.filter(x => hiddenOf(x, DJ.judge(x).yomi).every(k => found.includes(k)));
+    const list = pool.length > 1 ? pool.filter(x => x !== lastPick) : pool;
+    lastPick = list[Math.random() * list.length | 0]; $('text').value = lastPick; run();
+  });
+  // 音のオン・オフ
+  const soundBtn = $('sound'), paintSound = () => { soundBtn.textContent = sfx.isMuted() ? '音：オフ' : '音：オン'; soundBtn.setAttribute('aria-pressed', String(!sfx.isMuted())); };
+  soundBtn.addEventListener('click', () => { sfx.setMuted(!sfx.isMuted()); paintSound(); if (!sfx.isMuted()) { sfx.wake(); sfx.play('ping', 2); } }); paintSound();
+  // 声で入れる（対応ブラウザだけボタンを出す）
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (SR) {
+    const mic = $('mic'); mic.hidden = false; let listening = false;
+    mic.addEventListener('click', () => {
+      if (listening || recording) return;
+      let sr; try { sr = new SR(); } catch (e) { $('hint').textContent = 'このブラウザでは声で入力できません。'; return; }
+      sr.lang = 'ja-JP'; sr.interimResults = false; sr.maxAlternatives = 1; listening = true; mic.textContent = '聞いています…'; $('hint').textContent = ''; sfx.wake();
+      sr.onresult = e => { const s = (e.results[0][0].transcript || '').replace(/[。．]$/, '').trim().slice(0, 60); if (s) { $('text').value = s; run(); } };
+      sr.onerror = e => { $('hint').textContent = e.error === 'not-allowed' ? 'マイクの使用が許可されていません。' : e.error === 'no-speech' ? '声が聞き取れませんでした。' : '声で入力できませんでした。'; };
+      sr.onend = () => { listening = false; mic.textContent = '声で入れる'; };
+      try { sr.start(); } catch (e) { listening = false; mic.textContent = '声で入れる'; }
+    });
+  }
 })();
 </script>
 </body>
