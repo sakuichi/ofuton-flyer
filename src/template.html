@@ -491,13 +491,14 @@ summary{font-weight:700;cursor:pointer}
   if (season) { scene.dataset.season = season.key; const el = $('season'); el.textContent = `${season.label}の限定演出中`; el.hidden = false; }
 
   // 効果音（ファイルを使わず、その場で音を合成する）
+  const VOLUME = .75; // 全体の音量（効果音・BGM・動画の音すべてに効く）
   const sfx = (() => {
     let ctx = null, master = null, out = null, recDest = null, muted = true, live = [], nbuf = null; // 音は最初オフ
     try { muted = localStorage.getItem('dj-mute') !== '0'; } catch (e) {}
     const AC = window.AudioContext || window.webkitAudioContext;
     function init() {
       if (ctx || !AC) return !!ctx;
-      try { ctx = new AC(); master = ctx.createGain(); master.gain.value = .5; out = ctx.createGain(); out.gain.value = muted ? 0 : 1; master.connect(out); out.connect(ctx.destination); } catch (e) { ctx = null; }
+      try { ctx = new AC(); master = ctx.createGain(); master.gain.value = VOLUME; out = ctx.createGain(); out.gain.value = muted ? 0 : 1; master.connect(out); out.connect(ctx.destination); } catch (e) { ctx = null; }
       return !!ctx;
     }
     function wake() { if (init() && ctx.state === 'suspended') ctx.resume().catch(() => {}); }
