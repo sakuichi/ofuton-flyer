@@ -866,7 +866,15 @@ const MP4FIX = (() => {
       try { ctx = new AC(); master = ctx.createGain(); master.gain.value = VOLUME; out = ctx.createGain(); out.gain.value = muted ? 0 : 1; master.connect(out); out.connect(ctx.destination); } catch (e) { ctx = null; }
       return !!ctx;
     }
-    function wake() { if (init() && ctx.state === 'suspended') ctx.resume().catch(() => {}); }
+    // 音の出口を起こす。iOSのSafariは、別の動画を再生したりアプリを切り替えたりすると音声を「interrupted（中断）」にして止める。
+    // 'suspended' だけを見ていると中断から戻れず無音のままになるので、'running' 以外はすべて再開を試み、だめなら作り直す
+    function rebuild() { try { if (ctx.state !== 'closed') { const p = ctx.close(); if (p && p.catch) p.catch(() => {}); } } catch (e) {} ctx = master = out = recDest = nbuf = null; live = []; init(); }
+    function wake() {
+      if (!init()) return;
+      if (ctx.state === 'closed') { rebuild(); return; }
+      if (ctx.state !== 'running') { const c = ctx; let p; try { p = c.resume(); } catch (e) { rebuild(); return; }
+        if (p && p.catch) p.catch(() => { if (ctx === c) rebuild(); }); }
+    }
     const keep = n => { live.push(n); n.onended = () => { live = live.filter(x => x !== n); }; };
     function tone(type, f0, f1, dur, vol, at) {
       const t = ctx.currentTime + (at || 0), o = ctx.createOscillator(), g = ctx.createGain();
@@ -1717,6 +1725,10 @@ const MP4FIX = (() => {
     const list = pool.length > 1 ? pool.filter(x => x !== lastPick) : pool;
     lastPick = list[Math.random() * list.length | 0]; $('text').value = lastPick; run();
   });
+  // 動画を見て戻ってきたときなど、ページが再び表に出たら音の出口を起こし直す（実際に鳴り始めるのは次の操作から）
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) sfx.wake(); });
+  window.addEventListener('pageshow', () => sfx.wake());
+  window.addEventListener('focus', () => sfx.wake());
   // 音のオン・オフ
   const soundBtn = $('sound'), paintSound = () => { soundBtn.textContent = sfx.isMuted() ? '音：オフ' : '音：オン'; soundBtn.setAttribute('aria-pressed', String(!sfx.isMuted())); };
   soundBtn.addEventListener('click', () => { sfx.setMuted(!sfx.isMuted()); paintSound(); if (!sfx.isMuted()) { sfx.wake(); sfx.play('ping', 2); } }); paintSound();
